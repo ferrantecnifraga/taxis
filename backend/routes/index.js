@@ -3,7 +3,10 @@ const router  = express.Router();
 
 /* GET home page */
 router.get('/', (req, res, next) => {
-  res.render('index');
+  res.json({
+    message: "Prueba con otras rutas",
+    path: "/taxislleida/api/v1/user/"
+  })
 });
 
 module.exports = router;
