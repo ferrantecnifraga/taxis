@@ -14,7 +14,7 @@ export default function App() {
         title="Hola"
       />
       <Login
-        name="Jimmy"
+        name="YA jala porfavor"
       />
     </View>
   );
