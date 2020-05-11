@@ -1,12 +1,8 @@
 const express = require('express');
 const router  = express.Router();
 
+const { renderIndex } = require('../controllers/index.controller')
 /* GET home page */
-router.get('/', (req, res, next) => {
-  res.json({
-    message: "Prueba con otras rutas",
-    path: "/taxislleida/api/v1/user/"
-  })
-});
+router.get('/', renderIndex);
 
 module.exports = router;

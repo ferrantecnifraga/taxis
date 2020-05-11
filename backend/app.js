@@ -9,7 +9,7 @@ const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
 
-
+/* 
 mongoose.connect(process.env.DB, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
@@ -17,8 +17,8 @@ mongoose.connect(process.env.DB, {
   .then(() => console.log('DB Connected!'))
   .catch(err => {
   console.log(`DB Connection Error: ${err.message}`);
-  });
-  
+  }); */
+const database = require("./database/database")  
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
