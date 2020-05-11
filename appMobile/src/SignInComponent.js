@@ -1,106 +1,76 @@
-import React from 'react';
+import React from "react";
 import {
     View,
     Text,
     StyleSheet,
-    StatusBar,
-    Dimensions,
-    TouchableOpacity
-} from 'react-native';
+    TextInput
+} from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome"
 
-import * as Animatable from 'react-native-animatable'
-import { LinearGradient } from 'expo-linear-gradient';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-export default class SplashComponent extends React.Component{
+export default class SignInComponent extends React.COmponent{
     render(){
         return(
             <View style={styles.container}>
-                <StatusBar barStyle="light-content" />
                 <View style={styles.header}>
-                    <Animatable.Image
-                        animation="bounceIn"
-                        duration={1500}
-                        source={require('./asset/logo.png')}
-                        style={styles.logo}
-                        resizeMode={"stretch"}
-                    />
-
+                    <Text style={styles.text_header}>¡Bienvenido Usuario!</Text>
                 </View>
-                <Animatable.View 
-                style={styles.footer}
-                animation="fadeInUpBig"
-                >
-                    <Text style={styles.title}> ya  </Text>
-                    <Text style={styles.text}> es toda </Text>
-                    <View style={styles.button}>
-                        <TouchableOpacity
-                        onPress={ () => this.props.navigation.navigate("SignInScreen")}>
-                            <LinearGradient colors={['#4c669f', '#3b5998',]}
-                            style={styles.signIn}>
-                                <Text style={styles.textSign}>we</Text>
-                                <MaterialIcons 
-                                    name='navigate-next' 
-                                    color="white"
-                                    size={20}
-                                />
-                            </LinearGradient>
-                        </TouchableOpacity>
+                <View style={styles.footer}>
+                    <Text style={styles.text_footer}> Correo Electronico</Text>
+                    <View style={styles.action}>
+                        <FontAwesome 
+                            name="user-o"
+                            color="#05375a"
+                            size={20}
+                        />
+                        <TextInput 
+                            placeholder="Tu correo electronico"
+                            style={styles.textInput}
+                        />
                     </View>
-                </Animatable.View>
+                </View>qq
             </View>
         )
     }
 }
-const {height} = Dimensions.get("screen");
-const height_logo = height * 0.7 * 0.4;
 
 var styles = StyleSheet.create({
     container: {
         flex:1,
         backgroundColor: '#05375a'
     },
-    header:{
-        flex:2,
-        justifyContent:'center',
-        alignItems:'center'
+    header: {
+        flex:1,
+        justifyContent:'flex-end',
+        paddingHorizontal:20,
+        paddingBottom:50
     },
     footer: {
-        flex:1,
-        backgroundColor:'white',
-        borderTopRightRadius:30,
+        flex:3,
+        backgroundColor: 'white',
         borderTopLeftRadius:30,
-        paddingVertical:50,
-        paddingHorizontal:30
+        borderTopRightRadius:30,
+        paddingHorizontal:20,
+        paddingVertical:30
     },
-    logo: {
-        width: height_logo,
-        height: height_logo
-    },
-    title: {
-        color: '#05375a',
-        fontWeight: 'bold',
-        fontSize: 30
-    },
-    text: {
-        color: 'gray',
-        marginTop:5 
-    },
-    button: {
-        alignItems:'flex-end',
-        marginTop:30
-    },
-    signIn: {
-        width:150,
-        height:40,
-        justifyContent:'center',
-        alignItems:'center',
-        borderRadius:50,
-        flexDirection: 'row'
-    },
-    textSign: {
+    text_header: {
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight:'bold',
+        fontSize:30
+    },
+    text_footer: {
+        color: '#05375a',
+        fontSize:18 
+    },
+    action: {
+        flexDirection: 'row',
+        marginTop:10,
+        borderBottomWidth:1,
+        borderBottomColor: '#f2f2f2',
+        paddingBottom:5
+    },
+    textInput: {
+        flex:1,
+        paddingLeft:10,
+        color:'#05375a'
     }
-    
-})
+});
