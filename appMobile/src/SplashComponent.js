@@ -12,7 +12,7 @@ import * as Animatable from 'react-native-animatable'
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export const SignInScreen = () => {
+export const SplashComponent = (props) => {
     
         return(
             <View style={styles.container}>
@@ -35,7 +35,7 @@ export const SignInScreen = () => {
                     <Text style={styles.text}> Un viaje seguro </Text>
                     <View style={styles.button}>
                         <TouchableOpacity
-                        onPress={ () => this.props.navigation.navigate("SignInScreen")}>
+                        onPress={ () => props.navigation.navigate("SignInScreen")}>
                             <LinearGradient colors={['#393E46', '#393E47',]}
                             style={styles.signIn}>
                                 <Text style={styles.textSign}> Inicia Sesión </Text>

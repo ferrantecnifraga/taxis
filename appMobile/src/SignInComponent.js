@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome"
 
-export default class SignInComponent extends React.COmponent{
+export default class SignInComponent extends React.Component{
     render(){
         return(
             <View style={styles.container}>
@@ -27,7 +27,7 @@ export default class SignInComponent extends React.COmponent{
                             style={styles.textInput}
                         />
                     </View>
-                </View>qq
+                </View>
             </View>
         )
     }
