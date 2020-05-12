@@ -1,7 +1,7 @@
 import {createAppContainer} from "react-navigation";
 import {createStackNavigator} from "react-navigation-stack";
 
-import SplashComponent from "./SplashComponent";
+import {SignInScreen} from "./SplashComponent";
 import SignInComponent from "./SignInComponent";
 import SignUpComponent from "./SignUpComponent";
 

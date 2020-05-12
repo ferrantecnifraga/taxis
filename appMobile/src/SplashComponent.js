@@ -12,8 +12,8 @@ import * as Animatable from 'react-native-animatable'
 import { LinearGradient } from 'expo-linear-gradient';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export default class SignInScreen extends React.Component{
-    render(){
+export const SignInScreen = () => {
+    
         return(
             <View style={styles.container}>
                 <StatusBar barStyle="light-content" />
@@ -50,7 +50,7 @@ export default class SignInScreen extends React.Component{
                 </Animatable.View>
             </View>
         )
-    }
+    
 }
 const {height} = Dimensions.get("screen");
 const height_logo = height * 0.7 * 0.4;
