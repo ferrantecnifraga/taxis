@@ -1,106 +1,277 @@
-import React from 'react';
+import React from "react";
 import {
     View,
     Text,
     StyleSheet,
-    StatusBar,
-    Dimensions,
+    TextInput,
     TouchableOpacity
-} from 'react-native';
-
-import * as Animatable from 'react-native-animatable'
+} from "react-native";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import Feather from "react-native-vector-icons/Feather";
 import { LinearGradient } from 'expo-linear-gradient';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import * as Animatable from "react-native-animatable";
 
-export default class SignUpScreen extends React.Component{
+export default class SignInComponent extends React.Component{
+    
+    constructor(props){
+        super(props);
+        this.state={
+            check_textInputChange: false,
+            password:'',
+            password_confirm:'',
+            secureTextEntry: true,
+            secureTextEntry_confirm: true
+        }
+    }
+
+    textInputChange(value){
+        if(value.lenght!==0){
+            this.setState({
+                check_textInputChange: true
+            });
+        }
+        else{
+            this.setState({
+                check_textInputChange: false
+            });
+        }
+    }
+
+    secureTextEntry(){
+        this.setState({
+            secureTextEntry: !this.state.secureTextEntry
+        })
+    }
+
+    secureTextEntry_confirm(){
+        this.setState({
+            secureTextEntry_confirm: !this.state.secureTextEntry_confirm
+        })
+    }
+    
     render(){
         return(
             <View style={styles.container}>
-                <StatusBar barStyle="light-content" />
                 <View style={styles.header}>
-                    <Animatable.Image
-                        animation="bounceIn"
-                        duration={1500}
-                        source={require('./asset/logo.png')}
-                        style={styles.logo}
-                        resizeMode={'strech'}
-                    />
-
+                    <Text style={styles.text_header}>¡Bienvenido Usuario!</Text>
                 </View>
                 <Animatable.View 
-                style={styles.footer}
                 animation="fadeInUpBig"
-                >
-                    <Text style={styles.title}> Ya  </Text>
-                    <Text style={styles.text}> Es Toda </Text>
-                    <View style={styles.button}>
+                style={styles.footer}>
+                    <Text style={styles.text_footer}> Correo Electronico</Text>
+                    <View style={styles.action}>
+                        <FontAwesome 
+                            name="user-o"
+                            color="#05375a"
+                            size={20}
+                        />
+                        <TextInput 
+                            placeholder="Tu correo electronico"
+                            onChangeText={(text)=>this.textInputChange(text)}
+                            style={styles.textInput}
+                        />
+                        {this.state.check_textInputChange ?
+                        <Animatable.View 
+                        animation="bounceIn" >
+                            <Feather 
+                                name="check-circle"
+                                color="green"
+                                size={20}
+                            />
+                        </Animatable.View>
+                        :null}
+                    </View>
+
+                    <Text style={[styles.text_footer, {
+                        marginTop:35
+                    }]}> Contraseña </Text>
+                    <View style={styles.action}>
+                        <FontAwesome 
+                            name="lock"
+                            color="#05375a"
+                            size={20}
+                        />
+                        {this.state.secureTextEntry ?
+                        <TextInput 
+                            placeholder="Tu contraseña"
+                            secureTextEntry={true}
+                            style={styles.textInput}
+                            value={this.state.password}
+                            onChangeText={(text)=>this.setState({
+                                password:text
+                            })}
+                        />
+                        :
+                        <TextInput 
+                            placeholder="Tu contraseña"
+                            style={styles.textInput}
+                            value={this.state.password}
+                            onChangeText={(text)=>this.setState({
+                                password:text
+                            })}
+                        />
+                        }
                         <TouchableOpacity
-                        onPress={ () => this.props.navigation.navigate("SignInScreen")}>
-                            <LinearGradient colors={['#4c669f', '#3b5998',]}
-                            style={styles.signIn}>
-                                <Text style={styles.textSign}>we </Text>
-                                <MaterialIcons 
-                                    name='navigate-next' 
-                                    color="white"
-                                    size={20}
-                                />
-                            </LinearGradient>
+                        onPress={()=>this.secureTextEntry()}>
+                            {this.state.secureTextEntry ?    
+                            <Feather 
+                                name="eye-off"
+                                color="green"
+                                size={20}
+                            />
+                            :
+                            <Feather 
+                                name="eye"
+                                color="gray"
+                                size={20}
+                            />
+                            }
                         </TouchableOpacity>
                     </View>
-                </Animatable.View>
+                    <Text style={[styles.text_footer, {
+                        marginTop:35
+                    }]}>Confirma tu contraseña </Text>
+                    <View style={styles.action}>
+                        <FontAwesome 
+                            name="lock"
+                            color="#05375a"
+                            size={20}
+                        />
+                        {this.state.secureTextEntry_confirm ?
+                        <TextInput 
+                            placeholder="Confirma tu contraseña"
+                            secureTextEntry={true}
+                            style={styles.textInput}
+                            value={this.state.password_confirm}
+                            onChangeText={(text)=>this.setState({
+                                password_confirm:text
+                            })}
+                        />
+                        :
+                        <TextInput 
+                            placeholder="Confirma tu contraseña"
+                            style={styles.textInput}
+                            value={this.state.password_confirm}
+                            onChangeText={(text)=>this.setState({
+                                password_confirm:text
+                            })}
+                        />}
+                        <TouchableOpacity
+                        onPress={()=>this.secureTextEntry_confirm()}>
+                            {this.state.secureTextEntry_confirm ?    
+                            <Feather 
+                                name="eye-off"
+                                color="green"
+                                size={20}
+                            />
+                            :
+                            <Feather 
+                                name="eye"
+                                color="gray"
+                                size={20}
+                            />
+                            }
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.textPrivate}>
+                        <Text style={styles.color_textPrivate}>
+                            Al registrarme estoy deacuerdo con los
+                        </Text>
+                        <Text style={[styles.color_textPrivate,{
+                            fontWeight:'bold'
+                        }]}>
+                            {""}
+                            "Terminos del servicio 
+                        </Text>
+                        <Text style={styles.color_textPrivate}>
+                            "
+                             Y la
+                            "
+                        </Text>
+                        <Text style={[styles.color_textPrivate,{
+                            fontWeight:'bold'
+                        }]}>
+                            {""}
+                             Politica de privacidad"
+                        </Text>
+                    </View>
+                    <View style={styles.button}>
+                        <LinearGradient 
+                            colors={['#393E46', '#393E47',]}
+                            style={styles.signIn}>
+                                <Text style={[styles.textSign, {
+                                    color:'white'
+                                }]}>Registrarse</Text>
+                        </LinearGradient>
+                    </View>
+                </Animatable.View >
             </View>
         )
     }
 }
-const {height} = Dimensions.get("screen");
-const height_logo = height * 0.7 * 0.4;
 
 var styles = StyleSheet.create({
     container: {
         flex:1,
-        backgroundColor: '#05375a'
+        backgroundColor: '#393E46'
     },
-    header:{
-        flex:2,
-        justifyContent:'center',
-        alignItems:'center'
+    header: {
+        flex:1,
+        justifyContent:'flex-end',
+        paddingHorizontal:20,
+        paddingBottom:50
     },
     footer: {
-        flex:1,
-        backgroundColor:'white',
-        borderTopRightRadius:30,
+        flex:3,
+        backgroundColor: 'white',
         borderTopLeftRadius:30,
-        paddingVertical:50,
-        paddingHorizontal:30
+        borderTopRightRadius:30,
+        paddingHorizontal:20,
+        paddingVertical:30
     },
-    logo: {
-        width: height_logo,
-        height: height_logo
+    text_header: {
+        color: 'white',
+        fontWeight:'bold',
+        fontSize:30
     },
-    title: {
+    text_footer: {
         color: '#05375a',
-        fontWeight: 'bold',
-        fontSize: 30
+        fontSize:18 
     },
-    text: {
-        color: 'gray',
-        marginTop:5 
+    action: {
+        flexDirection: 'row',
+        marginTop:10,
+        borderBottomWidth:1,
+        borderBottomColor: '#f2f2f2',
+        paddingBottom:5
+    },
+    textInput: {
+        flex:1,
+        paddingLeft:10,
+        color:'#05375a'
     },
     button: {
-        alignItems:'flex-end',
-        marginTop:30
+        alignItems: 'center',
+        marginTop:10 
     },
     signIn: {
-        width:150,
-        height:40,
+        width:'100%',
+        height:50,
         justifyContent:'center',
-        alignItems:'center',
-        borderRadius:50,
-        flexDirection: 'row'
+        alignItems: 'center',
+        borderRadius:10
     },
     textSign: {
-        color: 'white',
-        fontWeight: 'bold'
+        fontSize:18,
+        fontWeight:'bold'
+    },
+    textPrivate:{
+        flexDirection:'row',
+        flexWrap:'wrap',
+        marginTop:20
+    },
+    color_textPrivate:{
+        color:'gray'
     }
-    
-})
+
+});
