@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
     View,
     Text,
@@ -11,9 +11,9 @@ import Feather from "react-native-vector-icons/Feather";
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from "react-native-animatable";
 
-export default class SignInComponent extends React.Component{
+export const SignUpComponent = (props) => {
     
-    constructor(props){
+   /*  constructor(props){
         super(props);
         this.state={
             check_textInputChange: false,
@@ -22,34 +22,27 @@ export default class SignInComponent extends React.Component{
             secureTextEntry: true,
             secureTextEntry_confirm: true
         }
-    }
+    } */
+    const [check_textInputChange, setCheck_textInputChange] = useState(false)
+    const [password, setPassword] = setState("")
+    const [password_confirm, setPassword_confirm] = setState("")
+    const [secureTextEntry, setSecureTextEntry] = useState(true)
+    const [secureTextEntry_confirm, setSecureTextEntry_confirm] = useState(true)
 
-    textInputChange(value){
+
+    const textInputChange = (value) => {
         if(value.lenght!==0){
-            this.setState({
-                check_textInputChange: true
-            });
+            setCheck_textInputChange( () => !check_textInputChange)
         }
-        else{
+        /* else{
             this.setState({
                 check_textInputChange: false
             });
-        }
+        } */
     }
 
-    secureTextEntry(){
-        this.setState({
-            secureTextEntry: !this.state.secureTextEntry
-        })
-    }
-
-    secureTextEntry_confirm(){
-        this.setState({
-            secureTextEntry_confirm: !this.state.secureTextEntry_confirm
-        })
-    }
     
-    render(){
+    
         return(
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -67,10 +60,10 @@ export default class SignInComponent extends React.Component{
                         />
                         <TextInput 
                             placeholder="Tu correo electronico"
-                            onChangeText={(text)=>this.textInputChange(text)}
+                            onChangeText={(text)=>textInputChange(text)}
                             style={styles.textInput}
                         />
-                        {this.state.check_textInputChange ?
+                        {check_textInputChange ?
                         <Animatable.View 
                         animation="bounceIn" >
                             <Feather 
@@ -91,29 +84,29 @@ export default class SignInComponent extends React.Component{
                             color="#05375a"
                             size={20}
                         />
-                        {this.state.secureTextEntry ?
+                        {secureTextEntry ?
                         <TextInput 
                             placeholder="Tu contraseña"
                             secureTextEntry={true}
                             style={styles.textInput}
-                            value={this.state.password}
-                            onChangeText={(text)=>this.setState({
-                                password:text
+                            value={password}
+                            onChangeText={(text)=>setPassword( (text) => {
+                                password = text
                             })}
                         />
                         :
                         <TextInput 
                             placeholder="Tu contraseña"
                             style={styles.textInput}
-                            value={this.state.password}
-                            onChangeText={(text)=>this.setState({
-                                password:text
+                            value={password}
+                            onChangeText={(text)=>setPassword( (text) => {
+                                password = text
                             })}
                         />
                         }
                         <TouchableOpacity
-                        onPress={()=>this.secureTextEntry()}>
-                            {this.state.secureTextEntry ?    
+                        onPress={()=>setSecureTextEntry( () => !secureTextEntry)}>
+                            {secureTextEntry ?    
                             <Feather 
                                 name="eye-off"
                                 color="green"
@@ -137,28 +130,28 @@ export default class SignInComponent extends React.Component{
                             color="#05375a"
                             size={20}
                         />
-                        {this.state.secureTextEntry_confirm ?
+                        {secureTextEntry_confirm ?
                         <TextInput 
                             placeholder="Confirma tu contraseña"
                             secureTextEntry={true}
                             style={styles.textInput}
-                            value={this.state.password_confirm}
-                            onChangeText={(text)=>this.setState({
-                                password_confirm:text
+                            value={password_confirm}
+                            onChangeText={(text)=>setPassword_confirm( (text) => {
+                                password_confirm = text
                             })}
                         />
                         :
                         <TextInput 
                             placeholder="Confirma tu contraseña"
                             style={styles.textInput}
-                            value={this.state.password_confirm}
-                            onChangeText={(text)=>this.setState({
-                                password_confirm:text
+                            value={password_confirm}
+                            onChangeText={(text)=>setPassword_confirm( (text) => {
+                                password_confirm = text
                             })}
                         />}
                         <TouchableOpacity
-                        onPress={()=>this.secureTextEntry_confirm()}>
-                            {this.state.secureTextEntry_confirm ?    
+                        onPress={()=>setSecureTextEntry_confirm( ()=> !secureTextEntry_confirm)}>
+                            {secureTextEntry_confirm ?    
                             <Feather 
                                 name="eye-off"
                                 color="green"
@@ -208,7 +201,7 @@ export default class SignInComponent extends React.Component{
             </View>
         )
     }
-}
+
 
 var styles = StyleSheet.create({
     container: {
