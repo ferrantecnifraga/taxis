@@ -24,8 +24,8 @@ export const SignUpComponent = (props) => {
         }
     } */
     const [check_textInputChange, setCheck_textInputChange] = useState(false)
-    const [password, setPassword] = setState("")
-    const [password_confirm, setPassword_confirm] = setState("")
+    const [password, setPassword] = useState("")
+    const [password_confirm, setPassword_confirm] = useState("")
     const [secureTextEntry, setSecureTextEntry] = useState(true)
     const [secureTextEntry_confirm, setSecureTextEntry_confirm] = useState(true)
 
