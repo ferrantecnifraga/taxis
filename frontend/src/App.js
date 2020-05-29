@@ -1,15 +1,21 @@
-import React, { Component } from "react";
-import { Admin } from "react-admin";
+import React from "react";
+import { Admin, Resource } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 
 const dataProvider =
   jsonServerProvider("https://jsonplaceholder.typicode.com");
 
-class App extends Component {
-  render() {
+
+
+export const App = () => {
+  
     return (
-      <Admin dataProvider={dataProvider} />
+      <div>
+      <Admin dataProvider={dataProvider} >
+        
+      </Admin>
+      </div>
     );
-  }
+
 }
-export default App;
+
