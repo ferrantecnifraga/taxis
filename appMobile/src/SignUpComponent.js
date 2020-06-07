@@ -90,18 +90,14 @@ export const SignUpComponent = (props) => {
                             secureTextEntry={true}
                             style={styles.textInput}
                             value={password}
-                            onChangeText={(text)=>setPassword( (text) => {
-                                password = text
-                            })}
+                            onChangeText={(text)=>setPassword( text )}
                         />
                         :
                         <TextInput 
                             placeholder="Tu contraseña"
                             style={styles.textInput}
                             value={password}
-                            onChangeText={(text)=>setPassword( (text) => {
-                                password = text
-                            })}
+                            onChangeText={(text)=>setPassword( text )}
                         />
                         }
                         <TouchableOpacity
@@ -136,18 +132,14 @@ export const SignUpComponent = (props) => {
                             secureTextEntry={true}
                             style={styles.textInput}
                             value={password_confirm}
-                            onChangeText={(text)=>setPassword_confirm( (text) => {
-                                password_confirm = text
-                            })}
+                            onChangeText={(text)=>setPassword_confirm( text )}
                         />
                         :
                         <TextInput 
                             placeholder="Confirma tu contraseña"
                             style={styles.textInput}
                             value={password_confirm}
-                            onChangeText={(text)=>setPassword_confirm( (text) => {
-                                password_confirm = text
-                            })}
+                            onChangeText={(text)=>setPassword_confirm( text )}
                         />}
                         <TouchableOpacity
                         onPress={()=>setSecureTextEntry_confirm( ()=> !secureTextEntry_confirm)}>

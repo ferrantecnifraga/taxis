@@ -4,6 +4,7 @@ import {createStackNavigator} from "react-navigation-stack";
 import {SplashComponent} from "./SplashComponent";
 import {SignInComponent} from "./SignInComponent";
 import {SignUpComponent} from "./SignUpComponent";
+import {HomeComponent} from "./HomeComponent";
 
 const StackNavigator = createStackNavigator({
     SplashScreen: {
@@ -24,6 +25,13 @@ const StackNavigator = createStackNavigator({
             headerShown: false
         }
     },
+    HomeScreen: {
+        screen: HomeComponent,
+        navigationOptions: {
+            headerShown: false
+        }
+
+    }
 });
 
 export default createAppContainer(StackNavigator);

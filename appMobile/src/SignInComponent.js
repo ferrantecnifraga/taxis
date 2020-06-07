@@ -17,6 +17,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 // @ts-ignore
 import * as Animatable from "react-native-animatable";
 
+
+
+
 export const SignInComponent = (props) => {
     
     // @ts-ignore
@@ -97,9 +100,7 @@ export const SignInComponent = (props) => {
                             style={styles.textInput}
                             value={password}
                             // @ts-ignore
-                            onChangeText={(text)=> setPassword( (text) => {
-                                password = text
-                            })}
+                            onChangeText={(text)=> setPassword (text) }
                         />
                         :
                         <TextInput 
@@ -107,9 +108,7 @@ export const SignInComponent = (props) => {
                             style={styles.textInput}
                             value={password}
                             // @ts-ignore
-                            onChangeText={(text)=> setPassword( (text) => {
-                                password = text
-                            })}
+                            onChangeText={(text)=> setPassword( text )}
                         />
                         }
                         <TouchableOpacity
@@ -131,25 +130,31 @@ export const SignInComponent = (props) => {
                     </View>
                     <Text style={{color:'#009bd1', marginTop:15}}>Olvide mi contraseña</Text>
                     <View style={styles.button}>
-                        <LinearGradient 
-                            colors={['#393E46', '#393E47',]}
-                            style={styles.signIn}>
-                                <Text style={[styles.textSign, {
-                                    color:'white'
+                        <TouchableOpacity
+                        // @ts-ignore
+                            onPress={()=>props.navigation.navigate("HomeScreen")}
+                            style={[styles.signIn,{
+                                borderColor:'#263238',
+                                backgroundColor:'#263238',
+                                borderWidth:1,
+                                marginTop:15
+                                }]}>
+                                <Text style={[styles.textSign,{
+                                    color:'#eceff1'
                                 }]}>Entrar</Text>
-                        </LinearGradient>
+                        </TouchableOpacity>
 
                         <TouchableOpacity
                         // @ts-ignore
-                        onPress={()=>props.navigation.navigate("SignUpScreen")}
-                        style={[styles.signIn,{
-                            borderColor:'#4dc2f8',
-                            borderWidth:1,
-                            marginTop:15
-                        }]}>
-                            <Text style={[styles.textSign,{
-                                color:'#4dc2f8'
-                            }]}>Registrate</Text>
+                            onPress={()=>props.navigation.navigate("HomeScreen")}
+                            style={[styles.signIn,{
+                                borderColor:'#4dc2f8',
+                                borderWidth:1,
+                                marginTop:15
+                                }]}>
+                                <Text style={[styles.textSign,{
+                                    color:'#4dc2f8'
+                                }]}>Registrate</Text>
                         </TouchableOpacity>
                     </View>
                 </Animatable.View >
