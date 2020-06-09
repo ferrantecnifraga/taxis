@@ -27,9 +27,6 @@ const StackNavigator = createStackNavigator({
     },
     HomeScreen: {
         screen: HomeComponent,
-        navigationOptions: {
-            headerShown: false
-        }
 
     }
 });

@@ -6,4 +6,8 @@ import {
 } from 'react-native';
 
 
-export const HomeComponent = (props) => <Text>huevos</Text> 
+export const HomeContainer = (props) => {
+  <View>
+    <Text>Huev</Text>
+  </View>
+};
