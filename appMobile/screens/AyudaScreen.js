@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 
-const AyudaScreen = () => {
+const AyudaScreen = ({navigation}) => {
+    
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
         <Text>AyudaScreen</Text>
         
       </View>
@@ -18,4 +19,6 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center'
   },
+  
+  
 });

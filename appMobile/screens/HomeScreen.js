@@ -7,7 +7,7 @@ const HomeScreen = ({navigation}) => {
         <Text>HomeScreen</Text>
         <Button
           title="Go to other screen"
-          onPress={() => navigation.navigate('Details')}
+          onPress={() => navigation.navigate('Viajes')}
         />
       </View>
     );

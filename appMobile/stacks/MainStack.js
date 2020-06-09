@@ -4,10 +4,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import HomeScreen from '../screens/HomeScreen';
-import DetailsScreen from '../screens/DetailsScreen';
+import AyudaScreen from '../screens/AyudaScreen';
 
 const HomeStack = createStackNavigator();
-const DetailsStack = createStackNavigator();
+const AyudaStack = createStackNavigator();
 
 export const HomeStackScreen = ({navigation}) => ( 
   <HomeStack.Navigator screenOptions={{
@@ -31,8 +31,8 @@ export const HomeStackScreen = ({navigation}) => (
 );
 
 
-export const DetailsStackScreen = ({navigation}) => ( 
-  <DetailsStack.Navigator screenOptions={{
+export const AyudaStackScreen = ({navigation}) => ( 
+  <AyudaStack.Navigator screenOptions={{
     headerStyle: {
       backgroundColor: '#009387',
     },
@@ -41,7 +41,7 @@ export const DetailsStackScreen = ({navigation}) => (
       fontWeight: 'bold'
     }
   }}>
-    <DetailsStack.Screen name="Details" component={DetailsScreen} 
+    <AyudaStack.Screen name="Ayuda" component={AyudaScreen} 
     options={{
       headerLeft: () => (
         <Icon.Button name="ios-menu" size= {25}
@@ -49,5 +49,6 @@ export const DetailsStackScreen = ({navigation}) => (
         navigation.openDrawer()}></Icon.Button>
       )
     }} />
-  </DetailsStack.Navigator> 
+  </AyudaStack.Navigator> 
 );
+
