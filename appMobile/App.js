@@ -9,14 +9,18 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 
 const Drawer = createDrawerNavigator();
 
+import RootStack from './src/RootStack'
+
 const App = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> } >
+
+      <RootStack />
+      {/* <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> } >
         <Drawer.Screen name="Home" component={HomeStackScreen} />
         <Drawer.Screen name="Ayuda" component={AyudaStackScreen} />
 
-      </Drawer.Navigator>
+      </Drawer.Navigator> */}
     </NavigationContainer>
   );
 }

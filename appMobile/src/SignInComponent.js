@@ -1,4 +1,3 @@
-// @ts-ignore
 import React, {useState, useEffect} from "react";
 import {
     View,
@@ -132,7 +131,7 @@ export const SignInComponent = (props) => {
                     <View style={styles.button}>
                         <TouchableOpacity
                         // @ts-ignore
-                            onPress={()=>props.navigation.navigate("HomeScreen")}
+                            onPress={()=>props.navigation.navigate("")}
                             style={[styles.signIn,{
                                 borderColor:'#263238',
                                 backgroundColor:'#263238',
@@ -145,8 +144,7 @@ export const SignInComponent = (props) => {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                        // @ts-ignore
-                            onPress={()=>props.navigation.navigate("HomeScreen")}
+                            onPress={()=>props.navigation.navigate("SignUpScreen")}
                             style={[styles.signIn,{
                                 borderColor:'#4dc2f8',
                                 borderWidth:1,
