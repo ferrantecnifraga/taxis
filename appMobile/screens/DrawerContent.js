@@ -61,7 +61,7 @@ export function DrawerContent(props) {
                               />
                           )}
                           label="Mi Perfil"
-                          onPress={() => {}}
+                          onPress={() => {props.navigation.navigate('Perfil')}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (
@@ -72,7 +72,7 @@ export function DrawerContent(props) {
                               />
                           )}
                           label="Mis viajes"
-                          onPress={() => {}}
+                          onPress={() => {props.navigation.navigate('Viajes')}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (
@@ -83,7 +83,7 @@ export function DrawerContent(props) {
                               />
                           )}
                           label="Estadísticas"
-                          onPress={() => {}}
+                          onPress={() => {props.navigation.navigate('Estadisticas')}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (
@@ -94,7 +94,7 @@ export function DrawerContent(props) {
                               />
                           )}
                           label="Facuración"
-                          onPress={() => {}}
+                          onPress={() => {props.navigation.navigate('Facturacion')}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (
@@ -116,7 +116,7 @@ export function DrawerContent(props) {
                               />
                           )}
                           label="Confiuracion"
-                          onPress={() => {}}
+                          onPress={() => {props.navigation.navigate('Config')}}
                       />
                     </Drawer.Section>
                 </View>
