@@ -1,4 +1,5 @@
 import React from 'react'
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from '@react-navigation/stack'
 
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -10,6 +11,7 @@ import EstadisticasScreen from '../screens/EstadisticasScreen';
 import FacturacionScreen from '../screens/FacturacionScreen';
 import AyudaScreen from '../screens/AyudaScreen';
 import ConfigScreen from '../screens/ConfigScreen';
+
 
 const HomeStack = createStackNavigator();
 const PerfilStack = createStackNavigator();
@@ -31,12 +33,22 @@ export const HomeStackScreen = ({navigation}) => (
   }}>
     <HomeStack.Screen name="Home" component={HomeScreen} options={{
       title:'Inicio',
-      headerLeft: () => (
-        <Icon.Button name="ios-menu" size= {25}
-        backgroundColor="#009387" onPress={() => 
-        navigation.openDrawer()}></Icon.Button>
-      )
+      headerLeft: () => ( 
+        <View>
+          <Icon.Button name="ios-menu" size= {25}
+          backgroundColor="#009387" onPress={() => 
+          navigation.openDrawer()}></Icon.Button>
+        </View>
+      ),
+      headerRight: () => (
+        <View style={styles.iconContainer}>
+          <Icon color='#fff' size= {25} backgroundColor="#009387" name={Platform.OS === "ios" ? "ios-notifications" : "md-search"} />
+          <Icon color='#fff' size= {25} backgroundColor="#009387" name={Platform.OS === "ios" ? "ios-mail" : "md-mail"} />
+        </View>
+      ),
+      
     }} />
+
   </HomeStack.Navigator> 
 );
 
@@ -166,3 +178,17 @@ export const ConfigStackScreen = ({navigation}) => (
   </ConfigStack.Navigator> 
 );
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  icon: {
+    paddingLeft: 10,
+    
+  },
+  iconContainer: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    width: 120
+  }
+});

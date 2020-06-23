@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
-import { DrawerContent } from './screens/DrawerContent';
+import { DrawerContent } from './screens/DrawerContent'
 
 import {HomeStackScreen} from './stacks/MainStack';
 import {PerfilStackScreen} from './stacks/MainStack';
@@ -23,14 +23,13 @@ const App = () => {
 
       {/* <RootStack /> */}
       <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> } >
-        <Drawer.Screen name="Home" component={HomeStackScreen} />
+        <Drawer.Screen name="HomeDrawer" component={HomeStackScreen} />
         <Drawer.Screen name="Perfil" component={PerfilStackScreen} />
         <Drawer.Screen name="Viajes" component={ViajesStackScreen} />
         <Drawer.Screen name="Estadisticas" component={EstadisticasStackScreen} />
         <Drawer.Screen name="Facturacion" component={FacturacionStackScreen} />
         <Drawer.Screen name="Ayuda" component={AyudaStackScreen} />
         <Drawer.Screen name="Config" component={ConfigStackScreen} />
-
       </Drawer.Navigator>
     </NavigationContainer>
   );

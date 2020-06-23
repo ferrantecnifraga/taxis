@@ -1,15 +1,18 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import MainTabScreen from './MainTabScreen';
 
 const HomeScreen = ({navigation}) => {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} >
         <Text>HomeScreen</Text>
         <Button
           title="Go to other screen"
           onPress={() => navigation.navigate('Viajes')}
         />
       </View>
+      
+      
     );
 };
 
