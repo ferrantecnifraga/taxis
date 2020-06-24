@@ -14,9 +14,11 @@ import {
     DrawerContentScrollView,
     DrawerItem
 } from '@react-navigation/drawer';
+import {  Badge, withBadge } from 'react-native-elements'
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
+const BadgedIcon = withBadge()(Icon)
 
 export function DrawerContent(props) {
     return( 
@@ -52,7 +54,30 @@ export function DrawerContent(props) {
                           )}
                           label="Inicio"
                             onPress={() => {props.navigation.navigate('Home')}}
-                      /><DrawerItem 
+                      />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <BadgedIcon
+                              name="email"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Mensajes"
+                          onPress={() => {props.navigation.navigate('Mensajes')}}
+                      />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <BadgedIcon
+                              name="bell"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Notificaciones"
+                          onPress={() => {props.navigation.navigate('Notificaciones')}}
+                      />
+                      <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
                               name="account-outline"
@@ -115,7 +140,7 @@ export function DrawerContent(props) {
                               size={size}
                               />
                           )}
-                          label="Confiuracion"
+                          label="Confiuración"
                           onPress={() => {props.navigation.navigate('Config')}}
                       />
                     </Drawer.Section>
@@ -148,7 +173,7 @@ const styles = StyleSheet.create({
     },
     title: {
       fontSize: 16,
-      marginTop: 3,
+      marginTop: 2,
       fontWeight: 'bold',
     },
     caption: {
@@ -170,10 +195,10 @@ const styles = StyleSheet.create({
       marginRight: 3,
     },
     drawerSection: {
-      marginTop: 15,
+      marginTop: .1,
     },
     bottomDrawerSection: {
-        marginBottom: 15,
+        marginBottom: 1,
         borderTopColor: '#f4f4f4',
         borderTopWidth: 1
     },
