@@ -36,9 +36,10 @@ const screenOpt = {
     fontWeight: 'bold'
   }
 }
-
 //Badge 
 const BadgedIcon = withBadge(99)(Icon)
+
+
 
 export const HomeStackScreen = ({navigation}) => ( 
   <HomeStack.Navigator name="Home" component={HomeScreen} screenOptions={screenOpt} >
