@@ -48,6 +48,24 @@ export const SignInComponent = (props) => {
             });
         } */
     }
+    
+    const sendData = () => {
+        
+        fetch('https://taxis-lleida.herokuapp.com/api/login', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: 'email',
+              password: 'password'
+            })
+          });
+
+    }
+
+
 
     
         return(
@@ -67,7 +85,7 @@ export const SignInComponent = (props) => {
                         />
                         <TextInput 
                             placeholder="Tu correo electronico"
-                            // @ts-ignore
+                            value={email}
                             onChangeText={(text)=>textInputChange(text)}
                             style={styles.textInput}
                         />
@@ -130,7 +148,6 @@ export const SignInComponent = (props) => {
                     <Text style={{color:'#009bd1', marginTop:15}}>Olvide mi contraseña</Text>
                     <View style={styles.button}>
                         <TouchableOpacity
-                        // @ts-ignore
                             onPress={()=>props.navigation.navigate("")}
                             style={[styles.signIn,{
                                 borderColor:'#263238',
