@@ -13,7 +13,7 @@ const MensajesScreen = ({navigation}) => {
     {
         name: 'Will Squarepants',
         avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'quiero hacer un cambio en la agenda'
+        subtitle: 'No quiero xdxdxdxd nada'
     },
    ]
 
