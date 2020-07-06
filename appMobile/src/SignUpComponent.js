@@ -5,12 +5,14 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    KeyboardAvoidingView,
+    FlatList,
 } from "react-native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from "react-native-animatable";
+
+import data from '../src/SignInComponent';
 
 
   
@@ -48,16 +50,15 @@ export const SignUpComponent = (props) => {
         } */
     }
 
-    
+               
     
     
         return(
             
             <View style={styles.container}>
-                    <View style={styles.header}>
-                        <Text style={styles.text_header}>Registro</Text>
-                    </View>
-                               
+                <View style={styles.header}                    >
+                </View>
+                 
                 <Animatable.View 
                     animation="fadeInUpBig"
                     style={styles.footer}>
@@ -194,13 +195,17 @@ export const SignUpComponent = (props) => {
                             </Text>
                         </View>
                         <View style={styles.button}>
-                            <LinearGradient 
-                                colors={['#393E46', '#393E47',]}
-                                style={styles.signIn}>
-                                    <Text style={[styles.textSign, {
-                                        color:'white'
-                                    }]}>Registrarse</Text>
-                            </LinearGradient>
+                        <TouchableOpacity
+                            onPress={()=>props.navigation.navigate("SignInScreen")}
+                            style={[styles.signIn,{
+                                borderColor:'#4dc2f8',
+                                borderWidth:1,
+                                marginTop:15
+                                }]}>
+                                <Text style={[styles.textSign,{
+                                    color:'#4dc2f8'
+                                }]}>Registrate</Text>
+                        </TouchableOpacity>
                         </View>
                 </Animatable.View >
             </View>

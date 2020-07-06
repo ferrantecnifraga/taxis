@@ -118,7 +118,7 @@ export function DrawerContent(props) {
                               size={size}
                               />
                           )}
-                          label="Facuración"
+                          label="Facturación"
                           onPress={() => {props.navigation.navigate('Facturacion')}}
                       />
                       <DrawerItem 

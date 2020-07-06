@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useCallback} from "react";
 import {
     View,
     Text,
@@ -34,7 +34,10 @@ export const SignInComponent = (props) => {
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState('')
     const [secureTextEntry, setSecureTextEntry] = useState(true)
+    const [data, setData] = useState([]) 
 
+    //Hook IsLoading
+    //
 
     // @ts-ignore
     const textInputChange = (value) => {
@@ -49,6 +52,7 @@ export const SignInComponent = (props) => {
             });
         } */
     }
+
     
     const loginUser = () => {
 
@@ -65,18 +69,17 @@ export const SignInComponent = (props) => {
           } )
           .then((response) => response.json())
           .then((responseJson) => {
-            console.log(responseJson);
+            setData([responseJson]);
         })
         .catch((error) => {
             console.error(error);
         });
           
     }
-    
 
 
 
-    
+        
         return ( 
             <View style={styles.container}>
                 <View style={styles.header}>
@@ -159,8 +162,8 @@ export const SignInComponent = (props) => {
                     <Text style={{color:'#009bd1', marginTop:15}}>Olvide mi contraseña</Text>
                     <View style={styles.button}>
                         <TouchableOpacity
-                            onPress={()=>props.navigation.navigate("")}
                             onClick={loginUser}
+                            
                             style={[styles.signIn,{
                                 borderColor:'#263238',
                                 backgroundColor:'#263238',
