@@ -32,6 +32,7 @@ export const SignInComponent = (props) => {
     } */
     const [check_textInputChange, setCheck_textInputChange] = useState(false)
     const [password, setPassword] = useState("")
+    const [email, setEmail] = useState('')
     const [secureTextEntry, setSecureTextEntry] = useState(true)
 
 
@@ -48,12 +49,38 @@ export const SignInComponent = (props) => {
             });
         } */
     }
+    
+    const loginUser = () => {
+
+        fetch('https://taxis-lleida.herokuapp.com/api/login', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email : email ,
+                contraseña : password
+            })
+          } )
+          .then((response) => response.json())
+          .then((responseJson) => {
+            console.log(responseJson);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+          
+    }
+    
+
+
 
     
-        return(
+        return ( 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.text_header}>¡Bienvenido Usuario!</Text>
+                    <Text style={styles.text_header}>¡Bienvenido usuario!</Text>
                 </View>
                 <Animatable.View 
                 animation="fadeInUpBig"
@@ -65,9 +92,9 @@ export const SignInComponent = (props) => {
                             color="#05375a"
                             size={20}
                         />
-                        <TextInput 
-                            placeholder="Tu correo electronico"
-                            // @ts-ignore
+                        <TextInput
+                            placeholder="Email"
+                            onChange={e => setEmail(e.target.value)}
                             onChangeText={(text)=>textInputChange(text)}
                             style={styles.textInput}
                         />
@@ -98,6 +125,7 @@ export const SignInComponent = (props) => {
                             secureTextEntry={true}
                             style={styles.textInput}
                             value={password}
+                            onChange={e => setPassword(e.target.value)}
                             // @ts-ignore
                             onChangeText={(text)=> setPassword (text) }
                         />
@@ -106,6 +134,7 @@ export const SignInComponent = (props) => {
                             placeholder="Tu contraseña"
                             style={styles.textInput}
                             value={password}
+                            onChange={e => setPassword(e.target.value)}
                             // @ts-ignore
                             onChangeText={(text)=> setPassword( text )}
                         />
@@ -130,8 +159,8 @@ export const SignInComponent = (props) => {
                     <Text style={{color:'#009bd1', marginTop:15}}>Olvide mi contraseña</Text>
                     <View style={styles.button}>
                         <TouchableOpacity
-                        // @ts-ignore
                             onPress={()=>props.navigation.navigate("")}
+                            onClick={loginUser}
                             style={[styles.signIn,{
                                 borderColor:'#263238',
                                 backgroundColor:'#263238',
