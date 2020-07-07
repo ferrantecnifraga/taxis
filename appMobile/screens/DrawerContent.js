@@ -129,7 +129,7 @@ export function DrawerContent(props) {
                               size={size}
                               />
                           )}
-                          label="Confiuración"
+                          label="Configuración"
                           onPress={() => {props.navigation.navigate('Config')}}
                       />
                     </Drawer.Section>
