@@ -35,9 +35,9 @@ export function DrawerContent(props) {
                             />
                             <View style={{marginLeft:15,
                             flexDirection:'column'}}>
-                                <Title style={styles.title}>User Name
+                                <Title style={styles.title}>Victor Pedraza
                                 </Title>
-                                <Caption style={styles.caption}>User ID
+                                <Caption style={styles.caption}>384 CAT
                                 </Caption>
                             </View>
                         </View>
@@ -54,17 +54,6 @@ export function DrawerContent(props) {
                           )}
                           label="Inicio"
                             onPress={() => {props.navigation.navigate('Home')}}
-                      />
-                      <DrawerItem 
-                            icon={({color, size}) => (
-                              <BadgedIcon
-                              name="email"
-                              color={color}
-                              size={size}
-                              />
-                          )}
-                          label="Mensajes"
-                          onPress={() => {props.navigation.navigate('Mensajes')}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (

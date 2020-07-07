@@ -6,7 +6,6 @@ import {  Badge, withBadge } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import HomeScreen from '../screens/HomeScreen';
-import MensajesScreen from '../screens/MensajesScreen';
 import NotificacionesScreen from '../screens/NotificacionesScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import ViajesScreen from '../screens/ViajesScreen';
@@ -17,7 +16,6 @@ import ConfigScreen from '../screens/ConfigScreen';
 
 
 const HomeStack = createStackNavigator();
-const MensajesStack = createStackNavigator();
 const NotificacionesStack = createStackNavigator();
 const PerfilStack = createStackNavigator();
 const ViajesStack = createStackNavigator();
@@ -53,28 +51,13 @@ export const HomeStackScreen = ({navigation}) => (
       ),
       headerRight: () => (
         <View style={styles.iconContainer}>
-          <BadgedIcon style={styles.Icon} size= {30} 
-          name={Platform.OS === "ios" ? "ios-notifications" : "md-notifications"}
+          <BadgedIcon style={styles.Icon} size= {30}   
+          name={Platform.OS === "ios" ? "ios-mail" : "md-notifications"} 
           onPress={() => {navigation.navigate('Notificaciones')}}/>
-          <BadgedIcon style={styles.Icon} size= {30}   name={Platform.OS === "ios" ? "ios-mail" : "md-mail"} 
-          onPress={() => {navigation.navigate('Mensajes')}}/>
         </View>
       )      
     }} />
   </HomeStack.Navigator> 
-);
-
-export const MensajesStackScreen = ({navigation}) => ( 
-  <MensajesStack.Navigator screenOptions={screenOpt} >
-    <MensajesStack.Screen name="Mensajes" component={MensajesScreen} options={{
-      title:'Mis mensajes',
-      headerLeft: () => (
-        <Icon.Button name="ios-menu" size= {30}
-        backgroundColor="#009387" onPress={() => 
-        navigation.openDrawer()}/>
-      )
-    }} />
-  </MensajesStack.Navigator> 
 );
 
 export const NotificacionesStackScreen = ({navigation}) => ( 
@@ -178,7 +161,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    width: 130,
+    width: 60,
     marginRight: 12
   }
 });
