@@ -102,6 +102,17 @@ export function DrawerContent(props) {
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
+                              name="alert"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Incidencias"
+                          onPress={() => {props.navigation.navigate('Incidencias')}}
+                      />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <Icon
                               name="note-outline"
                               color={color}
                               size={size}
@@ -124,14 +135,15 @@ export function DrawerContent(props) {
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
-                              name="settings"
+                              name="hand-left"
                               color={color}
                               size={size}
                               />
                           )}
-                          label="Configuración"
-                          onPress={() => {props.navigation.navigate('Config')}}
+                          label="Soporte"
+                          onPress={() => {props.navigation.navigate('Soporte')}}
                       />
+                      
                     </Drawer.Section>
                 </View>
             </DrawerContentScrollView>

@@ -1,10 +1,13 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import { Card } from 'react-native-elements';
 
 const ViajesScreen = () => {
     return (
-      <View style={styles.container}>
-        <Text>Viajes Screen 2.0 </Text>
+      <View>
+        <Card>
+
+        </Card>
         
       </View>
     );

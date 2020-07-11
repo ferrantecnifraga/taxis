@@ -10,9 +10,11 @@ import NotificacionesScreen from '../screens/NotificacionesScreen';
 import PerfilScreen from '../screens/PerfilScreen';
 import ViajesScreen from '../screens/ViajesScreen';
 import EstadisticasScreen from '../screens/EstadisticasScreen';
+import IncidenciasScreen from '../screens/IncidenciasScreen';
 import FacturacionScreen from '../screens/FacturacionScreen';
 import AyudaScreen from '../screens/AyudaScreen';
-import ConfigScreen from '../screens/ConfigScreen';
+import SoporteScreen from '../screens/SoporteScreen';
+
 
 
 const HomeStack = createStackNavigator();
@@ -20,9 +22,10 @@ const NotificacionesStack = createStackNavigator();
 const PerfilStack = createStackNavigator();
 const ViajesStack = createStackNavigator();
 const EstadisticasStack = createStackNavigator();
+const IncidenciasStack = createStackNavigator();
 const FacturacionStack = createStackNavigator();
 const AyudaStack = createStackNavigator();
-const ConfigStack = createStackNavigator();
+const SoporteStack = createStackNavigator();
 
 //Styles header:
 const screenOpt = {
@@ -112,6 +115,19 @@ export const EstadisticasStackScreen = ({navigation}) => (
   </EstadisticasStack.Navigator> 
 );
 
+export const IncidenciasStackScreen = ({navigation}) => ( 
+  <IncidenciasStack.Navigator screenOptions={screenOpt}>
+    <IncidenciasStack.Screen name="Incidencias" component={IncidenciasScreen} options={{
+      title:'Incidencias',
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size= {30}
+        backgroundColor="#009387" onPress={() => 
+        navigation.openDrawer()}/>
+      )
+    }} />
+  </IncidenciasStack.Navigator> 
+);
+
 export const FacturacionStackScreen = ({navigation}) => ( 
   <FacturacionStack.Navigator screenOptions={screenOpt}>
     <FacturacionStack.Screen name="Facturacion" component={FacturacionScreen} options={{
@@ -138,18 +154,19 @@ export const AyudaStackScreen = ({navigation}) => (
   </AyudaStack.Navigator> 
 );
 
-export const ConfigStackScreen = ({navigation}) => ( 
-  <ConfigStack.Navigator screenOptions={screenOpt}>
-    <ConfigStack.Screen name="Config" component={ConfigScreen} options={{
-      title:'Configuración',
+export const SoporteStackScreen = ({navigation}) => ( 
+  <SoporteStack.Navigator screenOptions={screenOpt}>
+    <SoporteStack.Screen name="Soporte" component={SoporteScreen} 
+    options={{
       headerLeft: () => (
         <Icon.Button name="ios-menu" size= {30}
         backgroundColor="#009387" onPress={() => 
         navigation.openDrawer()}/>
       )
     }} />
-  </ConfigStack.Navigator> 
+  </SoporteStack.Navigator> 
 );
+
 
 const styles = StyleSheet.create({
   Icon:{

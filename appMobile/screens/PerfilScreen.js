@@ -1,29 +1,48 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
-import {Card,Icon} from 'react-native-elements';
+import { View, Text, StyleSheet } from 'react-native';
+import { Card, ListItem, Avatar} from 'react-native-elements';
 
 const PerfilScreen = ({navigation}) => {
+  const list = [
+    {
+       name: 'Bryan Occonner',
+       subtitle: 'Quisiera cancelar mi viaje'
+    },
+    {
+        name: 'Will Squarepants',
+        subtitle: 'quiero hacer un cambio en la agenda'
+    },
+   ]
     return (
       <View>
         <Card 
-            title='Viajes esta semana'
-            titleStyle={{
-              fontSize: 15,
-              textAlign: 'left',
-              color: '#1976d2'
-            }}
-            containerStyle={{
-              borderLeftColor: '#1976d2',
-              borderLeftWidth: 3
-            }}>
-              <View style={{display: "flex",flexDirection: "row"}}>
-
-                <Text style={{fontSize: 25}} >27</Text>
-                <View style={{flexGrow: 1}} />
-                <Icon name="car" type='material-community' color="#9e9e9e" size= {25} /> 
-              
-              </View>
-          </Card>
+        containerStyle={{alignItems:'center'}}
+        > 
+              <Avatar
+                size='xlarge'
+                
+                rounded
+                source={{
+                  uri:
+                    'https://s3.amazonaws.com/uifaces/faces/twitter/ladylexy/128.jpg',
+                }}
+              />
+           
+        </Card>
+        <View style={{marginTop: 20 }} >
+              {
+                list.map((l, i) => (
+                  <ListItem
+                    key={i}
+                    title={l.name}
+                    titleStyle= {{ flexDirection:'row', flex: 1 }}
+                    subtitleStyle= {{textAlign: 'right' , flexDirection:'row', flex: 1 }}
+                    subtitle={l.subtitle}
+                    bottomDivider
+                  />
+                ))
+              }
+            </View>
         
       </View>
     );
@@ -37,4 +56,11 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center'
   },
+  textCard :{
+    fontSize: 20,
+    marginTop: 13,
+    flex: 1,
+    flexDirection: 'row'
+  }
+
 });
