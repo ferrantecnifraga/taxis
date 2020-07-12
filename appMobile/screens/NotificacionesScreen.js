@@ -1,21 +1,23 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
-import {ListItem} from 'react-native-elements';
+import { ListItem } from 'react-native-elements';
 
 
 const NotificacionesScreen = () => {
   const list = [
     {
-       name: 'Bryan Occonner',
+       name: 'Administradora Leticia',
        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
-       subtitle: 'Quisiera cancelar mi viaje'
+       subtitle: 'Tu sanción ha sido revocada'
     },
     {
-        name: 'Will Squarepants',
+        name: 'Administrador Squarepants',
         avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'quiero hacer un cambio en la agenda'
+        subtitle: 'Tienes una nueva sancion'
     },
-   ]
+   ];
+   
+  
 
   return ( 
   <View>
@@ -29,8 +31,6 @@ const NotificacionesScreen = () => {
           subtitleStyle= {{marginLeft: 15}}
           subtitle={l.subtitle}
           bottomDivider
-          chevron
-          onPress={() => {navigation.navigate('Home')}}
         />
       ))
     }
@@ -39,11 +39,3 @@ const NotificacionesScreen = () => {
 };
 
 export default NotificacionesScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center'
-  },
-});
