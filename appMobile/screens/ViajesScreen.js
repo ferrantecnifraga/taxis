@@ -4,13 +4,13 @@ import { Card, Divider, Icon } from 'react-native-elements';
 
 const ViajesScreen = () => {
     return (
-      <View>
-        <View style= {styles.row}>
+      <View >
+        <View style={{flexDirection: 'row'}}>
           <Card containerStyle={styles.cardContainer}>
             <Icon
               name='car-traction-control'
               type='material-community'
-              alignSelf='central'
+              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
             />
@@ -21,7 +21,7 @@ const ViajesScreen = () => {
             <Icon
               name='car-back'
               type='material-community'
-              alignSelf='central'
+              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
             />
@@ -29,12 +29,12 @@ const ViajesScreen = () => {
             <Text style={styles.cardText}>Último viaje</Text>
           </Card>
         </View>
-        <View style= {styles.row}>
+        <View style={{flexDirection: 'row'}}>
           <Card containerStyle={styles.cardContainer}>
             <Icon
               name='car-multiple'
               type='material-community'
-              alignSelf='central'
+              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
             />
@@ -45,7 +45,7 @@ const ViajesScreen = () => {
             <Icon
               name='car-side'
               type='material-community'
-              alignSelf='central'
+              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
             />
@@ -53,12 +53,12 @@ const ViajesScreen = () => {
             <Text style={styles.cardText}>Viajes rechazados</Text>
           </Card>
         </View>
-        <View style= {styles.row}>
+        <View style={{flexDirection: 'row'}}>
           <Card containerStyle={styles.cardContainer}>
             <Icon
               name='graph-trend'
               type='foundation'
-              alignSelf='central'
+              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
             />
@@ -69,7 +69,7 @@ const ViajesScreen = () => {
             <Icon
               name='car-side'
               type='material-community'
-              alignSelf='central'
+              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
             />
@@ -84,11 +84,6 @@ const ViajesScreen = () => {
 export default ViajesScreen;
 
 const styles = StyleSheet.create({
-  row: {
-    flex:1,
-    flexDirection: 'row',
-    height: 300
-  },
   cardText: {
     color:"#777777",
     textAlign: 'center',
@@ -98,8 +93,8 @@ const styles = StyleSheet.create({
   },
   cardContainer:{
     width: '40%', 
-    alignSelf: 'stretch', 
     marginHorizontal:'5%',
-    height: 175
+    height: 160,
+    flexDirection:'row',
   },
 });

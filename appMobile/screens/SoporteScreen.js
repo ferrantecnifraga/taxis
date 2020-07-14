@@ -1,14 +1,20 @@
-import React, { useState } from "react";
-import { View, StyleSheet } from 'react-native';
+import React  from "react";
+import { ScrollView, StyleSheet } from 'react-native';
 import { Card, Text, Divider, Input, Button } from 'react-native-elements';
-import { Picker } from '@react-native-community/picker';
+import RNPickerSelect from 'react-native-picker-select'
 
 const SoporteScreen = () => {
 
-  const [selectedValue, setSelectedValue] = useState("");
+  const placeholder = {
+    label: 'Tipo de reporte',
+    value: null,
+    color: '#9EA0A4',
+  }; 
 
     return (
-      <View>
+
+      
+      <ScrollView>
         <Card>
           <Text style={{color:"#777777", textAlign: 'center', fontSize: 20, margin: 30}}>Reporta errores o sugiere un cambio</Text>
           <Divider/>
@@ -23,14 +29,14 @@ const SoporteScreen = () => {
             placeholder='TuEmail@ejemplo.com '
           />
           <Text style={{ fontSize: 16 , color: '#86939e', fontWeight: 'bold', marginLeft: 10 }}>Tipo: </Text>
-          <Picker
-            selectedValue={selectedValue}
-            style={{ height: 50, width: 150, margin:10 }}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          >
-            <Picker.Item label="Error" value="error" />
-            <Picker.Item label="Funcionalidad" value="func" />
-          </Picker>
+          <RNPickerSelect
+            placeholder={placeholder}
+            onValueChange={(value) => console.log(value)}
+            items={[
+                { label: 'Funcionalidad', value: 'funcionalidad' },
+                { label: 'Error', value: 'error' },
+            ]}
+          />
           <Input
             label='Cuentanos que pasá...'
             placeholder='Cuentanos que pasá...'
@@ -42,7 +48,7 @@ const SoporteScreen = () => {
             buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
           />
         </Card>
-      </View>
+      </ScrollView>
     );
 };
 

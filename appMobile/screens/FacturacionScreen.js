@@ -5,12 +5,12 @@ import { Card, Divider, Icon, Button } from 'react-native-elements';
 const FacturacionScreen = () => {
   return (
     <View>
-      <View style= {styles.row}>
+      <View style={{flexDirection: 'row'}}>
         <Card containerStyle={styles.cardContainer}>
           <Icon
             name='file-check'
             type='material-community'
-            alignSelf='central'
+            alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
           />
@@ -21,7 +21,7 @@ const FacturacionScreen = () => {
           <Icon
             name='file-multiple'
             type='material-community'
-            alignSelf='central'
+            alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
           />
@@ -29,12 +29,12 @@ const FacturacionScreen = () => {
           <Text style={styles.cardText}>Ver mis facturas</Text>
         </Card>
       </View>
-      <View style= {styles.row}>
+      <View style={{flexDirection: 'row'}}>
         <Card containerStyle={styles.cardContainer}>
           <Icon
             name='file-undo'
             type='material-community'
-            alignSelf='central'
+            alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
           />
@@ -45,7 +45,7 @@ const FacturacionScreen = () => {
           <Icon
             name='file-plus'
             type='material-community'
-            alignSelf='central'
+            alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
           />
@@ -61,11 +61,10 @@ const FacturacionScreen = () => {
             size={30}
             type='material-community'
             color="white"
-            iconStyle={{marginLeft: 10}}
           />
         }
-        title="¿Como se preparan las facturas"
-        buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+        title="¿Como se preparan las facturas?"
+        buttonStyle={{width: '85%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
       />
     </View>
   );
@@ -74,11 +73,6 @@ const FacturacionScreen = () => {
 export default FacturacionScreen;
 
 const styles = StyleSheet.create({
-row: {
-  flex:1,
-  flexDirection: 'row',
-  height: 300
-},
 cardText: {
   color:"#777777",
   textAlign: 'center',
@@ -88,8 +82,8 @@ cardText: {
 },
 cardContainer:{
   width: '40%', 
-  alignSelf: 'stretch', 
   marginHorizontal:'5%',
-  height: 175
+  height: 160,
+  flexDirection:'row',
 },
 });

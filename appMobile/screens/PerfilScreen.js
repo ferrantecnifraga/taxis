@@ -8,10 +8,11 @@ import {
 
 import { Card, Divider } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const PerfilScreen = () => {
   return (
-    <View>
+    <ScrollView>
 
       <Card style={styles.userInfoSection}>
         
@@ -66,7 +67,7 @@ const PerfilScreen = () => {
         <Divider style={{height: 2}}  />
       </View>
       </Card>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -77,10 +78,9 @@ const styles = StyleSheet.create({
   userInfoSection: {
     paddingHorizontal: 25,
     marginBottom: 25,
-    marginTop:25
+    marginTop:10
   },
   row: {
-    flex:1,
     flexDirection: 'row',
     marginTop: 25,
   },
@@ -95,9 +95,9 @@ const styles = StyleSheet.create({
   dataText: {
     color:"#212121", 
     textAlign: 'right',
-    marginRight: 10, 
+    marginRight: 5, 
     fontSize: 20,
-    flex:1
+    
   },
 
 });
