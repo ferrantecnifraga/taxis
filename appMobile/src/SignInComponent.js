@@ -32,7 +32,7 @@ export const SignInComponent = (props) => {
     } */
     const [check_textInputChange, setCheck_textInputChange] = useState(false)
     const [password, setPassword] = useState("")
-    const [email, setEmail] = useState('')
+    const [email, setEmail] = useState("")
     const [secureTextEntry, setSecureTextEntry] = useState(true)
     const [data, setData] = useState([]) 
 
@@ -56,7 +56,7 @@ export const SignInComponent = (props) => {
     
     const loginUser = () => {
 
-        fetch('https://taxis-lleida.herokuapp.com/api/login', {
+        fetch('https://taxis-lleida.herokuapp.com/api/auth/login/', {
             method: 'POST',
             headers: {
               Accept: 'application/json',
@@ -64,12 +64,12 @@ export const SignInComponent = (props) => {
             },
             body: JSON.stringify({
                 email : email ,
-                contraseña : password
+                password : password
             })
           } )
           .then((response) => response.json())
           .then((responseJson) => {
-            setData([responseJson]);
+            console.log(responseJson);
         })
         .catch((error) => {
             console.error(error);

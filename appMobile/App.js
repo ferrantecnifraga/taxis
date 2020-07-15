@@ -24,8 +24,8 @@ const App = () => {
   return (
     <NavigationContainer>
 
-      {/* <RootStack /> */}
-      <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> } >
+      <RootStack />
+      {/* <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> } >
         <Drawer.Screen name="HomeDrawer" component={HomeStackScreen} />
         <Drawer.Screen name="Perfil" component={PerfilStackScreen} />
         <Drawer.Screen name="Notificaciones" component={NotificacionesStackScreen} />
@@ -35,7 +35,7 @@ const App = () => {
         <Drawer.Screen name="Facturacion" component={FacturacionStackScreen} />
         <Drawer.Screen name="Ayuda" component={AyudaStackScreen} />
         <Drawer.Screen name="Soporte" component={SoporteStackScreen} />
-      </Drawer.Navigator>
+      </Drawer.Navigator> */}
     </NavigationContainer>
   );
 }
