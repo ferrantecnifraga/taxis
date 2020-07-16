@@ -30,7 +30,7 @@ export const SignInComponent = ({navigation}) => {
         isValidPassword: true,
     });
 
-    const [respuesta, setRespuesta] = useState ({})
+    const [respuesta, setRespuesta] = useState()
 
     // const [check_textInputChange, setCheck_textInputChange] = useState(false)
     // const [password, setPassword] = useState("")
@@ -105,39 +105,49 @@ export const SignInComponent = ({navigation}) => {
         }
     }
 
-    const loginHandle = (email, password) => {
+    const loginHandle = async(email, password) => {
 
-        if ( data.isValidUser === true && data.isValidPassword === true ) {
-            console.log(data.email)
-            console.log(data.password)
-            fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-               'Authorization': 'Bearer '+('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGF4aXMtbGxlaWRhLmhlcm9rdWFwcC5jb21cL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1OTQ4MzI1NjAsImV4cCI6MTU5NDgzNjE2MCwibmJmIjoxNTk0ODMyNTYwLCJqdGkiOiJzd0F6UWJ4a2tmR0RlOHVCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.D2dIEcOGKyfwqZcWYkM1uTvC2AdP1SZqQLm_HixT9HU'),
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email : data.email ,
-                password : data.password
-            })
-          } )
-          .then((response) => response.json())
-          .then((responseJson) => {
-            setRespuesta((responseJson))
-            console.log(respuesta.error)
-        })
-         }  
-         else {
-             console.log(data)
-            console.log('Datos vacios: ', 'Email o Contraseña estan vacios');
-         }
+        try {
+            if ( data.isValidUser === true && data.isValidPassword === true ) {
+                console.log(data.email)
+                console.log(data.password)
+                let response = await fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                   
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email : data.email ,
+                    password : data.password
+                })
+              } )
+              
+              let dataServer = await response.json();
+              setRespuesta(dataServer)
+              console.log(json)
+              
+              //AsynStorage
+              
+
+             }  
+             else {
+                 console.log(data)
+                console.log('Datos vacios: ', 'Email o Contraseña estan vacios');
+             }
+            
+        } catch (error) {
+            console.error(error);
+        }
+
         
          
 
         // const foundUser = respuesta.filter( item => {
         //     return  email == item.email && password == item.password;
         // });
+        
         
     }
 
