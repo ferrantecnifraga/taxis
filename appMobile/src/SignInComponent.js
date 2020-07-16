@@ -56,16 +56,17 @@ export const SignInComponent = (props) => {
     
     const loginUser = () => {
 
-        fetch('https://taxis-lleida.herokuapp.com/api/auth/login/', {
+        fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
             method: 'POST',
             headers: {
-              Accept: 'application/json',
+              'Accept': 'application/json',
+               'Authorization': 'Bearer '+('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGF4aXMtbGxlaWRhLmhlcm9rdWFwcC5jb21cL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1OTQ4MzI1NjAsImV4cCI6MTU5NDgzNjE2MCwibmJmIjoxNTk0ODMyNTYwLCJqdGkiOiJzd0F6UWJ4a2tmR0RlOHVCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.D2dIEcOGKyfwqZcWYkM1uTvC2AdP1SZqQLm_HixT9HU'),
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                email : email ,
-                password : password
-            })
+              body: JSON.stringify({
+                  email : email ,
+                  password : password
+              })
           } )
           .then((response) => response.json())
           .then((responseJson) => {
