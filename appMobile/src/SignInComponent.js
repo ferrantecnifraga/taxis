@@ -126,7 +126,14 @@ export const SignInComponent = ({navigation}) => {
               
               let dataServer = await response.json();
               setRespuesta(dataServer)
-              console.log(json)
+              console.log(dataServer)
+            
+            console.log(dataServer.message)
+            if(String(dataServer.message) == "Success"){
+                console.log("Login jalando")
+            }else if(String(dataServer.message) == "Email no encontrado o Contraseña incorrecta"){
+                console.log("Contraseña o email incorrectos")
+            } 
               
               //AsynStorage
               
@@ -139,7 +146,7 @@ export const SignInComponent = ({navigation}) => {
             
         } catch (error) {
             console.error(error);
-        }
+        } 
 
         
          
