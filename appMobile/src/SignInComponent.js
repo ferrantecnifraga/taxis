@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 // @ts-ignore
 } from "react-native";
 // @ts-ignore
@@ -21,14 +22,15 @@ import { AuthContext } from '../src/context';
 
 export const SignInComponent = ({navigation}) => {
     
-    const [data, setData] = React.useState({
+    const [data, setData] = useState({
         email: '',
         password: '',
-        check_textInputChange: false,
         secureTextEntry: true,
         isValidUser: true,
         isValidPassword: true,
     });
+
+    const [respuesta, setRespuesta] = useState ({})
 
     // const [check_textInputChange, setCheck_textInputChange] = useState(false)
     // const [password, setPassword] = useState("")
@@ -39,24 +41,7 @@ export const SignInComponent = ({navigation}) => {
     const { signIn } = React.useContext(AuthContext);
 
 
-    const textInputChange = (val) => {
-        if( val.trim().length >= 4 ) {
-            setData({
-                ...data,
-                email: val,
-                check_textInputChange: true,
-                isValidUser: true
-            });
-        } else {
-            setData({
-                ...data,
-                username: val,
-                check_textInputChange: false,
-                isValidUser: false
-            });
-        }
-    }
-    
+
     // const loginUser = () => {
 
     //     fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
@@ -103,21 +88,56 @@ export const SignInComponent = ({navigation}) => {
     }
 
     const handleValidUser = (val) => {
-        if( val.trim().length >= 4 ) {
+        let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        if( reg.test(val) === false ) {
             setData({
                 ...data,
-                isValidUser: true
+                email: val,
+                isValidUser: false
             });
         } else {
             setData({
                 ...data,
-                isValidUser: false
+                email: val,
+                isValidUser: true
             });
         }
     }
 
-    const loginHandle = (email, password) => {        
-        signIn(email, password);
+    const loginHandle = (email, password) => {
+
+        if ( data.isValidUser === true && data.isValidPassword === true ) {
+            console.log(data.email)
+            console.log(data.password)
+            fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email : data.email ,
+                password : data.password
+            })
+          } )
+          .then((response) => response.json())
+          .then((responseJson) => {
+            setRespuesta((responseJson))
+            console.log(respuesta.error)
+        })
+         }  
+         else {
+             console.log(data)
+            console.log('Datos vacios: ', 'Email o Contraseña estan vacios');
+         }
+        
+         
+
+        // const foundUser = respuesta.filter( item => {
+        //     return  email == item.email && password == item.password;
+        // });
+        
     }
 
 
@@ -144,8 +164,9 @@ export const SignInComponent = ({navigation}) => {
                             style={styles.textInput}
                             autoCapitalize='none'
                             // onChange={e => setEmail(e.target.value)}
-                            onChangeText={(val)=>textInputChange(val)}
-                            onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+                            // onChangeText={(val)=>textInputChange(val)}
+                            onChangeText={(e)=>handleValidUser(e)}
+                            required
                         />
                         {data.check_textInputChange ?
                         <Animatable.View 
