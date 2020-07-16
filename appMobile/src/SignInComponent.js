@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     TextInput,
-    TouchableOpacity
+    TouchableOpacity,
+    Alert
 // @ts-ignore
 } from "react-native";
 // @ts-ignore
@@ -16,66 +17,128 @@ import { LinearGradient } from 'expo-linear-gradient';
 // @ts-ignore
 import * as Animatable from "react-native-animatable";
 
+import { AuthContext } from '../src/context';
 
 
-
-export const SignInComponent = (props) => {
+export const SignInComponent = ({navigation}) => {
     
-    // @ts-ignore
-    /* constructor(props){
-        super(props);
-        this.state={
-            check_textInputChange: false,
-            password:'',
-            secureTextEntry: true
-        }
-    } */
-    const [check_textInputChange, setCheck_textInputChange] = useState(false)
-    const [password, setPassword] = useState("")
-    const [email, setEmail] = useState("")
-    const [secureTextEntry, setSecureTextEntry] = useState(true)
-    const [data, setData] = useState([]) 
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+        secureTextEntry: true,
+        isValidUser: true,
+        isValidPassword: true,
+    });
 
-    //Hook IsLoading
-    //
+    const [respuesta, setRespuesta] = useState ({})
 
-    // @ts-ignore
-    const textInputChange = (value) => {
-        if(value.lenght!==0){
-            // @ts-ignore
-            setCheck_textInputChange( () => !check_textInputChange)
-        }
-        /* else{
-            // @ts-ignore
-            this.setState({
-                check_textInputChange: false
-            });
-        } */
+    // const [check_textInputChange, setCheck_textInputChange] = useState(false)
+    // const [password, setPassword] = useState("")
+    // const [email, setEmail] = useState("")
+    // const [secureTextEntry, setSecureTextEntry] = useState(true)
+    // const [data, setData] = useState([])
+    
+    const { signIn } = React.useContext(AuthContext);
+
+
+
+    // const loginUser = () => {
+
+    //     fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
+    //         method: 'POST',
+    //         headers: {
+    //           Accept: 'application/json',
+    //           'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({
+    //             email : email ,
+    //             password : password
+    //         })
+    //       } )
+    //       .then((response) => response.json())
+    //       .then((responseJson) => {
+    //         console.log(responseJson);
+    //     })
+    //     .catch((error) => {
+    //         console.error(error);
+    //     });
+          
+    // }
+
+    const handlePasswordChange = (val) => {
+        if( val.trim().length >= 6 ) {
+        setData({
+            ...data,
+            password: val,
+            isValidPassword: true
+        });
+    } else {
+        setData({
+            ...data,
+            password: val,
+            isValidPassword: false
+        });
+    }
+ }
+    const updateSecureTextEntry = () => {
+        setData({
+            ...data,
+            secureTextEntry: !data.secureTextEntry
+        });
     }
 
-    
-    const loginUser = () => {
+    const handleValidUser = (val) => {
+        let reg = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        
+        if( reg.test(val) === false ) {
+            setData({
+                ...data,
+                email: val,
+                isValidUser: false
+            });
+        } else {
+            setData({
+                ...data,
+                email: val,
+                isValidUser: true
+            });
+        }
+    }
 
-        fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
+    const loginHandle = (email, password) => {
+
+        if ( data.isValidUser === true && data.isValidPassword === true ) {
+            console.log(data.email)
+            console.log(data.password)
+            fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
                'Authorization': 'Bearer '+('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczpcL1wvdGF4aXMtbGxlaWRhLmhlcm9rdWFwcC5jb21cL2FwaVwvYXV0aFwvbG9naW4iLCJpYXQiOjE1OTQ4MzI1NjAsImV4cCI6MTU5NDgzNjE2MCwibmJmIjoxNTk0ODMyNTYwLCJqdGkiOiJzd0F6UWJ4a2tmR0RlOHVCIiwic3ViIjoxLCJwcnYiOiI4N2UwYWYxZWY5ZmQxNTgxMmZkZWM5NzE1M2ExNGUwYjA0NzU0NmFhIn0.D2dIEcOGKyfwqZcWYkM1uTvC2AdP1SZqQLm_HixT9HU'),
               'Content-Type': 'application/json'
             },
-              body: JSON.stringify({
-                  email : email ,
-                  password : password
-              })
+            body: JSON.stringify({
+                email : data.email ,
+                password : data.password
+            })
           } )
           .then((response) => response.json())
           .then((responseJson) => {
-            console.log(responseJson);
+            setRespuesta((responseJson))
+            console.log(respuesta.error)
         })
-        .catch((error) => {
-            console.error(error);
-        });
-          
+         }  
+         else {
+             console.log(data)
+            console.log('Datos vacios: ', 'Email o Contraseña estan vacios');
+         }
+        
+         
+
+        // const foundUser = respuesta.filter( item => {
+        //     return  email == item.email && password == item.password;
+        // });
+        
     }
 
 
@@ -89,6 +152,7 @@ export const SignInComponent = (props) => {
                 <Animatable.View 
                 animation="fadeInUpBig"
                 style={styles.footer}>
+
                     <Text style={styles.text_footer}> Correo Electronico</Text>
                     <View style={styles.action}>
                         <FontAwesome 
@@ -98,11 +162,14 @@ export const SignInComponent = (props) => {
                         />
                         <TextInput
                             placeholder="Email"
-                            onChange={e => setEmail(e.target.value)}
-                            onChangeText={(text)=>textInputChange(text)}
                             style={styles.textInput}
+                            autoCapitalize='none'
+                            // onChange={e => setEmail(e.target.value)}
+                            // onChangeText={(val)=>textInputChange(val)}
+                            onChangeText={(e)=>handleValidUser(e)}
+                            required
                         />
-                        {check_textInputChange ?
+                        {data.check_textInputChange ?
                         <Animatable.View 
                         animation="bounceIn" >
                             <Feather 
@@ -113,6 +180,12 @@ export const SignInComponent = (props) => {
                         </Animatable.View>
                         :null}
                     </View>
+                    
+                    { data.isValidUser ? null :
+                    <Animatable.View animation="fadeInLeft" duration={500} >
+                    <Text style={styles.errorMsg}>Email incorrecto</Text>
+                    </Animatable.View>
+                    }
 
                     <Text style={[styles.text_footer, {
                         marginTop:35
@@ -123,29 +196,18 @@ export const SignInComponent = (props) => {
                             color="#05375a"
                             size={20}
                         />
-                        {secureTextEntry ?
                         <TextInput 
                             placeholder="Tu contraseña"
-                            secureTextEntry={true}
+                            secureTextEntry={data.secureTextEntry ? true : false }
                             style={styles.textInput}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            // @ts-ignore
-                            onChangeText={(text)=> setPassword (text) }
-                        />
-                        :
-                        <TextInput 
-                            placeholder="Tu contraseña"
-                            style={styles.textInput}
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            // @ts-ignore
-                            onChangeText={(text)=> setPassword( text )}
-                        />
-                        }
+                            autoCapitalize='none'
+                            // onChange={e => setPassword(e.target.value)}
+                            onChangeText={(val)=> handlePasswordChange (val) }
+                        />                        
                         <TouchableOpacity
-                        onPress={()=>setSecureTextEntry(() => !secureTextEntry)}>
-                            {secureTextEntry ?    
+                        onPress={updateSecureTextEntry}
+                        >
+                            {data.secureTextEntry ?    
                             <Feather 
                                 name="eye-off"
                                 color="green"
@@ -160,11 +222,21 @@ export const SignInComponent = (props) => {
                             }
                         </TouchableOpacity>
                     </View>
-                    <Text style={{color:'#009bd1', marginTop:15}}>Olvide mi contraseña</Text>
+
+                    { data.isValidPassword ? null : 
+                        <Animatable.View animation="fadeInLeft" duration={500} >
+                        <Text style={styles.errorMsg}>Contraseña muy corta</Text>
+                        </Animatable.View>
+                    }
+                    
+
+                    <TouchableOpacity>
+                        <Text style={{color:'#009bd1', marginTop:15}}>Olvide mi contraseña</Text>
+                    </TouchableOpacity>
                     <View style={styles.button}>
                         <TouchableOpacity
-                            onClick={loginUser}
-                            
+                            // onClick={loginUser}
+                            onPress={() => {loginHandle( data.email, data.password )} }
                             style={[styles.signIn,{
                                 borderColor:'#263238',
                                 backgroundColor:'#263238',
@@ -177,7 +249,7 @@ export const SignInComponent = (props) => {
                         </TouchableOpacity>
 
                         <TouchableOpacity
-                            onPress={()=>props.navigation.navigate("SignUpScreen")}
+                            onPress={()=>navigation.navigate("SignUpScreen")}
                             style={[styles.signIn,{
                                 borderColor:'#4dc2f8',
                                 borderWidth:1,
@@ -248,6 +320,10 @@ var styles = StyleSheet.create({
     textSign: {
         fontSize:18,
         fontWeight:'bold'
-    }
+    },
+    errorMsg: {
+        color: '#FF0000',
+        fontSize: 14,
+    },
 
 });
