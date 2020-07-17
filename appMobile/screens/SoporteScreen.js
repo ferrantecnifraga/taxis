@@ -1,13 +1,16 @@
-import React, {useEffect}  from "react";
-import { ScrollView, StyleSheet } from 'react-native';
+import React, {useState}  from "react";
+import { ScrollView, StyleSheet, Alert } from 'react-native';
 import { Card, Text, Divider, Input, Button } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select'
-
+import AsyncStorage from "@react-native-community/async-storage";
 const SoporteScreen = () => {
 
-  useEffect(() => {
-    async function fetchMyAPI() {
-      
+  const[nombre, setNombre] = useState("")
+  const[email, setEmail] = useState("")
+  const[tipo, setTipo] = useState("")
+  const[mensaje, setMensaje] = useState("")
+
+  const requestHandle = async() => {
     let userToken = await AsyncStorage.getItem('userToken')
      if(userToken == null){
        signOut()
@@ -30,9 +33,9 @@ const SoporteScreen = () => {
 
       let response2 = await response.json()
       console.log(response2)
-      const {message} = response2.taxista[0]
+      const {message} = response2
 
-      if(message=="Error"){
+      if(String(message)=="Error!"){
         Alert.alert(
           "Error",
           "Checa tu conexión a internet",
@@ -60,15 +63,15 @@ const SoporteScreen = () => {
           ],
           { cancelable: true }
         );
+        setEmail("")
+        setNombre("")
+        setMensaje("")
       }
 
     }
 
-
-
-   fetchMyAPI()
-  }, [])
-
+  
+    
 
 
   const placeholder = {
@@ -88,16 +91,18 @@ const SoporteScreen = () => {
             containerStyle={styles.containerInput}
             label='Nombre'
             placeholder='Tu nombre'
+            onChangeText={(text) => setNombre(text)}
           />
           <Input
             containerStyle={styles.containerInput}
             label='Email'
             placeholder='TuEmail@ejemplo.com '
+            onChangeText={(text) => setEmail(text)}
           />
           <Text style={{ fontSize: 16 , color: '#86939e', fontWeight: 'bold', marginLeft: 10 }}>Tipo: </Text>
           <RNPickerSelect
             placeholder={placeholder}
-            onValueChange={(value) => console.log(value)}
+            onValueChange={(value) => setTipo(value)}
             items={[
                 { label: 'Funcionalidad', value: 'funcionalidad' },
                 { label: 'Error', value: 'error' },
@@ -108,10 +113,12 @@ const SoporteScreen = () => {
             placeholder='Cuentanos que pasá...'
             multiline={true}  
             numberOfLines={5}  
+            onChangeText={(text) => setMensaje(text)}
           />
           <Button
             title="Enviar"
             buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+            onPress={() => {requestHandle()} }
           />
         </Card>
       </ScrollView>
