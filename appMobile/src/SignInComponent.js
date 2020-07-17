@@ -148,7 +148,7 @@ export const SignInComponent = ({navigation}) => {
                       console.log(dataServer)
                     
                     console.log(dataServer.message)
-                    if(String(dataServer.message) == "Success"){
+                    if(String(dataServer.message) == "Success!"){
                         try {
                             let userToken = dataServer.access_token;
                             

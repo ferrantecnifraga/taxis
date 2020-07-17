@@ -54,13 +54,7 @@ const [numSocio, setNumSocio] = useState("")
        } )
 
        let response2 = await response.json()
-       if(response2.length >= 2){
-        const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
-       console.log(response2)
-       console.log(nombre)
-        setNombre(""+nombre+" "+primerApellido)
-        setNumSocio(numSocio)
-       }else{
+       if(String(message) == 'Token is Expired' || String(message) == 'Token is Invalid' || String(message) == 'Authorization Token not found, you do not have permission to see this data' ){
         Alert.alert(
           "Error",
           "La sesión caduco, inicia sesión de nuevo por seguridad",
@@ -75,6 +69,13 @@ const [numSocio, setNumSocio] = useState("")
           { cancelable: true }
         );
         signOut()
+       }else{
+        
+        const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
+       console.log(response2)
+       console.log(nombre)
+        setNombre(""+nombre+" "+primerApellido)
+        setNumSocio(numSocio)
        }
        
         
