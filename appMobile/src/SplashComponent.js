@@ -21,7 +21,7 @@ export const SplashComponent = (props) => {
                     <Animatable.Image
                         animation="bounceIn"
                         duration={1500}
-                        source={require('./asset/logo.png')}
+                        source={require('../assets/logolleida2.png')}
                         style={styles.logo}
                         resizeMode={'stretch'}
                     />
@@ -32,7 +32,7 @@ export const SplashComponent = (props) => {
                 animation="fadeInUpBig"
                 >
                     <Text style={styles.title}> Taxis Lleida </Text>
-                    <Text style={styles.text}> Un viaje seguro </Text>
+                    <Text style={styles.text}> Viatge Segur</Text>
                     <View style={styles.button}>
                         <TouchableOpacity
                         onPress={ () => props.navigation.navigate("SignInScreen")}>

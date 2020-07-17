@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { View, StyleSheet } from 'react-native';
+import AsyncStorage from "@react-native-community/async-storage";
 import {
     Avatar,
     Title,
@@ -26,6 +27,39 @@ export function DrawerContent(props) {
 
 const { signOut } = React.useContext(AuthContext); 
 
+
+const [dataTaxista, setDataTaxista] = useState();
+
+
+
+  useEffect(async() => {
+    let email = await AsyncStorage.getItem('email')
+    let userToken = await AsyncStorage.getItem('userToken')
+    console.log(userToken)
+    console.log(email)
+    const fetchData = async() => {
+      const result = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer '+(userToken),
+           
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email : email
+        })
+      } )
+        
+      
+     
+      setDataTaxista(result);
+      console.log(result)
+    };
+ 
+    fetchData();
+  }, []);
+
     return( 
         <View style={{flex:1}}>
             <DrawerContentScrollView {...props} >
@@ -40,9 +74,9 @@ const { signOut } = React.useContext(AuthContext);
                             />
                             <View style={{marginLeft:15,
                             flexDirection:'column'}}>
-                                <Title style={styles.title}>Victor Pedraza
+                                <Title style={styles.title}> 
                                 </Title>
-                                <Caption style={styles.caption}>384 CAT
+                                <Caption style={styles.caption}>
                                 </Caption>
                             </View>
                         </View>

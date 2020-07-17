@@ -23,6 +23,7 @@ const Drawer = createDrawerNavigator();
 
 import RootStack from './src/RootStack'
 
+
 const App = () => {
   // const [isLoading, setIsLoading] = React.useState(true);
   // const [userToken, setUserToken] = React.useState(null);
@@ -68,20 +69,13 @@ const App = () => {
   const [loginState, dispatch] = React.useReducer(loginReducer, initialLoginState)
 
   const authContext = React.useMemo(() => ( {
-    signIn: async(email, password) => {
+    signIn: async(email, password, userToken) => {
       
       // setUserToken('abc');
       // setIsLoading(false);
-      let userToken;
-      userToken = null;
-      if ( email == 'user' && password == 'pass' ) {
-        try {
-          userToken = '';
-          await AsyncStorage.setItem('userToken', userToken)
-        } catch(e){
-          console.log(e);
-        }
-      }
+      loginState.userToken = userToken;
+    
+      
       // console.log('user token: ',  userToken);
       dispatch({ type: 'LOGIN', id: email, token: userToken });
     },

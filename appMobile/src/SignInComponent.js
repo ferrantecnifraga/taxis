@@ -18,6 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import * as Animatable from "react-native-animatable";
 
 import { AuthContext } from '../src/context';
+import AsyncStorage from "@react-native-community/async-storage";
 
 
 export const SignInComponent = ({navigation}) => {
@@ -107,44 +108,100 @@ export const SignInComponent = ({navigation}) => {
 
     const loginHandle = async(email, password) => {
 
-        try {
-            if ( data.isValidUser === true && data.isValidPassword === true ) {
-                console.log(data.email)
-                console.log(data.password)
-                let response = await fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                   
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    email : data.email ,
-                    password : data.password
-                })
-              } )
-              
-              let dataServer = await response.json();
-              setRespuesta(dataServer)
-              console.log(dataServer)
-            
-            console.log(dataServer.message)
-            if(String(dataServer.message) == "Success"){
-                console.log("Login jalando")
-            }else if(String(dataServer.message) == "Email no encontrado o Contraseña incorrecta"){
-                console.log("Contraseña o email incorrectos")
-            } 
+        if( data.password == "" || data.email =="" ){
+            Alert.alert(
+                "Error",
+                "Los campos están vacios",
+                [
+                  {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    
+                  },
+                  { text: "OK", onPress: () => console.log("OK Pressed") }
+                ],
+                { cancelable: true }
+              );
+        }
+       
+
+            try {
+
+                if ( data.isValidUser === true && data.isValidPassword === true ) {
+                    console.log(data.email)
+                    console.log(data.password)
+                    let response = await fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                          'Accept': 'application/json',
+                           
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            email : data.email ,
+                            password : data.password
+                        })
+                      } )
+                      
+                      let dataServer = await response.json();
+                      setRespuesta(dataServer)
+                      console.log(dataServer)
+                    
+                    console.log(dataServer.message)
+                    if(String(dataServer.message) == "Success"){
+                        try {
+                            let userToken = dataServer.access_token;
+                            
+                            await AsyncStorage.setItem('userToken', userToken)
+                            await AsyncStorage.setItem('email', email)
+                            signIn(data.email, data.password, userToken)
+                        } catch(e){
+                            console.log(e);
+                        }
+                        console.log("Login jalando")
+                    }else if(String(dataServer.message) == "Email no encontrado o Contraseña incorrecta"){
+                        Alert.alert(
+                            "Error",
+                            dataServer.message,
+                            [
+                              {
+                                text: "Cancel",
+                                onPress: () => console.log("Cancel Pressed"),
+                                
+                              },
+                              { text: "OK", onPress: () => console.log("OK Pressed") }
+                            ],
+                            { cancelable: true }
+                          );
+                    } 
+        
+        
+        
+                }else {
+                    Alert.alert(
+                        "Error",
+                        "Los campos no son validos",
+                        [
+                          {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            
+                          },
+                          { text: "OK", onPress: () => console.log("OK Pressed") }
+                        ],
+                        { cancelable: true }
+                      );
+                }
+
+                
               
               //AsynStorage
               
 
              }  
-             else {
-                 console.log(data)
-                console.log('Datos vacios: ', 'Email o Contraseña estan vacios');
-             }
+             
             
-        } catch (error) {
+        catch (error) {
             console.error(error);
         } 
 
@@ -164,7 +221,7 @@ export const SignInComponent = ({navigation}) => {
         return ( 
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={styles.text_header}>¡Bienvenido usuario!</Text>
+                    <Text style={styles.text_header}>¡Bienvenido Taxista!</Text>
                 </View>
                 <Animatable.View 
                 animation="fadeInUpBig"
