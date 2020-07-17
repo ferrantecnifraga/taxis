@@ -1,11 +1,13 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { View, Text, StyleSheet, ProgressBarAndroid,
 ActivityIndicator, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 
+
+
 const HomeScreen = ({navigation}) => {
 
-  
+
 
     return (
 

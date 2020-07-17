@@ -5,11 +5,11 @@ import { ListItem } from 'react-native-elements';
 const IncidenciasScreen = () => {
   const list = [
     {
-       name: 'Incidencia 17/05/2020',
+       name: 'Choque 17/05/2020',
        subtitle: 'Acabo de chocar'
     },
     {
-        name: 'Incidencia 11/08/2020',
+        name: 'Reporte 11/08/2020',
         subtitle: 'El cliente no se presento y no hay rep...'
     },
    ];

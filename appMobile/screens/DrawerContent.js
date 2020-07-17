@@ -31,12 +31,15 @@ const { signOut } = React.useContext(AuthContext);
 const [email, setEmail] = useState("");
 const [nombre, setNombre] = useState("")
 const [numSocio, setNumSocio] = useState("")    
-
+const [prueba, setPrueba] = useState({})
   
      useEffect(() => {
      async function fetchMyAPI() {
        let email2 =  await AsyncStorage.getItem('email')
      let userToken = await AsyncStorage.getItem('userToken')
+      if(userToken == null){
+        signOut()
+      }
        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
        method: 'POST',
          headers: {
@@ -51,11 +54,13 @@ const [numSocio, setNumSocio] = useState("")
        } )
 
        let response2 = await response.json()
+       setPrueba(response2.taxista[0])
        const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
        console.log(response2)
        console.log(nombre)
         setNombre(""+nombre+" "+primerApellido)
         setNumSocio(numSocio)
+        
      }
 
     fetchMyAPI()

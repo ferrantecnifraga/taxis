@@ -1,9 +1,75 @@
-import React  from "react";
+import React, {useEffect}  from "react";
 import { ScrollView, StyleSheet } from 'react-native';
 import { Card, Text, Divider, Input, Button } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select'
 
 const SoporteScreen = () => {
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      
+    let userToken = await AsyncStorage.getItem('userToken')
+     if(userToken == null){
+       signOut()
+     }
+      let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/soporte', {
+      method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': 'Bearer '+(userToken),
+          
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            nombre : nombre,
+            email: email,
+            tipo: tipo,
+            mensaje: mensaje 
+        })
+      } )
+
+      let response2 = await response.json()
+      console.log(response2)
+      const {message} = response2.taxista[0]
+
+      if(message=="Error"){
+        Alert.alert(
+          "Error",
+          "Checa tu conexión a internet",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: true }
+        );
+      }else{
+        Alert.alert(
+          "Gracias!",
+          "Se enviarón tus comentarios",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: true }
+        );
+      }
+
+    }
+
+
+
+   fetchMyAPI()
+  }, [])
+
+
 
   const placeholder = {
     label: 'Tipo de reporte',
