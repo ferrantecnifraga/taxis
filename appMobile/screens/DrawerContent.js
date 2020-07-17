@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import AsyncStorage from "@react-native-community/async-storage";
 import {
     Avatar,
@@ -31,7 +31,7 @@ const { signOut } = React.useContext(AuthContext);
 const [email, setEmail] = useState("");
 const [nombre, setNombre] = useState("")
 const [numSocio, setNumSocio] = useState("")    
-const [prueba, setPrueba] = useState({})
+
   
      useEffect(() => {
      async function fetchMyAPI() {
@@ -54,12 +54,29 @@ const [prueba, setPrueba] = useState({})
        } )
 
        let response2 = await response.json()
-       setPrueba(response2.taxista[0])
-       const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
+       if(response2.length >= 2){
+        const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
        console.log(response2)
        console.log(nombre)
         setNombre(""+nombre+" "+primerApellido)
         setNumSocio(numSocio)
+       }else{
+        Alert.alert(
+          "Error",
+          "La sesión caduco, inicia sesión de nuevo por seguridad",
+          [
+            {
+              text: "Cancel",
+              onPress: () => console.log("Cancel Pressed"),
+              
+            },
+            { text: "OK", onPress: () => console.log("OK Pressed") }
+          ],
+          { cancelable: true }
+        );
+        signOut()
+       }
+       
         
      }
 
