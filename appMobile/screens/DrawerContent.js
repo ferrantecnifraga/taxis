@@ -32,33 +32,31 @@ const [dataTaxista, setDataTaxista] = useState();
 
 
 
-  useEffect(async() => {
-    let email = await AsyncStorage.getItem('email')
-    let userToken = await AsyncStorage.getItem('userToken')
-    console.log(userToken)
-    console.log(email)
-    const fetchData = async() => {
-      const result = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': 'Bearer '+(userToken),
-           
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email : email
-        })
-      } )
-        
-      
-     
-      setDataTaxista(result);
-      console.log(result)
-    };
- 
-    fetchData();
-  }, []);
+useEffect(() => {
+  const fetchData = async () => {
+      let email =  AsyncStorage.getItem('email')
+      let userToken = AsyncStorage.getItem('userToken')
+      console.log(userToken)
+      console.log(email)
+    const result = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': 'Bearer '+(userToken),
+         
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+          email : email
+      })
+    } )
+
+    setDataTaxista(result.taxista);
+    console.log(dataTaxista)
+  };
+
+  fetchData();
+}, []);
 
     return( 
         <View style={{flex:1}}>
