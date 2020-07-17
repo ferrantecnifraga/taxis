@@ -23,40 +23,46 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const BadgedIcon = withBadge()(Icon)
 
-export function DrawerContent(props) {
+export function DrawerContent(props){
 
 const { signOut } = React.useContext(AuthContext); 
 
 
-const [dataTaxista, setDataTaxista] = useState();
+const [email, setEmail] = useState("");
+const [nombre, setNombre] = useState("")
+const [numSocio, setNumSocio] = useState("")    
+
+  
+     useEffect(() => {
+     async function fetchMyAPI() {
+       let email2 =  await AsyncStorage.getItem('email')
+     let userToken = await AsyncStorage.getItem('userToken')
+       let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
+       method: 'POST',
+         headers: {
+           'Accept': 'application/json',
+           'Authorization': 'Bearer '+(userToken),
+           
+           'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({
+             email : email2 
+         })
+       } )
+
+       let response2 = await response.json()
+       const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
+       console.log(response2)
+       console.log(nombre)
+        setNombre(""+nombre+" "+primerApellido)
+        setNumSocio(numSocio)
+     }
+
+    fetchMyAPI()
+   }, [])
 
 
-
-useEffect(() => {
-  const fetchData = async () => {
-      let email =  AsyncStorage.getItem('email')
-      let userToken = AsyncStorage.getItem('userToken')
-      console.log(userToken)
-      console.log(email)
-    const result = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Authorization': 'Bearer '+(userToken),
-         
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-          email : email
-      })
-    } )
-
-    setDataTaxista(result.taxista);
-    console.log(dataTaxista)
-  };
-
-  fetchData();
-}, []);
+//json.taxista[0] remeber
 
     return( 
         <View style={{flex:1}}>
@@ -72,9 +78,9 @@ useEffect(() => {
                             />
                             <View style={{marginLeft:15,
                             flexDirection:'column'}}>
-                                <Title style={styles.title}> 
+                                <Title style={styles.title}> {nombre}
                                 </Title>
-                                <Caption style={styles.caption}>
+                                <Caption style={styles.caption}> {numSocio}
                                 </Caption>
                             </View>
                         </View>
