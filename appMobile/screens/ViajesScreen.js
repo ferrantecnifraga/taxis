@@ -2,7 +2,8 @@ import React from 'react';
 import { View, Text,  StyleSheet } from 'react-native';
 import { Card, Divider, Icon } from 'react-native-elements';
 
-const ViajesScreen = () => {
+
+const ViajesScreen = ({navigation}) => {
     return (
       <View >
         <View style={{flexDirection: 'row'}}>
@@ -10,9 +11,9 @@ const ViajesScreen = () => {
             <Icon
               name='car-traction-control'
               type='material-community'
-              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
+              onPress={() => {navigation.navigate('ProximosViajes')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Próximo viaje</Text>
@@ -23,7 +24,7 @@ const ViajesScreen = () => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10}}
+              iconStyle={{marginVertical: 10, flex: 1}}
             />
             <Divider/>
             <Text style={styles.cardText}>Último viaje</Text>
@@ -36,7 +37,7 @@ const ViajesScreen = () => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10}}
+              iconStyle={{marginVertical: 10, flex: 1}}
             />
             <Divider/>
             <Text style={styles.cardText}>Historial de viajes</Text>
@@ -47,7 +48,7 @@ const ViajesScreen = () => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10}}
+              iconStyle={styles.icon}
             />
             <Divider/>
             <Text style={styles.cardText}>Viajes rechazados</Text>
@@ -60,7 +61,7 @@ const ViajesScreen = () => {
               type='foundation'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10}}
+              iconStyle={styles.icon}
             />
             <Divider/>
             <Text style={styles.cardText}>Costos y Porcentajes</Text>
@@ -71,7 +72,7 @@ const ViajesScreen = () => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10}}
+              iconStyle={styles.icon}
             />
             <Divider/>
             <Text style={styles.cardText}>Sectores y Servicios</Text>
@@ -88,7 +89,6 @@ const styles = StyleSheet.create({
     color:"#777777",
     textAlign: 'center',
     fontSize: 20,
-    flex:1,
     marginTop:10
   },
   cardContainer:{
@@ -97,4 +97,8 @@ const styles = StyleSheet.create({
     height: 160,
     flexDirection:'row',
   },
+  icon:{
+    marginVertical:10,
+    alignItems:"center"
+  }
 });

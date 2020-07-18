@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
-import { View, Text, StyleSheet, ProgressBarAndroid,
+import { View, Text, StyleSheet, ProgressBarAndroid, ScrollView,
 ActivityIndicator, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
+import { FAB } from 'react-native-paper'; 
 
 
 
@@ -12,6 +13,7 @@ const HomeScreen = ({navigation}) => {
     return (
 
       <View>
+      <ScrollView>
         <Card 
             title='Viajes esta semana'
             titleStyle={{
@@ -21,7 +23,8 @@ const HomeScreen = ({navigation}) => {
             }}
             containerStyle={{
               borderLeftColor: '#1976d2',
-              borderLeftWidth: 3
+              borderLeftWidth: 3,
+              height: 130
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
 
@@ -40,7 +43,9 @@ const HomeScreen = ({navigation}) => {
             }}
             containerStyle={{
               borderLeftColor: '#66bb6a',
-              borderLeftWidth: 3
+              borderLeftWidth: 3,
+              height: 130
+              
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
       
@@ -59,7 +64,8 @@ const HomeScreen = ({navigation}) => {
             }}
             containerStyle={{
               borderLeftColor: '#00bcd4',
-              borderLeftWidth: 3
+              borderLeftWidth: 3,
+              height: 130
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
       
@@ -88,7 +94,8 @@ const HomeScreen = ({navigation}) => {
             }}
             containerStyle={{
               borderLeftColor: '#e53935',
-              borderLeftWidth: 3
+              borderLeftWidth: 3,
+              height: 130
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
       
@@ -98,6 +105,17 @@ const HomeScreen = ({navigation}) => {
               
               </View>
           </Card>
+          
+          </ScrollView>
+          <View>
+            <FAB
+              style={styles.fab}
+              large
+              icon="alert-octagon"
+              onPress={() => console.log('Pressed')}
+            />
+
+          </View>
 
        </View>
     );
@@ -106,9 +124,10 @@ const HomeScreen = ({navigation}) => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1, 
-    alignItems: 'center', 
-    justifyContent: 'center'
+  fab: {
+    position: 'absolute',
+    margin: 20,
+    right: 0,
+    bottom: 0,
   },
 });

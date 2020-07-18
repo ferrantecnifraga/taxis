@@ -153,7 +153,7 @@ const [numSocio, setNumSocio] = useState("")
                               />
                           )}
                           label="Mis viajes"
-                          onPress={() => {props.navigation.navigate('Viajes')}}
+                          onPress={() => {props.navigation.navigate('Viajes', {screen: 'Viajes'})}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (
