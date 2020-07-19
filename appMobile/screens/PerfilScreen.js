@@ -22,11 +22,13 @@ const [telfT, setTelfT] = useState("")
 const [plazasT, setPlazasT] = useState("")
 const [estatusT, setEstatusT] = useState("")
 
+
+
   
     useEffect(() => {
-      async function fetchMyAPI() {
+      const fetchMyAPI = async () => {
         let email2 =  await AsyncStorage.getItem('email')
-      let userToken = await AsyncStorage.getItem('userToken')
+        let userToken = await AsyncStorage.getItem('userToken')
         let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
         method: 'POST',
           headers: {
@@ -39,13 +41,23 @@ const [estatusT, setEstatusT] = useState("")
               email : email2 
           })
         } )
-
+        
         let response2 = await response.json()
+        
+        //PRUEBAS: (BORRAR)
+        let idTaxistaxd = await AsyncStorage.getItem('idTaxista')
+        let emailxd = await AsyncStorage.getItem('userToken')
+        let tokenxd = await AsyncStorage.getItem('email')
         
         const {nombre, primerApellido, segundoApellido, 
           numSocio, acuerdoMarco, telf, plazas, estatus} = response2.taxista[0]
+        
+          //PRUEBAS EN CONSOLA PARA VER SI GUARDO EN EL ASYNCSTORAGE MI idTaxista
         console.log(response2)
-        console.log(nombre)
+        console.log(idTaxistaxd)
+        console.log(emailxd)
+        console.log(tokenxd)
+
          setNombreT(nombre)
          setPrimerApellidoT(primerApellido)
          setSegundoApellidoT(segundoApellido)

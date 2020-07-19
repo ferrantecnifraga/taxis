@@ -95,8 +95,8 @@ export const PerfilStackScreen = ({navigation}) => (
   </PerfilStack.Navigator> 
 );
 
+//Mi stack para navegar entre screens de viajes
 export const ViajesStackScreen = ({navigation}) => (
-  
   <ViajesStack.Navigator screenOptions={screenOpt}>
     <ViajesStack.Screen name="Viajes" component={ViajesScreen} options={{ 
       title:'Mis viajes', 
@@ -105,7 +105,7 @@ export const ViajesStackScreen = ({navigation}) => (
         backgroundColor="#009387" 
         onPress={() => navigation.openDrawer()}/>
       )
-    }} />
+    }}/>
     <ViajesStack.Screen name="ProximosViajes" component={ProximosViajes} 
     options={{
       title:'Proximos viajes',
@@ -114,7 +114,7 @@ export const ViajesStackScreen = ({navigation}) => (
         backgroundColor="#009387"
         onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
       )
-    }} />
+    }}/>
   </ViajesStack.Navigator>
 );
 
