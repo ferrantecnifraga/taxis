@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { ListItem } from 'react-native-elements';
 
-
 const NotificacionesScreen = () => {
   const list = [
     {

@@ -30,54 +30,62 @@ const { signOut } = React.useContext(AuthContext);
 
 const [email, setEmail] = useState("");
 const [nombre, setNombre] = useState("")
-const [numSocio, setNumSocio] = useState("")    
+const [numSocio, setNumSocio] = useState("")
 
-  
-     useEffect(() => {
-     async function fetchMyAPI() {
-       let email2 =  await AsyncStorage.getItem('email')
-     let userToken = await AsyncStorage.getItem('userToken')
+useEffect(() => {
+  async function fetchMyAPI() {
+    let email2 =  await AsyncStorage.getItem('email')
+    let userToken = await AsyncStorage.getItem('userToken')
       if(userToken == null){
         signOut()
       }
-       let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
-       method: 'POST',
-         headers: {
-           'Accept': 'application/json',
-           'Authorization': 'Bearer '+(userToken),
-           
-           'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({
-             email : email2 
-         })
-       } )
+      let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
+        method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Authorization': 'Bearer '+(userToken),
+            
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              email : email2 
+          })
+        })
 
-       let response2 = await response.json()
-       const {message} = response2
+      let response2 = await response.json()
+      const {message} = response2
+
+       //Logout if Token is Expired
        if(String(message) == 'Token is Expired' || String(message) == 'Token is Invalid' || String(message) == 'Authorization Token not found, you do not have permission to see this data' ){
         Alert.alert(
           "Error",
           "La sesión caduco, inicia sesión de nuevo por seguridad",
           [
-            {
-              text: "Cancel",
-              onPress: () => console.log("Cancel Pressed"),
-              
-            },
+            {  text: "Cancel", onPress: () => console.log("Cancel Pressed") },
             { text: "OK", onPress: () => console.log("OK Pressed") }
           ],
           { cancelable: true }
         );
         signOut()
-       }else{
-        
-        const {nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
-       console.log(response2)
-       console.log(nombre)
-        setNombre(""+nombre+" "+primerApellido)
-        setNumSocio(numSocio)
-       }
+       }else{   
+         
+      //Aqui quiero llamar Id taxista para guardarlo en el async Storage
+      const {idTaxista, nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
+        console.log(response2)
+        console.log(nombre)
+        console.log(idTaxista)
+
+          setNombre(""+nombre+" "+primerApellido)
+          setNumSocio(numSocio)
+          
+          //Aqui lo trato de guardar :C
+          let idPrueba = await AsyncStorage.getItem('idTaxista')
+          console.log(idPrueba)
+             if(idPrueba == null || idPrueba == undefined) {
+            let id =  await AsyncStorage.setItem('idTaxista', idTaxista)
+             }
+       } 
+       
        
         
      }
@@ -153,7 +161,7 @@ const [numSocio, setNumSocio] = useState("")
                               />
                           )}
                           label="Mis viajes"
-                          onPress={() => {props.navigation.navigate('Viajes')}}
+                          onPress={() => {props.navigation.navigate('Viajes', {screen: 'Viajes'})}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (

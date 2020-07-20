@@ -1,10 +1,12 @@
 import React from 'react'
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import {  Badge, withBadge } from 'react-native-elements'
 
 import Icon from 'react-native-vector-icons/Ionicons'
 
+//Stack del Drawer
 import HomeScreen from '../screens/HomeScreen';
 import NotificacionesScreen from '../screens/NotificacionesScreen';
 import PerfilScreen from '../screens/PerfilScreen';
@@ -15,8 +17,11 @@ import FacturacionScreen from '../screens/FacturacionScreen';
 import AyudaScreen from '../screens/AyudaScreen';
 import SoporteScreen from '../screens/SoporteScreen';
 
+//Stack de viajes
+import ProximosViajes from '../screens/dataScreen/ProximosViajes'
 
 
+//Stack del drawer
 const HomeStack = createStackNavigator();
 const NotificacionesStack = createStackNavigator();
 const PerfilStack = createStackNavigator();
@@ -26,6 +31,7 @@ const IncidenciasStack = createStackNavigator();
 const FacturacionStack = createStackNavigator();
 const AyudaStack = createStackNavigator();
 const SoporteStack = createStackNavigator();
+
 
 //Styles header:
 const screenOpt = {
@@ -89,17 +95,27 @@ export const PerfilStackScreen = ({navigation}) => (
   </PerfilStack.Navigator> 
 );
 
-export const ViajesStackScreen = ({navigation}) => ( 
+//Mi stack para navegar entre screens de viajes
+export const ViajesStackScreen = ({navigation}) => (
   <ViajesStack.Navigator screenOptions={screenOpt}>
-    <ViajesStack.Screen name="Viajes" component={ViajesScreen} options={{
-      title:'Mis viajes',
+    <ViajesStack.Screen name="Viajes" component={ViajesScreen} options={{ 
+      title:'Mis viajes', 
       headerLeft: () => (
         <Icon.Button name="ios-menu" size= {30}
-        backgroundColor="#009387" onPress={() => 
-        navigation.openDrawer()}/>
+        backgroundColor="#009387" 
+        onPress={() => navigation.openDrawer()}/>
       )
-    }} />
-  </ViajesStack.Navigator> 
+    }}/>
+    <ViajesStack.Screen name="ProximosViajes" component={ProximosViajes} 
+    options={{
+      title:'Proximos viajes',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+  </ViajesStack.Navigator>
 );
 
 export const EstadisticasStackScreen = ({navigation}) => ( 
@@ -166,6 +182,7 @@ export const SoporteStackScreen = ({navigation}) => (
     }} />
   </SoporteStack.Navigator> 
 );
+
 
 
 const styles = StyleSheet.create({
