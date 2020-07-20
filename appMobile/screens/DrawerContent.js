@@ -54,6 +54,7 @@ const [numSocio, setNumSocio] = useState("")
        } )
 
        let response2 = await response.json()
+       const {message} = response2
        if(String(message) == 'Token is Expired' || String(message) == 'Token is Invalid' || String(message) == 'Authorization Token not found, you do not have permission to see this data' ){
         Alert.alert(
           "Error",
