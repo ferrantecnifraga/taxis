@@ -58,7 +58,7 @@ const ProximosViajes = ({navigation}) => {
   //Headers de tabla(categorias):
   const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
   //Mi Data donde deberia de ir toda nuestra info
-    const tableData = proximosViajes.map(record=>([record.pacientePrimero, record.pacienteSegundo, record.servicio, record.fechaInicio, record.estatus]));
+  const tableData = proximosViajes.map(record=>([record.pacientePrimero, record.pacienteSegundo, record.servicio, record.fechaInicio, record.estatus]));
 
     return (
       <ScrollView horizontal={true}>

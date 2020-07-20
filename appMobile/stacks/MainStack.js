@@ -19,6 +19,11 @@ import SoporteScreen from '../screens/SoporteScreen';
 
 //Stack de viajes
 import ProximosViajes from '../screens/dataScreen/ProximosViajes'
+import atenderViajes from '../screens/dataScreen/atenderViajes'
+import historialViajes from '../screens/dataScreen/historialViajes'
+import rechazadosViajes from '../screens/dataScreen/rechazadosViajes'
+import costosPorcentajes from '../screens/dataScreen/costosPorcentajes'
+import sectoresServicios from '../screens/dataScreen/sectoresServicios'
 
 
 //Stack del drawer
@@ -109,6 +114,51 @@ export const ViajesStackScreen = ({navigation}) => (
     <ViajesStack.Screen name="ProximosViajes" component={ProximosViajes} 
     options={{
       title:'Proximos viajes',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="atenderViajes" component={atenderViajes} 
+    options={{
+      title:'Viajes por atender',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="historialViajes" component={historialViajes} 
+    options={{
+      title:'Historial de viajes',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="rechazadosViajes" component={rechazadosViajes} 
+    options={{
+      title:'Viajes rechazados',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="costosPorcentajes" component={costosPorcentajes} 
+    options={{
+      title:'Costos y Porcentajes',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="sectoresServicios" component={sectoresServicios} 
+    options={{
+      title:'Sectores y Servicios',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"

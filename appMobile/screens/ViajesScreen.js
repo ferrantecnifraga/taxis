@@ -24,10 +24,11 @@ const ViajesScreen = ({navigation}) => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10, flex: 1}}
+              iconStyle={{marginVertical: 10}}
+              onPress={() => {navigation.navigate('atenderViajes')}}
             />
             <Divider/>
-            <Text style={styles.cardText}>Último viaje</Text>
+            <Text style={styles.cardText}>Viajes por Atender</Text>
           </Card>
         </View>
         <View style={{flexDirection: 'row'}}>
@@ -37,7 +38,8 @@ const ViajesScreen = ({navigation}) => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={{marginVertical: 10, flex: 1}}
+              iconStyle={{marginVertical: 10}}
+              onPress={() => {navigation.navigate('historialViajes')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Historial de viajes</Text>
@@ -49,6 +51,7 @@ const ViajesScreen = ({navigation}) => {
               alignSelf='center'
               size={50}
               iconStyle={styles.icon}
+              onPress={() => {navigation.navigate('rechazadosViajes')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Viajes rechazados</Text>
@@ -62,6 +65,7 @@ const ViajesScreen = ({navigation}) => {
               alignSelf='center'
               size={50}
               iconStyle={styles.icon}
+              onPress={() => {navigation.navigate('costosPorcentajes')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Costos y Porcentajes</Text>
@@ -73,6 +77,7 @@ const ViajesScreen = ({navigation}) => {
               alignSelf='center'
               size={50}
               iconStyle={styles.icon}
+              onPress={() => {navigation.navigate('sectoresServicios')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Sectores y Servicios</Text>
