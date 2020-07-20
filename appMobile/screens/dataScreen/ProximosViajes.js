@@ -14,7 +14,7 @@ const ProximosViajes = ({navigation}) => {
   const [estatusT, setEstatusT] = useState("")
   const [nombrePacienteT, setNombrePacienteT] = useState("")
   const [fechaInicioT, setFechaInicioT] = useState("")
-
+  const [proximosViajes, setProximosViajes] = useState([])
   //Hago fetch
   useEffect(() => {
     const fetchMyAPI = async () => {
@@ -35,17 +35,20 @@ const ProximosViajes = ({navigation}) => {
 
       let response2 = await response.json()
       
-      const {nombre, primerApellido, segundoApellido, 
-        servicio, estatus, nombrePaciente, fechaInicio} = response2.proximosViajes
-      console.log(response2)
-       setNombreT(nombre)
-       setPrimerApellidoT(primerApellido)
-       setSegundoApellidoT(segundoApellido)
-       setServicioT(servicio)
-       setEstatusT(estatus)
-       setNombrePacienteT(nombrePaciente)
-       setFechaInicioT(fechaInicio)
-      
+      //const {nombre, primerApellido, segundoApellido, 
+        //servicio, estatus, nombrePaciente, fechaInicio} = response2.proximosViajes
+      //console.log(response2)
+       //setNombreT(nombre)
+      //  setPrimerApellidoT(primerApellido)
+      //  setSegundoApellidoT(segundoApellido)
+      //  setServicioT(servicio)
+      //  setEstatusT(estatus)
+      //  setNombrePacienteT(nombrePaciente)
+      //  setFechaInicioT(fechaInicio)
+      console.log(response2.proximosViajes)
+       setProximosViajes(response2.proximosViajes)
+       console.log(proximosViajes)
+
     }
 
    fetchMyAPI()
@@ -53,18 +56,16 @@ const ProximosViajes = ({navigation}) => {
   
   
   //Headers de tabla(categorias):
-  const tableHead = ['Taxista', 'Paciente', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
+  const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
   //Mi Data donde deberia de ir toda nuestra info
-    const tableData = [
-      [nombreT, nombrePacienteT, servicioT, fechaInicioT, estatusT ],
-    ];
+    const tableData = proximosViajes.map(record=>([record.pacientePrimero, record.pacienteSegundo, record.servicio, record.fechaInicio, record.estatus]));
 
     return (
       <ScrollView horizontal={true}>
         <Table style={styles.table}>
           <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/>
-        </Table>
+          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
+        </Table> 
       </ScrollView>
     )
   }
@@ -75,10 +76,10 @@ export default ProximosViajes;
 
 const styles = StyleSheet.create({
   table:{
-    margin: 4,
+    margin: 10,
     width: 500
   },
   head: { height: 40, backgroundColor: '#f1f8ff' },
   text: { marginLeft: 5 },
-  row: {  height: 30, backgroundColor:'#fff' }
+  row: {  height: 50, backgroundColor:'#fff59d' }
 })
