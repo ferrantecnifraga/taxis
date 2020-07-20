@@ -9,7 +9,8 @@ const atenderViajes = ({navigation}) => {
   //Headers de tabla(categorias):
     const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
   //Mi Data donde deberia de ir toda nuestra info
-    const tableData = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
+    const tableData = [
+      ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus'] ];
 
     return (
       <ScrollView horizontal={true}>
