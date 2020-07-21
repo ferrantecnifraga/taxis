@@ -25,6 +25,19 @@ import rechazadosViajes from '../screens/dataScreen/rechazadosViajes'
 import costosPorcentajes from '../screens/dataScreen/costosPorcentajes'
 import sectoresServicios from '../screens/dataScreen/sectoresServicios'
 
+//Stack de estadisticas
+import cantidadViajes from '../screens/dataEstadisticas/cantidadViajes'
+import proxViajesEst from '../screens/dataEstadisticas/proxViajesEst'
+import rechazadosEst from '../screens/dataEstadisticas/rechazadosEst'
+import sancionesEst from '../screens/dataEstadisticas/sancionesEst'
+import secServEst from '../screens/dataEstadisticas/secServEst'
+import totalGanado from '../screens/dataEstadisticas/totalGanado'
+
+//Stack de FACTURAS
+import totalFacturas from '../screens/dataFacturas/totalFacturas'
+import verFacturas from '../screens/dataFacturas/verFacturas'
+import ultimasFacturas from '../screens/dataFacturas/ultimasFacturas'
+import agregarFacturas from '../screens/dataFacturas/agregarFacturas'
 
 //Stack del drawer
 const HomeStack = createStackNavigator();
@@ -165,9 +178,11 @@ export const ViajesStackScreen = ({navigation}) => (
         onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
       )
     }}/>
+    
   </ViajesStack.Navigator>
 );
 
+//Mi stack para navegar entre screens de ESTADISTICAS
 export const EstadisticasStackScreen = ({navigation}) => ( 
   <EstadisticasStack.Navigator screenOptions={screenOpt}>
     <EstadisticasStack.Screen name="Estadisticas" component={EstadisticasScreen} options={{
@@ -176,6 +191,60 @@ export const EstadisticasStackScreen = ({navigation}) => (
         <Icon.Button name="ios-menu" size= {30}
         backgroundColor="#009387" onPress={() => 
         navigation.openDrawer()}/>
+      )
+    }} />
+    <EstadisticasStack.Screen name="cantidadViajes" component={cantidadViajes} options={{
+      title:'Cantidad de Viajes',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
+        />
+      )
+    }} />
+    <EstadisticasStack.Screen name="proxViajesEst" component={proxViajesEst} options={{
+      title:'Próximos viajes',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
+        />
+      )
+    }} />
+    <EstadisticasStack.Screen name="totalGanado" component={totalGanado} options={{
+      title:'Total ganado',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
+        />
+      )
+    }} />
+    <EstadisticasStack.Screen name="sancionesEst" component={sancionesEst} options={{
+      title:'Sanciones',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
+        />
+      )
+    }} />
+    <EstadisticasStack.Screen name="rechazadosEst" component={rechazadosEst} options={{
+      title:'Viajes rechazados',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
+        />
+      )
+    }} />
+    <EstadisticasStack.Screen name="secServEst" component={secServEst} options={{
+      title:'Sectores y Servicios',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
+        />
       )
     }} />
   </EstadisticasStack.Navigator> 
@@ -194,6 +263,8 @@ export const IncidenciasStackScreen = ({navigation}) => (
   </IncidenciasStack.Navigator> 
 );
 
+
+//Stack de Facturas
 export const FacturacionStackScreen = ({navigation}) => ( 
   <FacturacionStack.Navigator screenOptions={screenOpt}>
     <FacturacionStack.Screen name="Facturacion" component={FacturacionScreen} options={{
@@ -202,6 +273,42 @@ export const FacturacionStackScreen = ({navigation}) => (
         <Icon.Button name="ios-menu" size= {30}
         backgroundColor="#009387" onPress={() => 
         navigation.openDrawer()}/>
+      )
+    }} />
+    <FacturacionStack.Screen name="totalFacturas" component={totalFacturas} options={{
+      title:'Total facturado',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Facturacion', {screen: 'Facturacion'})}
+        />
+      )
+    }} />
+    <FacturacionStack.Screen name="verFacturas" component={verFacturas} options={{
+      title:'Mis Facturas',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Facturacion', {screen: 'Facturacion'})}
+        />
+      )
+    }} />
+    <FacturacionStack.Screen name="ultimasFacturas" component={ultimasFacturas} options={{
+      title:'Últimas facturas',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Facturacion', {screen: 'Facturacion'})}
+        />
+      )
+    }} />
+    <FacturacionStack.Screen name="agregarFacturas" component={agregarFacturas} options={{
+      title:'Agregar facturas',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387" 
+        onPress={() => navigation.navigate('Facturacion', {screen: 'Facturacion'})}
+        />
       )
     }} />
   </FacturacionStack.Navigator> 

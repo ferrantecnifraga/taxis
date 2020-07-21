@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, Divider, Icon, Button } from 'react-native-elements';
 
-const FacturacionScreen = () => {
+const FacturacionScreen = ({navigation}) => {
   return (
     <View>
       <View style={{flexDirection: 'row'}}>
@@ -13,6 +13,7 @@ const FacturacionScreen = () => {
             alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
+            onPress={() => {navigation.navigate('totalFacturas')}}
           />
           <Divider/>
           <Text style={styles.cardText}>Total facturado</Text>
@@ -24,6 +25,7 @@ const FacturacionScreen = () => {
             alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
+            onPress={() => {navigation.navigate('verFacturas')}}
           />
           <Divider/>
           <Text style={styles.cardText}>Ver mis facturas</Text>
@@ -37,6 +39,7 @@ const FacturacionScreen = () => {
             alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
+            onPress={() => {navigation.navigate('ultimasFacturas')}}
           />
           <Divider/>
           <Text style={styles.cardText}>Últimas facturas</Text>
@@ -48,6 +51,7 @@ const FacturacionScreen = () => {
             alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
+            onPress={() => {navigation.navigate('agregarFacturas')}}
           />
           <Divider/>
           <Text style={styles.cardText}>Agregar facturas</Text>
