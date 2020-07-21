@@ -322,17 +322,7 @@ export const SignInComponent = ({navigation}) => {
                                 }]}>Entrar</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity
-                            onPress={()=>navigation.navigate("SignUpScreen")}
-                            style={[styles.signIn,{
-                                borderColor:'#4dc2f8',
-                                borderWidth:1,
-                                marginTop:15
-                                }]}>
-                                <Text style={[styles.textSign,{
-                                    color:'#4dc2f8'
-                                }]}>Registrate</Text>
-                        </TouchableOpacity>
+                        
                     </View>
                 </Animatable.View >
             </View>
