@@ -82,11 +82,9 @@ const [estatusT, setEstatusT] = useState("")
 
       <Card style={styles.userInfoSection}>
         
-          <Avatar.Image
-            style={{alignSelf: 'center'}}
-            source={{
-              uri: 'https://api.adorable.io/avatars/80/abott@adorable.png',
-            }}
+          <Avatar.Icon
+            style={{alignSelf: 'center', backgroundColor: "#009387"}}
+            icon='taxi'
             size={100}
           />
       
