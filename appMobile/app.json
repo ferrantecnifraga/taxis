@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Taxis Lleida",
+    "name": "Taxis Lleida - Taxista",
     "icon": "./assets/archivo.png",
     "version": "1.0.0",
-    "slug": "taxis-lleida",
+    "slug": "taxis-lleida-taxista",
     "ios": {
-      "bundleIdentifier": "com.vigsoft.taxislleida",
+      "bundleIdentifier": "com.vigsoft.taxislleida.taxista",
       "buildNumber": "1.0.0"
     },
     "android": {
-      "package": "com.vigsoft.taxislleida",
+      "package": "com.vigsoft.taxislleida.taxista",
       "versionCode": 1
     },
     "description": "Aplicación para taxistas"

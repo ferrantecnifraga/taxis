@@ -50,7 +50,7 @@ const [estatusT, setEstatusT] = useState("")
         let tokenxd = await AsyncStorage.getItem('email')
         
         const {nombre, primerApellido, segundoApellido, 
-          numSocio, acuerdoMarco, telf, plazas, estatus} = response2.taxista[0]
+          numSocio, acuerdoMarco, telf, plazas, estatus} = response2.taxista
         
           //PRUEBAS EN CONSOLA PARA VER SI GUARDO EN EL ASYNCSTORAGE MI idTaxista
         console.log(response2)

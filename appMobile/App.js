@@ -85,6 +85,7 @@ const App = () => {
       try {
         await AsyncStorage.removeItem('userToken')
         await AsyncStorage.removeItem('email')
+        await AsyncStorage.removeItem('idTaxista')
       } catch(e){
         console.log(e);
       }

@@ -70,7 +70,7 @@ useEffect(() => {
        }else{   
          
       //Aqui quiero llamar Id taxista para guardarlo en el async Storage
-      const {idTaxista, nombre, numSocio, primerApellido, segundoApellido} = response2.taxista[0]
+      const {idTaxista, nombre, numSocio, primerApellido, segundoApellido} = response2.taxista
         console.log(response2)
         console.log(nombre)
         console.log(idTaxista)
