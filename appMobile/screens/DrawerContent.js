@@ -36,7 +36,7 @@ useEffect(() => {
   async function fetchMyAPI() {
     let email2 =  await AsyncStorage.getItem('email')
     let userToken = await AsyncStorage.getItem('userToken')
-      if(userToken == null){
+      if(userToken == null || userToken == undefined){
         signOut()
       }
       let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
@@ -85,16 +85,12 @@ useEffect(() => {
             let id =  await AsyncStorage.setItem('idTaxista', idTaxista)
              }
        } 
-       
-       
-        
      }
 
     fetchMyAPI()
    }, [])
 
 
-//json.taxista[0] remeber
 
     return( 
         <View style={{flex:1}}>
@@ -102,10 +98,9 @@ useEffect(() => {
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{flexDirection:'row',marginTop: 15}}>
-                            <Avatar.Image
-                                source={{
-                                    uri:'https://www.w3schools.com/w3images/avatar2.png'
-                                }}
+                            <Avatar.Icon
+                                style={{alignSelf: 'center', backgroundColor: "#009387"}}
+                                icon='taxi'
                                 size={50}
                             />
                             <View style={{marginLeft:15,

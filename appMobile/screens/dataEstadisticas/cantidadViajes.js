@@ -1,38 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import AsyncStorage from "@react-native-community/async-storage";
-
+import { View } from 'react-native'
+import { BarChart, XAxis } from 'react-native-svg-charts'
+import {Card} from 'react-native-paper'
+import * as scale from 'd3-scale'
 
 const cantidadViajes = ({navigation}) => {
+    
+    const data = [ 14, 80, 100, 55 ]
 
-  //Headers de tabla(categorias):
-  const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
-  //Mi Data donde deberia de ir toda nuestra info
-  const tableData = [
-    ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus'] ];
-
-
-    return (
-      <ScrollView horizontal={true}>
-        <Table style={styles.table}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
-        </Table> 
-      </ScrollView>
-    )
+      return (
+        <Card style={{ height: 200, padding: 20 }}>
+            <BarChart
+                style={{ flex: 1 }}
+                data={data}
+                gridMin={0}
+                svg={{ fill: 'rgb(134, 65, 244)' }}
+            />
+            <XAxis
+                style={{ marginTop: 10 }}
+                data={ data }
+                scale={scale.scaleBand}
+                formatLabel={ (value, index) => index }
+                labelStyle={ { color: 'black' } }
+            />
+        </Card>
+      )
   }
 
-
-
-export default cantidadViajes;
-
-const styles = StyleSheet.create({
-  table:{
-    margin: 10,
-    width: 500
-  },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  text: { marginLeft: 5 },
-  row: {  height: 50, backgroundColor:'#fff59d' }
-})
+  export default cantidadViajes;
