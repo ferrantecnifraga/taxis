@@ -28,17 +28,18 @@ const [estatusT, setEstatusT] = useState("")
     useEffect(() => {
       const fetchMyAPI = async () => {
         let email2 =  await AsyncStorage.getItem('email')
-        let userToken = await AsyncStorage.getItem('userToken')
+        let password2 = await AsyncStorage.getItem('password')
+        
         let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
         method: 'POST',
           headers: {
             'Accept': 'application/json',
-            'Authorization': 'Bearer '+(userToken),
            
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              email : email2 
+              email : email2 ,
+              password : password2
           })
         } )
         
@@ -46,8 +47,6 @@ const [estatusT, setEstatusT] = useState("")
         
         //PRUEBAS: (BORRAR)
         let idTaxistaxd = await AsyncStorage.getItem('idTaxista')
-        let emailxd = await AsyncStorage.getItem('userToken')
-        let tokenxd = await AsyncStorage.getItem('email')
         
         const {nombre, primerApellido, segundoApellido, 
           numSocio, acuerdoMarco, telf, plazas, estatus} = response2.taxista
@@ -55,8 +54,6 @@ const [estatusT, setEstatusT] = useState("")
           //PRUEBAS EN CONSOLA PARA VER SI GUARDO EN EL ASYNCSTORAGE MI idTaxista
         console.log(response2)
         console.log(idTaxistaxd)
-        console.log(emailxd)
-        console.log(tokenxd)
 
          setNombreT(nombre)
          setPrimerApellidoT(primerApellido)

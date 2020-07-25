@@ -130,7 +130,7 @@ export const SignInComponent = ({navigation}) => {
                 if ( data.isValidUser === true && data.isValidPassword === true ) {
                     console.log(data.email)
                     console.log(data.password)
-                    let response = await fetch('https://taxis-lleida.herokuapp.com/api/auth/login', {
+                    let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/login', {
                         method: 'POST',
                         headers: {
                           'Accept': 'application/json',
@@ -150,11 +150,12 @@ export const SignInComponent = ({navigation}) => {
                     console.log(dataServer.message)
                     if(String(dataServer.message) == "Success!"){
                         try {
-                            let userToken = dataServer.access_token;
+                            // let userToken = dataServer.access_token;
                             
-                            await AsyncStorage.setItem('userToken', userToken)
+                            await AsyncStorage.setItem('password', password)
+                            // await AsyncStorage.setItem('userToken', userToken)
                             await AsyncStorage.setItem('email', email)
-                            signIn(data.email, data.password, userToken)
+                            signIn(data.email, data.password)
                         } catch(e){
                             console.log(e);
                         }

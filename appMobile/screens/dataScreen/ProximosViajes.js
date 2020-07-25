@@ -19,17 +19,19 @@ const ProximosViajes = ({navigation}) => {
   useEffect(() => {
     const fetchMyAPI = async () => {
       let idTaxista2 =  await AsyncStorage.getItem('idTaxista')
-      let userToken = await AsyncStorage.getItem('userToken')
+      let email2 = await AsyncStorage.getItem('email')
+      let password2 = await AsyncStorage.getItem('password')
       console.log(idTaxista2)
        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/proximosViajes', {
        method: 'POST',
          headers: {
            'Accept': 'application/json',
-          'Authorization': 'Bearer '+(userToken),
            'Content-Type': 'application/json'
          },
          body: JSON.stringify({
-           idTaxista : idTaxista2 
+           idTaxista : idTaxista2,
+           email : email2, 
+           password : password2
          })
        } )
 

@@ -35,39 +35,28 @@ const [numSocio, setNumSocio] = useState("")
 useEffect(() => {
   async function fetchMyAPI() {
     let email2 =  await AsyncStorage.getItem('email')
-    let userToken = await AsyncStorage.getItem('userToken')
-      if(userToken == null || userToken == undefined){
-        signOut()
-      }
+    let password2 = await AsyncStorage.getItem('password')
+    // let userToken = await AsyncStorage.getItem('userToken')
+    //   if(userToken == null || userToken == undefined){
+    //     signOut()
+    //   }
       let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
         method: 'POST',
           headers: {
             'Accept': 'application/json',
-            'Authorization': 'Bearer '+(userToken),
             
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-              email : email2 
+              email : email2,
+              password : password2
           })
         })
 
       let response2 = await response.json()
       const {message} = response2
 
-       //Logout if Token is Expired
-       if(String(message) == 'Token is Expired' || String(message) == 'Token is Invalid' || String(message) == 'Authorization Token not found, you do not have permission to see this data' ){
-        Alert.alert(
-          "Error",
-          "La sesión caduco, inicia sesión de nuevo por seguridad",
-          [
-            {  text: "Cancel", onPress: () => console.log("Cancel Pressed") },
-            { text: "OK", onPress: () => console.log("OK Pressed") }
-          ],
-          { cancelable: true }
-        );
-        signOut()
-       }else{   
+       
          
       //Aqui quiero llamar Id taxista para guardarlo en el async Storage
       const {idTaxista, nombre, numSocio, primerApellido, segundoApellido} = response2.taxista
@@ -84,7 +73,7 @@ useEffect(() => {
              if(idPrueba == null || idPrueba == undefined) {
             let id =  await AsyncStorage.setItem('idTaxista', idTaxista)
              }
-       } 
+       
      }
 
     fetchMyAPI()
