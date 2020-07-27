@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { ScrollView, StyleSheet, TouchableOpacity, View, Text, Alert } from "react-native";
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from "@react-native-community/async-storage";
 
+
+import ViajesProgramadosTable from './tablasViajes/ViajesProgramadosTable'
 
 const ProximosViajes = ({navigation}) => {
 
@@ -62,13 +64,17 @@ const ProximosViajes = ({navigation}) => {
   //Mi Data donde deberia de ir toda nuestra info
   const tableData = proximosViajes.map(record=>([record.pacientePrimero, record.pacienteSegundo, record.servicio, record.fechaInicio, record.estatus]));
 
+  //pruebas 
+
+
     return (
+      
       <ScrollView horizontal={true}>
-        <Table style={styles.table}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
-        </Table> 
+         
+         <ViajesProgramadosTable/>
+
       </ScrollView>
+      
     )
   }
 
@@ -77,11 +83,14 @@ const ProximosViajes = ({navigation}) => {
 export default ProximosViajes;
 
 const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
   table:{
     margin: 10,
     width: 500
   },
   head: { height: 40, backgroundColor: '#f1f8ff' },
   text: { marginLeft: 5 },
-  row: {  height: 50, backgroundColor:'#fff59d' }
+  row: {  height: 50, backgroundColor:'#fff59d' },
+  btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
+  btnText: { textAlign: 'center', color: '#fff' }
 })

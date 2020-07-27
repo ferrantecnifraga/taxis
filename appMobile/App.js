@@ -103,7 +103,7 @@ const App = () => {
       let userToken;
       userToken = null;
       try {
-        userToken = await AsyncStorage.getItem('userToken')
+        userToken = await AsyncStorage.getItem('email')
       } catch(e){
         console.log(e);
       }
