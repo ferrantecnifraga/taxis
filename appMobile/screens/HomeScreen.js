@@ -15,7 +15,7 @@ const HomeScreen = ({navigation}) => {
       <View>
       <ScrollView>
         <Card 
-            title='Viajes esta semana'
+            title='Viajes realizados este mes'
             titleStyle={{
               fontSize: 15,
               textAlign: 'left',
@@ -35,7 +35,7 @@ const HomeScreen = ({navigation}) => {
               </View>
           </Card>
           <Card 
-            title='Total ganado esta semana'
+            title='Total ganado por mes'
             titleStyle={{
               fontSize: 15,
               textAlign: 'left',
@@ -56,7 +56,7 @@ const HomeScreen = ({navigation}) => {
               </View>
           </Card>
           <Card 
-            title='Viajes programados'
+            title='Viajes programados por mes'
             titleStyle={{
               fontSize: 15,
               textAlign: 'left',
@@ -86,7 +86,7 @@ const HomeScreen = ({navigation}) => {
               </View>
           </Card>
           <Card 
-            title='Quejas sin atender'
+            title='Sanciones por mes'
             titleStyle={{
               fontSize: 15,
               textAlign: 'left',
