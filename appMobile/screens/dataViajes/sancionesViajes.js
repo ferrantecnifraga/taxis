@@ -4,7 +4,7 @@ import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-tab
 import AsyncStorage from "@react-native-community/async-storage";
 
 
-const sectoresServicios = ({navigation}) => {
+const sancionesViajes = ({navigation}) => {
 
   //Headers de tabla(categorias):
   const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
@@ -25,7 +25,7 @@ const sectoresServicios = ({navigation}) => {
 
 
 
-export default sectoresServicios;
+export default sancionesViajes;
 
 const styles = StyleSheet.create({
   table:{

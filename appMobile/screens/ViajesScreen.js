@@ -13,11 +13,24 @@ const ViajesScreen = ({navigation}) => {
               type='material-community'
               size={50}
               iconStyle={{marginVertical: 10}}
+              onPress={() => {navigation.navigate('iniciarViaje')}}
+            />
+            <Divider/>
+            <Text style={styles.cardText}>Iniciar viaje</Text>
+          </Card>
+          <Card containerStyle={styles.cardContainer}>
+            <Icon
+              name='car'
+              type='material-community'
+              size={50}
+              iconStyle={{marginVertical: 10}}
               onPress={() => {navigation.navigate('ProximosViajes')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Próximo viaje</Text>
           </Card>
+        </View>
+        <View style={{flexDirection: 'row'}}>
           <Card containerStyle={styles.cardContainer}>
             <Icon
               name='car-back'
@@ -30,8 +43,6 @@ const ViajesScreen = ({navigation}) => {
             <Divider/>
             <Text style={styles.cardText}>Viajes por Atender</Text>
           </Card>
-        </View>
-        <View style={{flexDirection: 'row'}}>
           <Card containerStyle={styles.cardContainer}>
             <Icon
               name='car-multiple'
@@ -44,7 +55,9 @@ const ViajesScreen = ({navigation}) => {
             <Divider/>
             <Text style={styles.cardText}>Historial de viajes</Text>
           </Card>
-          <Card containerStyle={styles.cardContainer}>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+        <Card containerStyle={styles.cardContainer}>
             <Icon
               name='car-side'
               type='material-community'
@@ -56,31 +69,17 @@ const ViajesScreen = ({navigation}) => {
             <Divider/>
             <Text style={styles.cardText}>Viajes rechazados</Text>
           </Card>
-        </View>
-        <View style={{flexDirection: 'row'}}>
           <Card containerStyle={styles.cardContainer}>
             <Icon
-              name='graph-trend'
-              type='foundation'
+              name='report'
+              type='material'
               alignSelf='center'
               size={50}
               iconStyle={styles.icon}
-              onPress={() => {navigation.navigate('costosPorcentajes')}}
+              onPress={() => {navigation.navigate('sancionesViajes')}}
             />
             <Divider/>
-            <Text style={styles.cardText}>Costos y Porcentajes</Text>
-          </Card>
-          <Card containerStyle={styles.cardContainer}>
-            <Icon
-              name='car-side'
-              type='material-community'
-              alignSelf='center'
-              size={50}
-              iconStyle={styles.icon}
-              onPress={() => {navigation.navigate('sectoresServicios')}}
-            />
-            <Divider/>
-            <Text style={styles.cardText}>Sectores y Servicios</Text>
+            <Text style={styles.cardText}>Sanciones</Text>
           </Card>
         </View>
       </View>

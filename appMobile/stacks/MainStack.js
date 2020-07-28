@@ -18,12 +18,12 @@ import AyudaScreen from '../screens/AyudaScreen';
 import SoporteScreen from '../screens/SoporteScreen';
 
 //Stack de viajes
+import iniciarViaje from '../screens/dataViajes/iniciarViaje'
 import ProximosViajes from '../screens/dataViajes/ProximosViajes'
 import atenderViajes from '../screens/dataViajes/atenderViajes'
 import historialViajes from '../screens/dataViajes/historialViajes'
 import rechazadosViajes from '../screens/dataViajes/rechazadosViajes'
-import costosPorcentajes from '../screens/dataViajes/costosPorcentajes'
-import sectoresServicios from '../screens/dataViajes/sectoresServicios'
+import sancionesViajes from '../screens/dataViajes/sancionesViajes'
 
 //Stack de estadisticas
 import viajesPasados from '../screens/dataEstadisticas/viajesPasados'
@@ -122,6 +122,15 @@ export const ViajesStackScreen = ({navigation}) => (
         onPress={() => navigation.openDrawer()}/>
       )
     }}/>
+    <ViajesStack.Screen name="iniciarViaje" component={iniciarViaje} 
+    options={{
+      title:'Iniciar Viaje',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
     <ViajesStack.Screen name="ProximosViajes" component={ProximosViajes} 
     options={{
       title:'Proximos viajes',
@@ -158,18 +167,9 @@ export const ViajesStackScreen = ({navigation}) => (
         onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
       )
     }}/>
-    <ViajesStack.Screen name="costosPorcentajes" component={costosPorcentajes} 
+    <ViajesStack.Screen name="sancionesViajes" component={sancionesViajes} 
     options={{
-      title:'Costos y Porcentajes',
-      headerLeft: () => (
-        <Icon.Button name="md-arrow-back" size= {30}
-        backgroundColor="#009387"
-        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
-      )
-    }}/>
-    <ViajesStack.Screen name="sectoresServicios" component={sectoresServicios} 
-    options={{
-      title:'Sectores y Servicios',
+      title:'Sanciones',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"

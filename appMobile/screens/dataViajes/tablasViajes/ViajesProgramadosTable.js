@@ -1,29 +1,39 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+
+import  {Button} from 'react-native-elements'
+
+import Modal from 'react-native-modal';
  
 export default class ViajesProgramadosTable extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tableHead: ['Head', 'Head2', 'Head3', 'Head4'],
+      tableHead: ['Tipo', 'Estatus', 'Descripción', 'Lugar', 'Taxista', 'ID Viaje', 'Atendida por', 'Acciones'],
       tableData: [
-        ['1', '2', '3', '4'],
-        ['a', 'b', 'c', 'd'],
-        ['1', '2', '3', '4'],
-        ['a', 'b', 'c', 'd']
+        ['1', '2', '3', '4', '1', '2', '3', '4'],
+        ['1', '2', '3', '4', '1', '2', '3', '4'],
+        ['1', '2', '3', '4', '1', '2', '3', '4'],
       ]
     }
   }
  
-  _alertIndex(index) {
-    Alert.alert(`This is row ${index + 1}`);
-  }
+  
  
+  state = {
+    isModalVisible: false,
+  };
+ 
+  toggleModal = () => {
+    this.setState({isModalVisible: !this.state.isModalVisible});
+  };
+
   render() {
+    
     const state = this.state;
     const element = (data, index) => (
-      <TouchableOpacity onPress={() => this._alertIndex(index)}>
+      <TouchableOpacity onPress={() => this.toggleModal(index)}>
         <View style={styles.btn}>
           <Text style={styles.btnText}>button</Text>
         </View>
@@ -31,6 +41,7 @@ export default class ViajesProgramadosTable extends Component {
     );
  
     return (
+      <ScrollView horizontal={true}>
         <Table borderStyle={{borderColor: 'transparent'}}>
           <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
           {
@@ -38,13 +49,36 @@ export default class ViajesProgramadosTable extends Component {
               <TableWrapper key={index} style={styles.row}>
                 {
                   rowData.map((cellData, cellIndex) => (
-                    <Cell key={cellIndex} data={cellIndex === 3 ? element(cellData, index) : cellData} textStyle={styles.text}/>
+                    <Cell key={cellIndex} data={cellIndex === 7 ? element(cellData, index) : cellData} textStyle={styles.text}/>
                   ))
                 }
               </TableWrapper>
             ))
           }
         </Table>
+        <Modal isVisible={this.state.isModalVisible}
+        style={{backgroundColor: '#fff',
+          padding: 20,
+          alignSelf: "center",
+          width: 270,
+          marginVertical: 100
+          
+      }}
+        >
+          <View style={{flex: 1}}>
+            <Text>Hello!</Text>
+            <Text>Hello!</Text>
+            <Text>Hello!</Text>
+            <Text>Hello!</Text>
+            <Text>Hello!</Text>
+            <Text>Hello!</Text>
+            
+            <Button
+            buttonStyle={{marginTop: 30, width: '80%', alignSelf: 'center', backgroundColor: '#009387'}}
+             title="Hide modal" onPress={this.toggleModal} />
+          </View>
+        </Modal>
+      </ScrollView>
     )
   }
 }
