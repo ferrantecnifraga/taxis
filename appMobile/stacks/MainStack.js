@@ -35,7 +35,7 @@ import totalGanado from '../screens/dataEstadisticas/totalGanado'
 import totalFacturas from '../screens/dataFacturas/totalFacturas'
 import verFacturas from '../screens/dataFacturas/verFacturas'
 import ultimasFacturas from '../screens/dataFacturas/ultimasFacturas'
-import agregarFacturas from '../screens/dataFacturas/agregarFacturas'
+import pedirFacturas from '../screens/dataFacturas/pedirFacturas'
 
 //Stack del drawer
 const HomeStack = createStackNavigator();
@@ -282,8 +282,8 @@ export const FacturacionStackScreen = ({navigation}) => (
         />
       )
     }} />
-    <FacturacionStack.Screen name="agregarFacturas" component={agregarFacturas} options={{
-      title:'Agregar facturas',
+    <FacturacionStack.Screen name="pedirFacturas" component={pedirFacturas} options={{
+      title:'Pedir factura',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387" 

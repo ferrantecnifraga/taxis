@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from "@react-native-community/async-storage";
 
-const agregarFacturas = ({navigation}) => {
+const pedirFacturas = ({navigation}) => {
 
   //Headers de tabla(categorias):
     const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
@@ -20,7 +20,7 @@ const agregarFacturas = ({navigation}) => {
       </ScrollView>
     )
   }
-export default agregarFacturas;
+export default pedirFacturas;
 
 const styles = StyleSheet.create({
   table:{

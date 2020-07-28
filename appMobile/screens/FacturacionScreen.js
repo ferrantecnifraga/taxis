@@ -51,7 +51,7 @@ const FacturacionScreen = ({navigation}) => {
             alignSelf='center'
             size={50}
             iconStyle={{marginVertical: 10}}
-            onPress={() => {navigation.navigate('agregarFacturas')}}
+            onPress={() => {navigation.navigate('pedirFacturas')}}
           />
           <Divider/>
           <Text style={styles.cardText}>Pedir factura</Text>
