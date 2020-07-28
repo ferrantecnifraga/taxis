@@ -18,19 +18,17 @@ import AyudaScreen from '../screens/AyudaScreen';
 import SoporteScreen from '../screens/SoporteScreen';
 
 //Stack de viajes
-import ProximosViajes from '../screens/dataScreen/ProximosViajes'
-import atenderViajes from '../screens/dataScreen/atenderViajes'
-import historialViajes from '../screens/dataScreen/historialViajes'
-import rechazadosViajes from '../screens/dataScreen/rechazadosViajes'
-import costosPorcentajes from '../screens/dataScreen/costosPorcentajes'
-import sectoresServicios from '../screens/dataScreen/sectoresServicios'
+import ProximosViajes from '../screens/dataViajes/ProximosViajes'
+import atenderViajes from '../screens/dataViajes/atenderViajes'
+import historialViajes from '../screens/dataViajes/historialViajes'
+import rechazadosViajes from '../screens/dataViajes/rechazadosViajes'
+import costosPorcentajes from '../screens/dataViajes/costosPorcentajes'
+import sectoresServicios from '../screens/dataViajes/sectoresServicios'
 
 //Stack de estadisticas
-import cantidadViajes from '../screens/dataEstadisticas/cantidadViajes'
+import viajesPasados from '../screens/dataEstadisticas/viajesPasados'
 import proxViajesEst from '../screens/dataEstadisticas/proxViajesEst'
-import rechazadosEst from '../screens/dataEstadisticas/rechazadosEst'
 import sancionesEst from '../screens/dataEstadisticas/sancionesEst'
-import secServEst from '../screens/dataEstadisticas/secServEst'
 import totalGanado from '../screens/dataEstadisticas/totalGanado'
 
 //Stack de FACTURAS
@@ -193,8 +191,8 @@ export const EstadisticasStackScreen = ({navigation}) => (
         navigation.openDrawer()}/>
       )
     }} />
-    <EstadisticasStack.Screen name="cantidadViajes" component={cantidadViajes} options={{
-      title:'Cantidad de Viajes',
+    <EstadisticasStack.Screen name="viajesPasados" component={viajesPasados} options={{
+      title:'Viajes pasados',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387" 
@@ -222,24 +220,6 @@ export const EstadisticasStackScreen = ({navigation}) => (
     }} />
     <EstadisticasStack.Screen name="sancionesEst" component={sancionesEst} options={{
       title:'Sanciones',
-      headerLeft: () => (
-        <Icon.Button name="md-arrow-back" size= {30}
-        backgroundColor="#009387" 
-        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
-        />
-      )
-    }} />
-    <EstadisticasStack.Screen name="rechazadosEst" component={rechazadosEst} options={{
-      title:'Viajes rechazados',
-      headerLeft: () => (
-        <Icon.Button name="md-arrow-back" size= {30}
-        backgroundColor="#009387" 
-        onPress={() => navigation.navigate('Estadisticas', {screen: 'Estadisticas'})}
-        />
-      )
-    }} />
-    <EstadisticasStack.Screen name="secServEst" component={secServEst} options={{
-      title:'Sectores y Servicios',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387" 

@@ -13,7 +13,7 @@ const EstadisticasScreen = ({navigation}) => {
               alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
-              onPress={() => {navigation.navigate('cantidadViajes')}}
+              onPress={() => {navigation.navigate('viajesPasados')}}
             />
             <Divider/>
             <Text style={styles.cardText}>Viajes pasados</Text>

@@ -4,7 +4,7 @@ import { BarChart, XAxis } from 'react-native-svg-charts'
 import {Card} from 'react-native-paper'
 import * as scale from 'd3-scale'
 
-const cantidadViajes = ({navigation}) => {
+const viajesPasados = ({navigation}) => {
     
     const data = [ 14, 80, 100, 55 ]
 
@@ -27,4 +27,4 @@ const cantidadViajes = ({navigation}) => {
       )
   }
 
-  export default cantidadViajes;
+  export default viajesPasados;

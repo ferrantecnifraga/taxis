@@ -16,7 +16,7 @@ const FacturacionScreen = ({navigation}) => {
             onPress={() => {navigation.navigate('totalFacturas')}}
           />
           <Divider/>
-          <Text style={styles.cardText}>Total facturado</Text>
+          <Text style={styles.cardText}>Total facturado por mes</Text>
         </Card>
         <Card containerStyle={styles.cardContainer}>
           <Icon
@@ -28,7 +28,7 @@ const FacturacionScreen = ({navigation}) => {
             onPress={() => {navigation.navigate('verFacturas')}}
           />
           <Divider/>
-          <Text style={styles.cardText}>Ver mis facturas</Text>
+          <Text style={styles.cardText}>Mis facturas</Text>
         </Card>
       </View>
       <View style={{flexDirection: 'row'}}>
@@ -42,7 +42,7 @@ const FacturacionScreen = ({navigation}) => {
             onPress={() => {navigation.navigate('ultimasFacturas')}}
           />
           <Divider/>
-          <Text style={styles.cardText}>Últimas facturas</Text>
+          <Text style={styles.cardText}>Última facturas</Text>
         </Card>
         <Card containerStyle={styles.cardContainer}>
           <Icon
@@ -54,7 +54,7 @@ const FacturacionScreen = ({navigation}) => {
             onPress={() => {navigation.navigate('agregarFacturas')}}
           />
           <Divider/>
-          <Text style={styles.cardText}>Agregar facturas</Text>
+          <Text style={styles.cardText}>Pedir factura</Text>
         </Card>
       </View>
 
