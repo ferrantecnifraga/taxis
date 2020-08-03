@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet } from "react-native";
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from "@react-native-community/async-storage";
 
+import ViajesRechazadosTable from './tablasViajes/ViajesRechazadosTable'
 
 const rechazadosViajes = ({navigation}) => {
 
@@ -15,10 +16,9 @@ const rechazadosViajes = ({navigation}) => {
 
     return (
       <ScrollView horizontal={true}>
-        <Table style={styles.table}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
-        </Table> 
+        
+        <ViajesRechazadosTable/>
+
       </ScrollView>
     )
   }

@@ -75,7 +75,7 @@ export default class ViajesProgramadosTable extends Component {
             
             <Button
             buttonStyle={{marginTop: 30, width: '80%', alignSelf: 'center', backgroundColor: '#009387'}}
-             title="Hide modal" onPress={this.toggleModal} />
+             title="Cerrar" onPress={this.toggleModal} />
           </View>
         </Modal>
       </ScrollView>
