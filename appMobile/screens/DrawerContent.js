@@ -33,18 +33,20 @@ const [nombre, setNombre] = useState("")
 const [numSocio, setNumSocio] = useState("")
 
 useEffect(() => {
-  async function fetchMyAPI() {
+  const fetchMyAPI = async () => {
+
+    try {     
     let email2 =  await AsyncStorage.getItem('email')
     let password2 = await AsyncStorage.getItem('password')
     // let userToken = await AsyncStorage.getItem('userToken')
     //   if(userToken == null || userToken == undefined){
     //     signOut()
     //   }
+
       let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
         method: 'POST',
           headers: {
             'Accept': 'application/json',
-            
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
@@ -55,8 +57,6 @@ useEffect(() => {
 
       let response2 = await response.json()
       const {message} = response2
-
-       
          
       //Aqui quiero llamar Id taxista para guardarlo en el async Storage
       const {idTaxista, nombre, numSocio, primerApellido, segundoApellido} = response2.taxista
@@ -73,8 +73,10 @@ useEffect(() => {
              if(idPrueba == null || idPrueba == undefined) {
             let id =  await AsyncStorage.setItem('idTaxista', idTaxista)
              }
-       
-     }
+    } catch (e) {
+      // saving error
+    }
+  }
 
     fetchMyAPI()
    }, [])
