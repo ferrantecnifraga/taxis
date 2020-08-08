@@ -26,7 +26,9 @@ export const SignInComponent = ({navigation}) => {
     const [data, setData] = useState({
         email: '',
         password: '',
+        numLicencia: '',
         secureTextEntry: true,
+        isValidNumLicencia: true,
         isValidUser: true,
         isValidPassword: true,
     });
@@ -65,6 +67,14 @@ export const SignInComponent = ({navigation}) => {
     //     });
           
     // }
+
+    const handleNumLicencia = (val) => {
+        setData({
+            ...data,
+            numLicencia: val
+        })
+
+    }
 
     const handlePasswordChange = (val) => {
         if( val.trim().length >= 6 ) {
@@ -139,7 +149,8 @@ export const SignInComponent = ({navigation}) => {
                         },
                         body: JSON.stringify({
                             email : data.email ,
-                            password : data.password
+                            password : data.password,
+                            numLicencia : data.numLicencia
                         })
                       } )
                       
@@ -155,7 +166,8 @@ export const SignInComponent = ({navigation}) => {
                             await AsyncStorage.setItem('password', password)
                             await AsyncStorage.setItem('userToken', userToken)
                             await AsyncStorage.setItem('email', email)
-                            signIn(data.email, data.password, userToken)
+                            await AsyncStorage.setItem('numLicencia', data.numLicencia)
+                            signIn(data.email, data.password)
                         } catch(e){
                             console.log(e);
                         }
@@ -228,6 +240,33 @@ export const SignInComponent = ({navigation}) => {
                 animation="fadeInUpBig"
                 style={styles.footer}>
 
+                    <Text style={styles.text_footer}>Numero de licencia</Text>
+                    <View style={styles.action}>
+                        <FontAwesome 
+                            name="user-o"
+                            color="#05375a"
+                            size={20}
+                        />
+                        <TextInput
+                            placeholder="Numero de licencia"
+                            style={styles.textInput}
+                            autoCapitalize='none'
+                            // onChange={e => setEmail(e.target.value)}
+                            // onChangeText={(val)=>textInputChange(val)}
+                            onChangeText={(e)=>handleNumLicencia(e)}
+                            required
+                        />
+                        {data.check_textInputChange ?
+                        <Animatable.View 
+                        animation="bounceIn" >
+                            <Feather 
+                                name="check-circle"
+                                color="green"
+                                size={20}
+                            />
+                        </Animatable.View>
+                        :null}
+                    </View>
                     <Text style={styles.text_footer}> Correo Electronico</Text>
                     <View style={styles.action}>
                         <FontAwesome 
