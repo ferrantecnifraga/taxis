@@ -38,6 +38,7 @@ useEffect(() => {
     try {     
     let email2 =  await AsyncStorage.getItem('email')
     let password2 = await AsyncStorage.getItem('password')
+    let numLicencia2 =  await AsyncStorage.getItem('numLicencia')
     // let userToken = await AsyncStorage.getItem('userToken')
     //   if(userToken == null || userToken == undefined){
     //     signOut()
@@ -51,7 +52,8 @@ useEffect(() => {
           },
           body: JSON.stringify({
               email : email2,
-              password : password2
+              password : password2,
+              numLicencia: numLicencia2
           })
         })
 

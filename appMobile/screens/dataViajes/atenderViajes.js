@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, TouchableOpacity, View, Text } from "react-nati
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from "@react-native-community/async-storage";
 import { Modal, Portal, Button } from 'react-native-paper';
+import ViajesAtenderTable from "./tablasViajes/ViajesAtenderTable";
 
 const atenderViajes = ({navigation}) => {
 
@@ -15,10 +16,7 @@ const atenderViajes = ({navigation}) => {
 
     return (
       <ScrollView horizontal={true}>
-        <Table style={styles.table}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
-        </Table> 
+        <ViajesAtenderTable/>
       </ScrollView>
     )
   }
