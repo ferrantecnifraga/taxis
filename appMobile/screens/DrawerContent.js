@@ -71,7 +71,7 @@ useEffect(() => {
           let idPrueba = await AsyncStorage.getItem('idTaxista')
           console.log(idPrueba)
              if(idPrueba == null || idPrueba == undefined) {
-            let id =  await AsyncStorage.setItem('idTaxista', idTaxista)
+            let id =  await AsyncStorage.setItem('idTaxista', String(idTaxista))
              }
     } catch (e) {
       // saving error

@@ -29,6 +29,7 @@ const [estatusT, setEstatusT] = useState("")
       const fetchMyAPI = async () => {
         let email2 =  await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 =  await AsyncStorage.getItem('idTaxista')
         
         let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/profile', {
         method: 'POST',
@@ -46,8 +47,8 @@ const [estatusT, setEstatusT] = useState("")
         let response2 = await response.json()
         
         //PRUEBAS: (BORRAR)
-        let idTaxistaxd = await AsyncStorage.getItem('idTaxista')
-        
+        // let idTaxistaxd = await AsyncStorage.getItem('idTaxista')
+        console.warn("idTaxista: "+idTaxista2)
         const {nombre, primerApellido, segundoApellido, 
           numSocio, acuerdoMarco, telf, plazas, estatus} = response2.taxista
         

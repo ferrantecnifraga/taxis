@@ -150,12 +150,12 @@ export const SignInComponent = ({navigation}) => {
                     console.log(dataServer.message)
                     if(String(dataServer.message) == "Success!"){
                         try {
-                            // let userToken = dataServer.access_token;
+                             let userToken = dataServer.access_token;
                             
                             await AsyncStorage.setItem('password', password)
-                            // await AsyncStorage.setItem('userToken', userToken)
+                            await AsyncStorage.setItem('userToken', userToken)
                             await AsyncStorage.setItem('email', email)
-                            signIn(data.email, data.password)
+                            signIn(data.email, data.password, userToken)
                         } catch(e){
                             console.log(e);
                         }
