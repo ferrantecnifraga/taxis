@@ -38,7 +38,8 @@ useEffect(() => {
     try {     
     let email2 =  await AsyncStorage.getItem('email')
     let password2 = await AsyncStorage.getItem('password')
-    let numLicencia2 =  await AsyncStorage.getItem('numLicencia')
+    let idTaxista2=  await AsyncStorage.getItem('idTaxista')
+    console.warn("Idtaxista: "+idTaxista2)
     // let userToken = await AsyncStorage.getItem('userToken')
     //   if(userToken == null || userToken == undefined){
     //     signOut()
@@ -53,7 +54,7 @@ useEffect(() => {
           body: JSON.stringify({
               email : email2,
               password : password2,
-              numLicencia: numLicencia2
+              idTaxista: idTaxista2
           })
         })
 
@@ -70,11 +71,11 @@ useEffect(() => {
           setNumSocio(numSocio)
           
           //Aqui lo trato de guardar :C
-          let idPrueba = await AsyncStorage.getItem('idTaxista')
-          console.log(idPrueba)
-             if(idPrueba == null || idPrueba == undefined) {
-            let id =  await AsyncStorage.setItem('idTaxista', String(idTaxista))
-             }
+          // let idPrueba = await AsyncStorage.getItem('idTaxista')
+          // console.log(idPrueba)
+            //  if(idPrueba == null || idPrueba == undefined) {
+            // let id =  await AsyncStorage.setItem('idTaxista', String(idTaxista))
+            //  }
     } catch (e) {
       // saving error
     }
@@ -160,7 +161,22 @@ useEffect(() => {
                               />
                           )}
                           label="Estadísticas"
-                          onPress={() => {props.navigation.navigate('Estadisticas')}}
+                          // onPress={() => {props.navigation.navigate('Estadisticas')}}
+                          onPress={() => {
+                            Alert.alert(
+                              "Estadísticas",
+                              "Las estadisticas estaran disponibles proximamente",
+                              [
+                                {
+                                  text: "Ok",
+                                  onPress: () => console.log("Cancel Pressed")
+                                }                                  
+                            
+                              ],
+                              { cancelable: true }
+                            );
+                          
+                          }}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (
@@ -182,7 +198,22 @@ useEffect(() => {
                               />
                           )}
                           label="Facturación"
-                          onPress={() => {props.navigation.navigate('Facturacion')}}
+                          // onPress={() => {props.navigation.navigate('Facturacion')}}
+                          onPress={() => {
+                            Alert.alert(
+                              "Facturacion",
+                              "La facturacion estara disponible proximamente",
+                              [
+                                {
+                                  text: "Ok",
+                                  onPress: () => console.log("Cancel Pressed")
+                                }                                  
+                            
+                              ],
+                              { cancelable: true }
+                            );
+                          }}
+                          
                       />
                       <DrawerItem 
                             icon={({color, size}) => (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text,  StyleSheet } from 'react-native';
+import { View, Text,  StyleSheet, Alert } from 'react-native';
 import { Card, Divider, Icon } from 'react-native-elements';
 
 
@@ -13,7 +13,24 @@ const ViajesScreen = ({navigation}) => {
               type='material-community'
               size={50}
               iconStyle={{marginVertical: 10}}
-              onPress={() => {navigation.navigate('iniciarViaje')}}
+              // onPress={() => {navigation.navigate('iniciarViaje')}}
+              onPress={ () =>{
+                Alert.alert(
+                  "Inicar viaje",
+                  "Iniciar viaje estara disponible proximamente",
+                  [
+                    {
+                      text: "Ok",
+                      onPress: () => console.log("Cancel Pressed")
+                    }                                  
+                
+                  ],
+                  { cancelable: true }
+                )
+              
+              }
+            }
+                
             />
             <Divider/>
             <Text style={styles.cardText}>Iniciar viaje</Text>

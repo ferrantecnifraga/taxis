@@ -162,20 +162,20 @@ export const SignInComponent = ({navigation}) => {
                     if(String(dataServer.message) == "Success!"){
                         try {
                              let userToken = dataServer.access_token;
-                            
+                                let idTaxista = String(dataServer.idTaxista)
                             await AsyncStorage.setItem('password', password)
                             await AsyncStorage.setItem('userToken', userToken)
                             await AsyncStorage.setItem('email', email)
-                            await AsyncStorage.setItem('numLicencia', data.numLicencia)
-                            signIn(data.email, data.password)
+                            await AsyncStorage.setItem('idTaxista', idTaxista)
+                            signIn(data.email, data.password, userToken)
                         } catch(e){
                             console.log(e);
                         }
                         console.log("Login jalando")
-                    }else if(String(dataServer.message) == "Email no encontrado o Contraseña incorrecta"){
+                    }else if(String(dataServer.message) == "Error! Taxista no encontrado"){
                         Alert.alert(
                             "Error",
-                            dataServer.message,
+                            dataServer.message+". Checa tus datos",
                             [
                               {
                                 text: "Cancel",

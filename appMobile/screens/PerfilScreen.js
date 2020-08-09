@@ -40,7 +40,8 @@ const [estatusT, setEstatusT] = useState("")
           },
           body: JSON.stringify({
               email : email2 ,
-              password : password2
+              password : password2,
+              idTaxista: idTaxista2
           })
         } )
         
@@ -48,13 +49,13 @@ const [estatusT, setEstatusT] = useState("")
         
         //PRUEBAS: (BORRAR)
         // let idTaxistaxd = await AsyncStorage.getItem('idTaxista')
-        console.warn("idTaxista: "+idTaxista2)
+        // console.warn("idTaxista: "+idTaxista2)
         const {nombre, primerApellido, segundoApellido, 
           numSocio, acuerdoMarco, telf, plazas, estatus} = response2.taxista
         
           //PRUEBAS EN CONSOLA PARA VER SI GUARDO EN EL ASYNCSTORAGE MI idTaxista
         console.log(response2)
-        console.log(idTaxistaxd)
+        // console.log(idTaxistaxd)
 
          setNombreT(nombre)
          setPrimerApellidoT(primerApellido)

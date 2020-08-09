@@ -117,7 +117,7 @@ setTotal2(total)
         msg,
         [
           {
-            text: "Si, voy a atender",
+            text: "Si, voy a atenderlo",
             onPress: () => alertAtender(idVP),
             
           },
