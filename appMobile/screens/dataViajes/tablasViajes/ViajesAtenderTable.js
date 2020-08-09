@@ -51,6 +51,65 @@ setTotal2(total)
     }, [] )
 
 
+    //Fetch a la API atender viaje
+    const atenderElViaje = async(idVP, respuesta) => {
+      let email2 = await AsyncStorage.getItem('email')
+        let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+
+
+      try {
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/atenderViaje', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email2,
+            password: password2,
+            idTaxista: idTaxista2,
+            idVP: idVP,
+            respuesta: respuesta
+          })
+        })
+
+        let response2 = await response.json()
+
+        Alert.alert(
+          "Atender viaje",
+          response2.estatus,
+          [
+            {
+              text: "Ok",
+              onPress: () => console.warn("OK"),
+              
+            }
+  
+          ],
+          { cancelable: true }
+        )
+      } catch (error) {
+        Alert.alert(
+          "Atender viaje",
+          error,
+          [
+            {
+              text: "Ok",
+              onPress: () => console.warn("OK"),
+              
+            }
+  
+          ],
+          { cancelable: true }
+        )
+      }
+
+      
+  }
+
+//Alert para confirmar
+
     const createAlert = (title, msg, idVP) => {
       return(
       Alert.alert(
@@ -74,7 +133,7 @@ setTotal2(total)
       )
   }
 
-  //AlertaAtender
+  //AlertaAtender menu
 const alertAtender = (idVP) =>{
   return(
     Alert.alert(
@@ -83,12 +142,12 @@ const alertAtender = (idVP) =>{
       [
         {
           text: "Si, confirmar viaje",
-          onPress: () => console.warn("ID: "+idVP),
+          onPress: () => atenderElViaje(idVP, "Confirmar"),
           
         },
         {
           text: "No, rechazar viaje",
-          onPress: () => console.warn("Rechazaste el viaje"),
+          onPress: () => atenderElViaje(idVP, "Rechazar"),
           
         }
 
@@ -99,7 +158,7 @@ const alertAtender = (idVP) =>{
 }
 
 
-  //HandleAtener
+  //HandleAtender
 
     const alertCancel = (idVP) => createAlert("Atender Viaje", "¿Quieres atender el viaje?", idVP)
 
