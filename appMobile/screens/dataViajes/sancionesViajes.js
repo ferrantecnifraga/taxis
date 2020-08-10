@@ -1,38 +1,121 @@
-import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet } from "react-native";
-import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-import AsyncStorage from "@react-native-community/async-storage";
+import React, { Component, useState, useEffect } from 'react';
+import { StyleSheet,TouchableOpacity, Text, View, Alert } from "react-native";
+
+import { DataTable, Button } from 'react-native-paper';
+import AsyncStorage from '@react-native-community/async-storage';
+import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
 const sancionesViajes = ({navigation}) => {
 
+  const [data, setData] = useState([])
+  const [current_page2, setCurrent_page2] = useState(1)
+  const [total2, setTotal2] = useState(6)
+  const [paginacion2, setPaginacion2] = useState("")
+  
+
+    useEffect(() => {
+      const fetchMyAPI = async () => {
+        
+        let email2 = await AsyncStorage.getItem('email')
+        let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/sanciones', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email2,
+            password: password2,
+            idTaxista: idTaxista2
+          })
+        })
+
+        let response2 = await response.json()
+        console.warn("Sanciones: "+response2.sanciones.data)
+        
+        setData(response2.sanciones.data)
+        const {current_page, last_page, total} = response2
+
+setCurrent_page2(current_page)
+setTotal2(total)
+
+        let paginacion = `${current_page2} de ${total2}`
+
+        setPaginacion2(paginacion)
+        
+      }
+
+      fetchMyAPI()
+    }, [] )
+
   //Headers de tabla(categorias):
-  const tableHead = ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus', ];
+  const tableHead = ['Tipo', 'Estatus', 'Pendiente' ];
   //Mi Data donde deberia de ir toda nuestra info
-  const tableData = [
-    ['Paciente 1', 'Paciente 2', 'Servicio', 'Fecha de Viaje', 'Estatus'] ];
+
 
 
     return (
-      <ScrollView horizontal={true}>
-        <Table style={styles.table}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
-        </Table> 
-      </ScrollView>
+      <View style={styles.container}>
+      <Table borderStyle={{borderColor: 'transparent'}} >
+          <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
+          {
+            data.map((e, i) => (
+              <TableWrapper key={i} style={styles.row} >
+                
+                    <Cell key={i+1} data={e.tipo} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+2} data={e.estatus} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+3} data={e.descripcion} textStyle={styles.text} style={styles.celda} />
+
+                  
+              </TableWrapper>
+            ))
+          }
+        </Table>
+    </View>
     )
   }
 
 
 
 export default sancionesViajes;
-
 const styles = StyleSheet.create({
-  table:{
-    margin: 10,
-    width: 500
+  celda:{
+    width: 150,
+    padding: 5,
+    textAlign: 'center'
   },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  text: { marginLeft: 5 },
-  row: {  height: 50, backgroundColor:'#fff59d' }
+  container: { 
+    flex: 1, 
+    padding: 16, 
+    paddingTop: 30, 
+    backgroundColor: '#fff' 
+  },
+  head: { 
+    height: 40, 
+    backgroundColor: '#bdbdbd',
+  },
+  text: { 
+    margin: 6, 
+    textAlign: 'center',
+  },
+  row: { 
+    flexDirection: 'row', 
+    backgroundColor: '#eeeeee',
+  },
+  btn: { 
+    width: 100, 
+    height: 25, 
+    backgroundColor: '#78B7BB',  
+    borderRadius: 5,
+    padding:1,
+    alignSelf: 'center',
+  },
+  btnText: { 
+    textAlign: 'center', 
+    color: '#fff' 
+  }
+
 })

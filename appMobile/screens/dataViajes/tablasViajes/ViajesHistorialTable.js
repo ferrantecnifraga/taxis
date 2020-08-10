@@ -5,7 +5,7 @@ import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
-const ViajesProgramadosTable = () => { 
+const ViajesHistorialTable = () => { 
 
   const [data, setData] = useState([])
   const [current_page2, setCurrent_page2] = useState(1)
@@ -19,7 +19,7 @@ const ViajesProgramadosTable = () => {
         let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
-        let response = await fetch('https://taxis-lleida.herokuapp.com/api/clientes/historialViajes', {
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/historialViajes', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -34,7 +34,7 @@ const ViajesProgramadosTable = () => {
 
         let response2 = await response.json()
 
-        console.log(idCliente2)
+        // console.log(idCliente2)
         console.log(response2.viajes.data)
         console.warn(response2.viajes.data)
         
@@ -54,49 +54,10 @@ setTotal2(total)
     }, [] )
 
 
-    const createAlert = (title, msg, idVP) => {
-      return(
-      Alert.alert(
-        title,
-        msg,
-        [
-          {
-            text: "No",
-            onPress: () => console.warn("Abortando accion"),
-            
-          },
-          { text: "Si, cancelalo", onPress: () => console.warn("OK Pressed: " +idVP) }
-        ],
-        { cancelable: true }
-      )
-      )
-  }
 
-
-
-    const alertCancel = (idVP) => createAlert("Confirmación", "¿Segur@ de cancelar este viaje?", idVP)
-
-  
-
-
-  const element2 = (idVP) => {
-    return(
-      <TouchableOpacity onPress={() => alertCancel(idVP)}>
-      <View style={styles.btn}>
-    <Text style={styles.btnText}>Cancelar viaje</Text>
-      </View>
-    </TouchableOpacity>
-    )
-  }
-
-  //cancelar viaje
-  // const cancelarViaje = (idVP) => {
-
-  // }
-    
 
 const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
+'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
 
 
 return (
@@ -121,7 +82,7 @@ return (
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+15} data={element2(e.idVP)}  />
+                    {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
 
                   
               </TableWrapper>
@@ -132,7 +93,7 @@ return (
 )
 };
 
-export default ViajesProgramadosTable;
+export default ViajesHistorialTable;
 
 const styles = StyleSheet.create({
   celda:{

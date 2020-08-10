@@ -44,7 +44,7 @@ const ViajesScreen = ({navigation}) => {
               onPress={() => {navigation.navigate('ProximosViajes')}}
             />
             <Divider/>
-            <Text style={styles.cardText}>Próximo viaje</Text>
+            <Text style={styles.cardText}>Próximos viajes</Text>
           </Card>
         </View>
         <View style={{flexDirection: 'row'}}>
