@@ -56,16 +56,16 @@ setTotal2(total)
 
 
 
-  const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-  'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
- 
+    const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+    'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
+
     return (
-      <View style={styles.container}>
-        <Table borderStyle={{borderColor: 'transparent'}}>
-        <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
+     <View style={styles.container}>
+      <Table borderStyle={{borderColor: 'transparent'}} >
+          <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
             data.map((e, i) => (
-              <TableWrapper key={i} style={styles.row}>
+              <TableWrapper key={i} style={styles.row} >
                 
                     <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
@@ -81,12 +81,14 @@ setTotal2(total)
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                 
+                    {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
+
+                  
               </TableWrapper>
             ))
           }
         </Table>
-        </View>
+    </View>
     
     )
   

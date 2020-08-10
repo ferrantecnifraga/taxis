@@ -70,8 +70,12 @@ const ProximosViajes = ({navigation}) => {
 
 
     return (
-      
-    <ViajesProgramadosTable />
+      <ScrollView horizontal={true}>
+        
+        <ViajesProgramadosTable />
+
+      </ScrollView>
+    
       
     )
   }
@@ -80,41 +84,3 @@ const ProximosViajes = ({navigation}) => {
 
 export default ProximosViajes;
 
-const styles = StyleSheet.create({
-  celda:{
-    width: 150,
-    padding: 5,
-    textAlign: 'center'
-  },
-  container: { 
-    flex: 1, 
-    padding: 16, 
-    paddingTop: 30, 
-    backgroundColor: '#fff' 
-  },
-  head: { 
-    height: 40, 
-    backgroundColor: '#bdbdbd',
-  },
-  text: { 
-    margin: 6, 
-    textAlign: 'center',
-  },
-  row: { 
-    flexDirection: 'row', 
-    backgroundColor: '#eeeeee',
-  },
-  btn: { 
-    width: 100, 
-    height: 25, 
-    backgroundColor: '#78B7BB',  
-    borderRadius: 5,
-    padding:1,
-    alignSelf: 'center',
-  },
-  btnText: { 
-    textAlign: 'center', 
-    color: '#fff' 
-  }
-
-})
