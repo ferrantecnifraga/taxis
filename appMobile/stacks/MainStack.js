@@ -37,6 +37,8 @@ import verFacturas from '../screens/dataFacturas/verFacturas'
 import ultimasFacturas from '../screens/dataFacturas/ultimasFacturas'
 import pedirFacturas from '../screens/dataFacturas/pedirFacturas'
 
+import incidenciasFormulario from '../screens/incidenciasFormulario'
+
 //Stack del drawer
 const HomeStack = createStackNavigator();
 const NotificacionesStack = createStackNavigator();
@@ -81,6 +83,15 @@ export const HomeStackScreen = ({navigation}) => (
           onPress={() => {navigation.navigate('Notificaciones')}}/>
         </View>
       )      
+    }} />
+    <HomeStack.Screen name="incidenciasFormulario" component={incidenciasFormulario} options={{
+      title:'Reportar incidencia',
+      headerLeft: () => ( 
+        <View paddingLeft={1}>
+          <Icon.Button style={styles.Icon} name="ios-menu" size= {30} onPress={() => 
+          navigation.openDrawer()}/>
+        </View>
+      ),  
     }} />
   </HomeStack.Navigator> 
 );
