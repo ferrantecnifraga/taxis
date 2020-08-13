@@ -301,9 +301,7 @@ export const SignInComponent = ({navigation}) => {
                     </Animatable.View>
                     }
 
-                    <Text style={[styles.text_footer, {
-                        marginTop:35
-                    }]}> Contraseña </Text>
+                    <Text style={[styles.text_footer]}> Contraseña </Text>
                     <View style={styles.action}>
                         <FontAwesome 
                             name="lock"
@@ -396,7 +394,8 @@ var styles = StyleSheet.create({
     },
     text_footer: {
         color: '#05375a',
-        fontSize:18 
+        fontSize:18,
+        marginTop: 10
     },
     action: {
         flexDirection: 'row',
@@ -423,7 +422,7 @@ var styles = StyleSheet.create({
     },
     textSign: {
         fontSize:18,
-        fontWeight:'bold'
+        fontWeight:'bold',
     },
     errorMsg: {
         color: '#FF0000',

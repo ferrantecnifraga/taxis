@@ -112,7 +112,7 @@ const HomeScreen = ({navigation}) => {
               style={styles.fab}
               large
               icon="alert-octagon"
-              onPress={() => console.log('Pressed')}
+              onPress={() => {navigation.navigate('incidenciasFormulario')}}
             />
 
           </View>

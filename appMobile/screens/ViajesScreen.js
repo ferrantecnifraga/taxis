@@ -33,7 +33,7 @@ const ViajesScreen = ({navigation}) => {
                 
             />
             <Divider/>
-            <Text style={styles.cardText}>Iniciar viaje</Text>
+            <Text style={styles.cardText}>  Iniciar viaje  </Text>
           </Card>
           <Card containerStyle={styles.cardContainer}>
             <Icon
@@ -52,7 +52,6 @@ const ViajesScreen = ({navigation}) => {
             <Icon
               name='car-back'
               type='material-community'
-              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
               onPress={() => {navigation.navigate('atenderViajes')}}
@@ -64,7 +63,6 @@ const ViajesScreen = ({navigation}) => {
             <Icon
               name='car-multiple'
               type='material-community'
-              alignSelf='center'
               size={50}
               iconStyle={{marginVertical: 10}}
               onPress={() => {navigation.navigate('historialViajes')}}
@@ -80,7 +78,7 @@ const ViajesScreen = ({navigation}) => {
               type='material-community'
               alignSelf='center'
               size={50}
-              iconStyle={styles.icon}
+              iconStyle={{marginVertical: 10}}
               onPress={() => {navigation.navigate('rechazadosViajes')}}
             />
             <Divider/>
@@ -90,13 +88,12 @@ const ViajesScreen = ({navigation}) => {
             <Icon
               name='report'
               type='material'
-              alignSelf='center'
               size={50}
               iconStyle={styles.icon}
               onPress={() => {navigation.navigate('sancionesViajes')}}
             />
             <Divider/>
-            <Text style={styles.cardText}>Sanciones</Text>
+            <Text style={styles.cardText}>    Sanciones   </Text>
           </Card>
         </View>
       </View>
@@ -109,6 +106,7 @@ const styles = StyleSheet.create({
   cardText: {
     color:"#777777",
     textAlign: 'center',
+    alignItems: 'center',
     fontSize: 20,
     marginTop:10
   },
