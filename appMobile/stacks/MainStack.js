@@ -60,7 +60,7 @@ const screenOpt = {
   }
 }
 //Badge 
-const BadgedIcon = withBadge(99)(Icon)
+const BadgedIcon = withBadge(1)(Icon)
 
 
 
