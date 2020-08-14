@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet,TouchableOpacity, Text, View, Alert } from "react-native";
+import { StyleSheet,TouchableOpacity, Text, View, Alert, ActivityIndicator, ScrollView } from "react-native";
 
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+
 
 const ViajesAtenderTable = () => { 
 
@@ -11,6 +12,7 @@ const ViajesAtenderTable = () => {
   const [current_page2, setCurrent_page2] = useState(1)
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
+  const [loading, setLoading] = useState(true);
   
 
     useEffect(() => {
@@ -36,6 +38,7 @@ const ViajesAtenderTable = () => {
 
         
         setData(response2.viajesPorAtender.data)
+        setLoading(false)
         const {current_page, last_page, total} = response2
 
 setCurrent_page2(current_page)
@@ -186,7 +189,16 @@ const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apelli
 
 
 return (
-  <View style={styles.container}>
+
+  loading ? 
+  <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
+    <ActivityIndicator size="large" color='#009387' />
+  </View>
+  
+  : 
+
+
+  <ScrollView style={styles.container} horizontal={true}>
         <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
@@ -214,7 +226,7 @@ return (
             ))
           }
         </Table>
-      </View>
+      </ScrollView>
 )
 };
 

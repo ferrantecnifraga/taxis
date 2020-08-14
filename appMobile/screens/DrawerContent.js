@@ -29,8 +29,8 @@ const { signOut } = React.useContext(AuthContext);
 
 
 const [email, setEmail] = useState("");
-const [nombre, setNombre] = useState("")
-const [numSocio, setNumSocio] = useState("")
+const [nombre, setNombre] = useState("Cargando...")
+const [numSocio, setNumSocio] = useState("Cargando...")
 
 useEffect(() => {
   const fetchMyAPI = async () => {

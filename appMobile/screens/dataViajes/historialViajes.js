@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from "@react-native-community/async-storage";
 
@@ -16,9 +16,9 @@ const historialViajes = ({navigation}) => {
 
 
     return (
-      <ScrollView horizontal={true}>
+      <View >
         <ViajesHistorialTable/>
-      </ScrollView>
+      </View>
     )
   }
 

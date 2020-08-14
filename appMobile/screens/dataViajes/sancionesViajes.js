@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet,TouchableOpacity, Text, View, Alert } from "react-native";
+import { StyleSheet,TouchableOpacity, Text, View, Alert, ActivityIndicator, ScrollView } from "react-native";
 
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -12,6 +12,7 @@ const sancionesViajes = ({navigation}) => {
   const [current_page2, setCurrent_page2] = useState(1)
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
+  const [loading, setLoading] = useState(true);
   
 
     useEffect(() => {
@@ -37,6 +38,7 @@ const sancionesViajes = ({navigation}) => {
         console.warn("Sanciones: "+response2.sanciones.data)
         
         setData(response2.sanciones.data)
+        setLoading(false)
         const {current_page, last_page, total} = response2
 
 setCurrent_page2(current_page)
@@ -58,7 +60,15 @@ setTotal2(total)
 
 
     return (
-      <View style={styles.container}>
+
+      loading ? 
+      <View style={styles.loading}>
+        <ActivityIndicator size="large" color='#009387' />
+      </View>
+      
+      : 
+
+      <ScrollView style={styles.container} horizontal={true}>
       <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
@@ -74,7 +84,7 @@ setTotal2(total)
             ))
           }
         </Table>
-    </View>
+    </ScrollView>
     )
   }
 
@@ -116,6 +126,15 @@ const styles = StyleSheet.create({
   btnText: { 
     textAlign: 'center', 
     color: '#fff' 
+  },
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 
 })

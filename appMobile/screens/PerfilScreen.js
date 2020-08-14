@@ -13,14 +13,14 @@ import AsyncStorage from "@react-native-community/async-storage";
 
 const PerfilScreen = () => {
 
-const [nombreT, setNombreT] = useState("")
-const [primerApellidoT, setPrimerApellidoT] = useState("")    
-const [segundoApellidoT, setSegundoApellidoT] = useState("")   
-const [numSocioT, setNumSocioT] = useState("")
-const [acuerdoMarcoT, setAcuerdoMarcoT] = useState("")
-const [telfT, setTelfT] = useState("")
-const [plazasT, setPlazasT] = useState("")
-const [estatusT, setEstatusT] = useState("")
+const [nombreT, setNombreT] = useState("Cargando nombre")
+const [primerApellidoT, setPrimerApellidoT] = useState("Cargando apellido")    
+const [segundoApellidoT, setSegundoApellidoT] = useState("Cargando apellido")   
+const [numSocioT, setNumSocioT] = useState("Cargando numSocio")
+const [acuerdoMarcoT, setAcuerdoMarcoT] = useState("Cargando acuerdoMarco")
+const [telfT, setTelfT] = useState("cargando Telf")
+const [plazasT, setPlazasT] = useState("Cargando plazas")
+const [estatusT, setEstatusT] = useState("Cargando estatus")
 
 
 

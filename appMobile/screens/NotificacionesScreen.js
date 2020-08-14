@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const NotificacionesScreen = () => {
 
   const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchMyAPI = async () => {
@@ -30,7 +31,7 @@ const NotificacionesScreen = () => {
         console.warn(response2.notificaciones)
         
           setData(response2.notificaciones)
-                 
+          setLoading(false)       
          
          
           
@@ -58,6 +59,14 @@ const NotificacionesScreen = () => {
  
 
   return ( 
+
+    loading ?
+
+    <View style={[styles.loading]}>
+    <ActivityIndicator size="large" color="#00ff00" />
+    </View>
+    :
+
   <View>
     {
       data.map((e, i) => {
@@ -80,3 +89,17 @@ const NotificacionesScreen = () => {
 };
 
 export default NotificacionesScreen;
+
+const styles = StyleSheet.create({
+  
+  loading: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
+
+})

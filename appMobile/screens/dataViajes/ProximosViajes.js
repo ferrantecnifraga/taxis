@@ -70,11 +70,11 @@ const ProximosViajes = ({navigation}) => {
 
 
     return (
-      <ScrollView horizontal={true}>
+      <View horizontal={true}>
         
         <ViajesProgramadosTable />
 
-      </ScrollView>
+      </View>
     
       
     )
