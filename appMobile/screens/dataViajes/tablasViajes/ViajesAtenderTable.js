@@ -198,7 +198,7 @@ return (
   : 
 
 
-  <ScrollView style={styles.container} horizontal={true}>
+  <ScrollView horizontal={true} style={styles.container} >
         <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
@@ -239,10 +239,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   container: { 
-    flex: 1, 
-    padding: 16, 
-    paddingTop: 30, 
-    backgroundColor: '#fff' 
+    marginHorizontal: 10,
+    paddingVertical: 30,
   },
   head: { 
     height: 40, 
