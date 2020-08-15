@@ -70,7 +70,7 @@ const ProximosViajes = ({navigation}) => {
 
 
     return (
-      <View horizontal={true}>
+      <View>
         
         <ViajesProgramadosTable />
 

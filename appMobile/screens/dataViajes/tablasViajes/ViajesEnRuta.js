@@ -1,20 +1,17 @@
-import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet,TouchableOpacity, ScrollView, Text, View, Alert, ActivityIndicator } from "react-native";
+import React, { useState, useEffect } from 'react';
+import { StyleSheet,TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndicator  } from "react-native";
 
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
-
- 
-const ViajesProgramadosTable = () => {
+const ViajesEnRuta = () => { 
 
   const [data, setData] = useState([])
   const [current_page2, setCurrent_page2] = useState(1)
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
-  const [loading, setLoading] = useState(true);
-  
+  const [loading, setLoading] = useState(true)
 
     useEffect(() => {
       const fetchMyAPI = async () => {
@@ -22,7 +19,7 @@ const ViajesProgramadosTable = () => {
         let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
-        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/proximosViajes', {
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/viajesEnRuta', {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
@@ -38,10 +35,10 @@ const ViajesProgramadosTable = () => {
         let response2 = await response.json()
 
         // console.log(idCliente2)
-        console.log(response2.proximosViajes.data)
-        console.warn(response2.proximosViajes.data)
+        console.log(response2.viajes.data)
+        console.warn(response2.viajes.data)
         
-        setData(response2.proximosViajes.data)
+        setData(response2.viajes.data)
         setLoading(false)
         const {current_page, last_page, total} = response2
 
@@ -58,20 +55,35 @@ setTotal2(total)
     }, [] )
 
 
+    const boton = (idVP, texto) => {
+        return(
+          <TouchableOpacity onPress={() => console.warn(idVP)}>
+          <View style={styles.btn}>
+        <Text style={styles.btnText}>{texto}</Text>
+          </View>
+        </TouchableOpacity>
+        )
+      }
+    
+      //cancelar viaje
+      // const cancelarViaje = (idVP) => {
+    
+      // }
+  
 
-    const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-    'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
+const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
-    return (
 
-  //     loading ? 
-  // <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
-  //   <ActivityIndicator size="large" color='#009387' />
-  // </View>
-  // : 
+return (
+  loading ? 
+  <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
+    <ActivityIndicator size="large" color='#009387' />
+  </View>
+  : 
 
-     <ScrollView style={styles.container} horizontal={true} >
-      <Table borderStyle={{borderColor: 'transparent'}} >
+  <ScrollView style={styles.container} horizontal={true}>
+        <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
             data.map((e, i) => (
@@ -91,21 +103,24 @@ setTotal2(total)
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
+
+                    {/* {e.estatus == "Confirmado " ? 
+                    <Cell key={i+15} data={boton(e.idVP, "Iniciar Viaje")}  />
+                    :
+                    <Cell key={i+15} data={boton(e.idVP, e.estatus)}  />
+                    } */}
 
                   
               </TableWrapper>
             ))
           }
         </Table>
-    </ScrollView>
-    
-    )
-  
-}
+      </ScrollView>
+)
+};
 
-export default ViajesProgramadosTable
- 
+export default ViajesEnRuta;
+
 const styles = StyleSheet.create({
   celda:{
     width: 150,

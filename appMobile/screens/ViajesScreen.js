@@ -13,23 +13,23 @@ const ViajesScreen = ({navigation}) => {
               type='material-community'
               size={50}
               iconStyle={{marginVertical: 10}}
-              // onPress={() => {navigation.navigate('iniciarViaje')}}
-              onPress={ () =>{
-                Alert.alert(
-                  "Inicar viaje",
-                  "Iniciar viaje estara disponible proximamente",
-                  [
-                    {
-                      text: "Ok",
-                      onPress: () => console.log("Cancel Pressed")
-                    }                                  
+              onPress={() => {navigation.navigate('iniciarViaje')}}
+            //   onPress={ () =>{
+            //     Alert.alert(
+            //       "Inicar viaje",
+            //       "Iniciar viaje estara disponible proximamente",
+            //       [
+            //         {
+            //           text: "Ok",
+            //           onPress: () => console.log("Cancel Pressed")
+            //         }                                  
                 
-                  ],
-                  { cancelable: true }
-                )
+            //       ],
+            //       { cancelable: true }
+            //     )
               
-              }
-            }
+            //   }
+            // }
                 
             />
             <Divider/>

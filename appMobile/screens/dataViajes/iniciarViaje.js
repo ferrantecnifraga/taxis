@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Table, TableWraper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import AsyncStorage from "@react-native-community/async-storage";
+import ViajesEnRuta from "./tablasViajes/ViajesEnRuta";
 
 
 const iniciarViaje = ({navigation}) => {
@@ -14,25 +15,12 @@ const iniciarViaje = ({navigation}) => {
 
 
     return (
-      <ScrollView horizontal={true}>
-        <Table style={styles.table}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.text}/>
-          <Rows data={tableData} style={styles.row} textStyle={styles.text}/> 
-        </Table> 
-      </ScrollView>
+      <View>
+        <ViajesEnRuta/>
+      </View>
     )
   }
 
 
 
 export default iniciarViaje;
-
-const styles = StyleSheet.create({
-  table:{
-    margin: 10,
-    width: 500
-  },
-  head: { height: 40, backgroundColor: '#f1f8ff' },
-  text: { marginLeft: 5 },
-  row: {  height: 50, backgroundColor:'#fff59d' }
-})
