@@ -55,6 +55,30 @@ setTotal2(total)
     }, [] )
 
 
+    const alertFactura = (idVP) => {
+      return(
+        Alert.alert(
+          "Facturación del viake",
+          "Las facturas estaran disponibles próximamente",
+          [
+        
+            { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
+          ],
+          { cancelable: true }
+        )
+        )
+    }
+    const element2 = (idVP) => {
+      return(
+        <TouchableOpacity onPress={() => alertFactura(idVP)}>
+        <View style={styles.btn}>
+      <Text style={styles.btnText}>Ver factura</Text>
+        </View>
+      </TouchableOpacity>
+      )
+    }
+
+
 
 
 const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
@@ -89,7 +113,7 @@ return (
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
+                    <Cell key={i+15} data={element2(e.idVP)}  />
 
                   
               </TableWrapper>
@@ -129,7 +153,7 @@ const styles = StyleSheet.create({
   btn: { 
     width: 100, 
     height: 25, 
-    backgroundColor: '#78B7BB',  
+    backgroundColor: '#2196f3',  
     borderRadius: 5,
     padding:1,
     alignSelf: 'center',
