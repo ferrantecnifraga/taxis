@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet,TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndicator  } from "react-native";
-
+import {Card, Divider} from 'react-native-elements'
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
@@ -12,6 +12,9 @@ const ViajesEnRuta = () => {
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
   const [loading, setLoading] = useState(true)
+
+  
+  
 
     useEffect(() => {
       const fetchMyAPI = async () => {
@@ -42,8 +45,8 @@ const ViajesEnRuta = () => {
         setLoading(false)
         const {current_page, last_page, total} = response2
 
-setCurrent_page2(current_page)
-setTotal2(total)
+        setCurrent_page2(current_page)
+        setTotal2(total)
 
         let paginacion = `${current_page2} de ${total2}`
 
@@ -55,17 +58,31 @@ setTotal2(total)
     }, [] )
 
 
-    const boton = (idVP, texto) => {
-      if(texto == "Confirmado"){ 
+    const boton = (idVP, fecha, estatus) => {
+    //  if( estatus == "Confirmado" ) {
 
-        texto="Iniciar viaje"
+       return(
+         <TouchableOpacity onPress={() => iniciarViaje(idVP, fecha) }>
+           <View style={styles.btn}>
+            <Text style={styles.btnText}>{estatus}</Text>
+           </View>
+         </TouchableOpacity>
+       ) 
+    //  }        
       }
-        return(
-          <TouchableOpacity onPress={() => console.warn(idVP)}>
-          <View style={styles.btn}>
-        <Text style={styles.btnText}>{texto}</Text>
-          </View>
-        </TouchableOpacity>
+
+      const iniciarViaje = (idVP, fecha) => {
+        let today = new Date();
+        console.warn(today)
+        return (          
+          Alert.alert(
+            "Estatus del viaje!",
+            "Acabas de iniciar viaje con el numero: " + idVP,
+            [
+              { text: "OK", onPress: () => setEstadoBoton("Terminar Viaje") }
+            ],
+            { cancelable: true }
+          )
         )
       }
     
@@ -75,8 +92,8 @@ setTotal2(total)
       // }
   
 
-const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
+// const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+// 'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
 
 return (
@@ -86,35 +103,62 @@ return (
   </View>
   : 
 
-  <ScrollView style={styles.container} horizontal={true}>
-        <Table borderStyle={{borderColor: 'transparent'}} >
-          <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
-          {
+  <ScrollView>
+        
+        {
             data.map((e, i) => (
-              <TableWrapper key={i} style={styles.row} >
-                
-                    <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+4} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+5} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+6} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+7} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+15} data={boton(e.idVP, e.estatus)}  />
-                    
-                    
-                  
-              </TableWrapper>
+              <Card style={styles.userInfoSection}>
+
+                <Text style={styles.infoText}>Costo Parcial: </Text>
+                <Text style={styles.dataText}>{e.costoParcial}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Nombre: </Text>
+                <Text style={styles.dataText}>{e.nombre}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Primer Apellido: </Text>
+                <Text style={styles.dataText}>{e.primerApellido}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Segundo Apellido: </Text>
+                <Text style={styles.dataText}>{e.segundoApellido}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Servicio:</Text>
+                <Text style={styles.dataText}>{e.servicio}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Estatus:</Text>
+                <Text style={styles.dataText}>{e.estatus}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Nombre del primer Paciente:</Text>
+                <Text style={styles.dataText}>{e.primerPaciente}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Nombre del segundo Paciente:</Text>
+                <Text style={styles.dataText}>{e.segundoPaciente}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Fecha de inicio:</Text>
+                <Text style={styles.dataText}>{e.fechaInicio}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Vehiculo:</Text>
+                <Text style={styles.dataText}>{e.vehiculo}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Origen:</Text>
+                <Text style={styles.dataText}>{e.origen}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Pasando por :</Text>
+                <Text style={styles.dataText}>{e.pasando_por}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Destino:</Text>
+                <Text style={styles.dataText}>{e.destino}</Text>
+                <Divider/>
+                <Text style={styles.infoText}>Cliente:</Text>
+                <Text style={styles.dataText}>{e.cliente}</Text>
+                <Divider/>
+                <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(idVP, fecha) }>
+                  Comenzar Viaje
+                </Button>
+              </Card>
+              
             ))
           }
-        </Table>
+        
       </ScrollView>
 )
 };
@@ -144,16 +188,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#eeeeee',
   },
   btn: { 
-    width: 100, 
-    height: 25, 
+    width: 200, 
     backgroundColor: '#78B7BB',  
     borderRadius: 5,
     padding:1,
+    marginTop: 10,
     alignSelf: 'center',
   },
   btnText: { 
     textAlign: 'center', 
     color: '#fff' 
-  }
+  },
+  infoText: {
+    color:"#777777",
+    fontSize: 20,
+  },
+  dataText: {
+    color:"#212121", 
+    fontSize: 20,
+    marginLeft: 20,
+    marginBottom: 10
+  },
+  userInfoSection: {
+    paddingHorizontal: 25,
+    marginBottom: 25,
+    marginTop:10
+  },
 
 })
