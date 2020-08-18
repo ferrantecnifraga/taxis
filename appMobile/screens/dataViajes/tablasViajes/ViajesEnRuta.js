@@ -109,46 +109,46 @@ return (
             data.map((e, i) => (
               <Card style={styles.userInfoSection}>
 
-                <Text style={styles.infoText}>Costo Parcial: </Text>
+                <Text style={styles.infoText}>Costo Parcial</Text>
                 <Text style={styles.dataText}>{e.costoParcial}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Nombre: </Text>
+                <Text style={styles.infoText}>Nombre</Text>
                 <Text style={styles.dataText}>{e.nombre}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Primer Apellido: </Text>
+                <Text style={styles.infoText}>Primer Apellido</Text>
                 <Text style={styles.dataText}>{e.primerApellido}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Segundo Apellido: </Text>
+                <Text style={styles.infoText}>Segundo Apellido</Text>
                 <Text style={styles.dataText}>{e.segundoApellido}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Servicio:</Text>
+                <Text style={styles.infoText}>Servicio</Text>
                 <Text style={styles.dataText}>{e.servicio}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Estatus:</Text>
+                <Text style={styles.infoText}>Estatus</Text>
                 <Text style={styles.dataText}>{e.estatus}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Nombre del primer Paciente:</Text>
-                <Text style={styles.dataText}>{e.primerPaciente}</Text>
+                <Text style={styles.infoText}>Nombre del primer Paciente</Text>
+                <Text style={styles.dataText}>{e.pacientePrimero}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Nombre del segundo Paciente:</Text>
-                <Text style={styles.dataText}>{e.segundoPaciente}</Text>
+                <Text style={styles.infoText}>Nombre del segundo Paciente</Text>
+                <Text style={styles.dataText}>{e.pacienteSegundo}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Fecha de inicio:</Text>
+                <Text style={styles.infoText}>Fecha de inicio</Text>
                 <Text style={styles.dataText}>{e.fechaInicio}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Vehiculo:</Text>
+                <Text style={styles.infoText}>Vehiculo</Text>
                 <Text style={styles.dataText}>{e.vehiculo}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Origen:</Text>
+                <Text style={styles.infoText}>Origen</Text>
                 <Text style={styles.dataText}>{e.origen}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Pasando por :</Text>
+                <Text style={styles.infoText}>Pasando por</Text>
                 <Text style={styles.dataText}>{e.pasando_por}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Destino:</Text>
+                <Text style={styles.infoText}>Destino</Text>
                 <Text style={styles.dataText}>{e.destino}</Text>
                 <Divider/>
-                <Text style={styles.infoText}>Cliente:</Text>
+                <Text style={styles.infoText}>Cliente</Text>
                 <Text style={styles.dataText}>{e.cliente}</Text>
                 <Divider/>
                 <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(idVP, fecha) }>
@@ -202,12 +202,14 @@ const styles = StyleSheet.create({
   infoText: {
     color:"#777777",
     fontSize: 20,
-  },
+    alignSelf: 'center'  
+},
   dataText: {
     color:"#212121", 
     fontSize: 20,
     marginLeft: 20,
-    marginBottom: 10
+    marginBottom: 10,
+    alignSelf: 'center'  
   },
   userInfoSection: {
     paddingHorizontal: 25,
