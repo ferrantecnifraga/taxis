@@ -108,8 +108,10 @@ return (
         {
             data.map((e, i) => (
               <Card style={styles.userInfoSection}>
+                <Text style={styles.titulo}  >Datos del viaje</Text>
+                <Divider style={styles.dividerTit}  />
 
-                <Text style={styles.infoText}>ID de Viaje</Text>
+                <Text style={styles.infoText}>Numero de Viaje</Text>
                 <Text style={styles.dataText}>{e.idVP}</Text>
                 <Divider/>
                 <Text style={styles.infoText}>Costo Parcial</Text>
@@ -210,7 +212,6 @@ const styles = StyleSheet.create({
   dataText: {
     color:"#212121", 
     fontSize: 20,
-    marginLeft: 20,
     marginBottom: 10,
     alignSelf: 'center'  
   },
@@ -219,5 +220,13 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop:10
   },
-
+  titulo: {
+    alignSelf: 'center',
+    color: "#212121",
+    fontSize: 30,
+    marginTop: 20
+  },
+  dividerTit: {
+    marginBottom: 30
+  }
 })
