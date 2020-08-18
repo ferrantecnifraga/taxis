@@ -109,6 +109,9 @@ return (
             data.map((e, i) => (
               <Card style={styles.userInfoSection}>
 
+                <Text style={styles.infoText}>ID de Viaje</Text>
+                <Text style={styles.dataText}>{e.idVP}</Text>
+                <Divider/>
                 <Text style={styles.infoText}>Costo Parcial</Text>
                 <Text style={styles.dataText}>{e.costoParcial}</Text>
                 <Divider/>
