@@ -85,7 +85,7 @@ setTotal2(total)
 
 
 const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Fecha Termino', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
+'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Fecha Termino', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
 
 return (
