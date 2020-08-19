@@ -42,13 +42,16 @@ const ViajesEnRuta = () => {
         // console.log(idCliente2)
         console.log(response2.viajes)
         console.warn(response2.viajes)
-        setLoading(false)
+    
         setData(response2.viajes)
-        if(response2.viajes.estatus == "En ruta"){
-          setEstado("Terminar viaje")
-        }else if(response2.viajes.estatus == "Confirmado"){
-          setEstado("Iniciar viaje")
+        if(response2.viajes != null){
+          if(response2.viajes.estatus == "En ruta"){
+            setEstado("Terminar viaje")
+          }else if(response2.viajes.estatus == "Confirmado"){
+            setEstado("Iniciar viaje")
+          }
         }
+        
         
         
         
@@ -193,17 +196,19 @@ const ViajesEnRuta = () => {
 const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
 'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
-
+if(data == null ){
   return(
-    loading ? 
     <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
-    <ActivityIndicator size="large" color='#009387' />
+      <Text style={styles.titulo}  >No hay viajes para iniciar por el momento</Text>
   </View>
-
-  :
+  )
+}else{
+  return(
+    
   <ScrollView>
         
   {
+    
       data.map((e, i) => (
         <Card style={styles.userInfoSection}>
           <Text style={styles.titulo}  >Datos del viaje</Text>
@@ -263,8 +268,10 @@ const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apelli
     }
   
 </ScrollView>
-
   )
+}
+  
+
 };
 
 export default ViajesEnRuta;
