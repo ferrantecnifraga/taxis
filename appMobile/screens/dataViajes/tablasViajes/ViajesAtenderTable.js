@@ -184,7 +184,7 @@ const alertAtender = (idVP) =>{
   // }
     
 
-const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
 'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
 
@@ -204,7 +204,7 @@ return (
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                
+                    <Cell key={i+16} data={e.idVP} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />

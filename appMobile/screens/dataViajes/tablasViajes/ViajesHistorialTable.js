@@ -69,6 +69,9 @@ setTotal2(total)
         )
     }
     const element2 = (idVP) => {
+
+
+
       return(
         <TouchableOpacity onPress={() => alertFactura(idVP)}>
         <View style={styles.btn}>
@@ -81,8 +84,8 @@ setTotal2(total)
 
 
 
-const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
+const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Fecha Termino', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
 
 
 return (
@@ -98,7 +101,8 @@ return (
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                
+                <Cell key={i+16} data={e.idVP} textStyle={styles.text} style={styles.celda} />
+                      <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
@@ -108,7 +112,8 @@ return (
                     <Cell key={i+7} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+9} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+17} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+10} data={e.fechaTermino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>

@@ -67,7 +67,7 @@ setTotal2(total)
       return(
         Alert.alert(
           "Información del viaje",
-          "El viaje número "+idVP+ ", es a las "+fecha,
+          "El viaje número "+idVP+ ", es a las "+fecha+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
           [
         
             { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
