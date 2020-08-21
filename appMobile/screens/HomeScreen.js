@@ -1,21 +1,58 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, StyleSheet, ProgressBarAndroid, ScrollView,
 ActivityIndicator, FlatList } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { FAB } from 'react-native-paper'; 
 
-
+import AsyncStorage from '@react-native-community/async-storage';
 
 const HomeScreen = ({navigation}) => {
 
+  const [viajesMes, setViajesMes] = useState("Cargando...")
+  const [totalCobrado, setTotalCobrado] = useState("Cargando...")
+  const [viajesEnTotal, setViajesEnTotal] = useState("Cargando...")
+  const [sanciones, setSanciones] = useState("Cargando...")
 
+  useEffect(() => {
+    const fetchMyAPI = async () => {
+      
+      let email2 = await AsyncStorage.getItem('email')
+      let password2 = await AsyncStorage.getItem('password')
+      let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+      let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/home', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email2,
+          password: password2,
+          idTaxista: idTaxista2
+        })
+      })
+
+      let response2 = await response.json()
+
+      
+     //Poner data
+     setViajesMes(response2.viajesMes)
+     setTotalCobrado(response2.totalCobrado)
+     setViajesEnTotal(response2.viajesEnTotal)
+     setSanciones(response2.sanciones)
+
+
+    }
+
+    fetchMyAPI()
+  }, [] )
 
     return (
 
       <View>
       <ScrollView>
         <Card 
-            title='Viajes realizados este mes'
+            title='Viajes realizados en total'
             titleStyle={{
               fontSize: 15,
               textAlign: 'left',
@@ -28,7 +65,7 @@ const HomeScreen = ({navigation}) => {
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
 
-                <Text style={{fontSize: 25}} >27</Text>
+          <Text style={{fontSize: 25}} >{viajesEnTotal}</Text>
                 <View style={{flexGrow: 1}} />
                 <Icon name="car" type='material-community' color="#9e9e9e" size= {25} /> 
               
@@ -49,7 +86,7 @@ const HomeScreen = ({navigation}) => {
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
       
-                <Text style={{fontSize: 25}} >215,000</Text>
+          <Text style={{fontSize: 25}} >€ {totalCobrado}</Text>
                 <View style={{flexGrow: 1}} />
                 <Icon name="euro" type='font-awesome' color="#9e9e9e" size= {25} /> 
               
@@ -69,7 +106,7 @@ const HomeScreen = ({navigation}) => {
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
       
-              <Text style={{fontSize: 25}} >13</Text>
+          <Text style={{fontSize: 25}} >{viajesMes}</Text>
               <View style={{flexGrow: 1}} />
                 <ProgressBarAndroid
                   styleAttr="Horizontal"
@@ -99,7 +136,7 @@ const HomeScreen = ({navigation}) => {
             }}>
               <View style={{display: "flex",flexDirection: "row"}}>
       
-                <Text style={{fontSize: 25}} >2</Text>
+          <Text style={{fontSize: 25}} >{sanciones}</Text>
                 <View style={{flexGrow: 1}} />
                 <Icon name="exclamation" type='font-awesome' color="#9e9e9e" size= {25} /> 
               
