@@ -38,6 +38,7 @@ import ultimasFacturas from '../screens/dataFacturas/ultimasFacturas'
 import pedirFacturas from '../screens/dataFacturas/pedirFacturas'
 
 import incidenciasFormulario from '../screens/incidenciasFormulario'
+import NotificacionDetalle from '../screens/NotificacionDetalle';
 
 //Stack del drawer
 const HomeStack = createStackNavigator();
@@ -106,6 +107,14 @@ export const NotificacionesStackScreen = ({navigation}) => (
         navigation.openDrawer()}/>
       )
     }} />
+    <NotificacionesStack.Screen name="NotificacionDetalle" component={NotificacionDetalle} options={{
+      title:'Detalle de notificación',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Notificaciones', {screen: 'Notificaciones'})}/>
+      )
+    }}/>
   </NotificacionesStack.Navigator> 
 );
 

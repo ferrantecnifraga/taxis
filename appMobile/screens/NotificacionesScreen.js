@@ -3,7 +3,7 @@ import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native'
 import { ListItem } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 
-const NotificacionesScreen = () => {
+const NotificacionesScreen = ({navigation}) => {
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -57,6 +57,7 @@ const NotificacionesScreen = () => {
 
    
  
+ 
 
   return ( 
 
@@ -79,6 +80,11 @@ const NotificacionesScreen = () => {
           subtitleStyle= {{marginLeft: 15}}
           subtitle={e.descripcion}
           bottomDivider
+          onPress={() => {navigation.navigate('NotificacionDetalle', {
+            encabezado: e.encabezado, 
+            descripcion: e.descripcion 
+          })}}
+          
         />
         )
     }
