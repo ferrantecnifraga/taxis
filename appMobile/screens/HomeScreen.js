@@ -52,7 +52,7 @@ const HomeScreen = ({navigation}) => {
       <View>
       <ScrollView>
         <Card 
-            title='Viajes realizados en total'
+            title='Viajes a realizar'
             titleStyle={{
               fontSize: 15,
               textAlign: 'left',

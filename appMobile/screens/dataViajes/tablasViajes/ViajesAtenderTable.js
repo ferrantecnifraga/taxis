@@ -152,6 +152,10 @@ const alertAtender = (idVP) =>{
           text: "No, rechazar viaje",
           onPress: () => atenderElViaje(idVP, "Rechazar"),
           
+        },
+        {
+        text: "Cancelar acción",
+          onPress: () => console.log("Abortando..."),
         }
 
       ],
@@ -170,7 +174,7 @@ const alertAtender = (idVP) =>{
 
   const element2 = (idVP) => {
     return(
-      <TouchableOpacity onPress={() => alertCancel(idVP)}>
+      <TouchableOpacity onPress={() => alertAtender(idVP)}>
       <View style={styles.btn}>
     <Text style={styles.btnText}>Atender viaje</Text>
       </View>
