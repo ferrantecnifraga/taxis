@@ -15,11 +15,11 @@ const rechazadosViajes = ({navigation}) => {
 
 
     return (
-      <View>
+      <ScrollView>
         
         <ViajesRechazadosTable/>
 
-      </View>
+      </ScrollView>
     )
   }
 

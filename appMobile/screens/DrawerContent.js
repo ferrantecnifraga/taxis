@@ -155,28 +155,14 @@ useEffect(() => {
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
-                              name="trending-up"
+                              name="alert-octagon"
                               color={color}
                               size={size}
                               />
                           )}
-                          label="Estadísticas"
+                          label="Levantar incidencia"
                           // onPress={() => {props.navigation.navigate('Estadisticas')}}
-                          onPress={() => {
-                            Alert.alert(
-                              "Estadísticas",
-                              "Las estadisticas estaran disponibles proximamente",
-                              [
-                                {
-                                  text: "Ok",
-                                  onPress: () => console.log("Cancel Pressed")
-                                }                                  
-                            
-                              ],
-                              { cancelable: true }
-                            );
-                          
-                          }}
+                          onPress={() => {props.navigation.navigate('incidenciasFormulario')}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (

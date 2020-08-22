@@ -59,16 +59,42 @@ setTotal2(total)
 
 
 
-    const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-    'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
+    const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+    'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
+
+
+    const detalles = (idVP, fecha) => {
+      return(
+        Alert.alert(
+          "Información del viaje",
+          "El viaje número "+idVP+ ", es a las "+fecha+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
+          [
+        
+            { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
+          ],
+          { cancelable: true }
+        )
+        )
+    }
+
+    const boton = (idVP, fecha) => {
+      return(
+        <TouchableOpacity onPress={() => detalles(idVP, fecha)}>
+        <View style={styles.btn}>
+      <Text style={styles.btnText}>Detalles viaje</Text>
+        </View>
+      </TouchableOpacity>
+      )
+    }
+
 
     return (
 
-  //     loading ? 
-  // <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
-  //   <ActivityIndicator size="large" color='#009387' />
-  // </View>
-  // : 
+      loading ? 
+  <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
+    <ActivityIndicator size="large" color='#009387' />
+  </View>
+  : 
 
      <ScrollView style={styles.container} horizontal={true} >
       <Table borderStyle={{borderColor: 'transparent'}} >
@@ -76,7 +102,7 @@ setTotal2(total)
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                
+                    <Cell key={i+16} data={e.idVP} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
@@ -91,7 +117,7 @@ setTotal2(total)
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
+                    <Cell key={i+15} data={boton(e.idVP, e.fechaInicio)}  />
 
                   
               </TableWrapper>

@@ -55,10 +55,37 @@ setTotal2(total)
     }, [] )
 
 
+    const alertFactura = (idVP) => {
+      return(
+        Alert.alert(
+          "Facturación del viake",
+          "Las facturas estaran disponibles próximamente",
+          [
+        
+            { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
+          ],
+          { cancelable: true }
+        )
+        )
+    }
+    const element2 = (idVP) => {
 
 
-const tableHead = ['Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente']
+
+      return(
+        <TouchableOpacity onPress={() => alertFactura(idVP)}>
+        <View style={styles.btn}>
+      <Text style={styles.btnText}>Ver factura</Text>
+        </View>
+      </TouchableOpacity>
+      )
+    }
+
+
+
+
+const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Fecha Termino', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
 
 return (
@@ -74,7 +101,8 @@ return (
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                
+                <Cell key={i+16} data={e.idVP} textStyle={styles.text} style={styles.celda} />
+                      <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
@@ -84,12 +112,13 @@ return (
                     <Cell key={i+7} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+9} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+17} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+10} data={e.fechaTermino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
+                    <Cell key={i+15} data={element2(e.idVP)}  />
 
                   
               </TableWrapper>
@@ -127,7 +156,7 @@ const styles = StyleSheet.create({
   btn: { 
     width: 100, 
     height: 25, 
-    backgroundColor: '#78B7BB',  
+    backgroundColor: '#2196f3',  
     borderRadius: 5,
     padding:1,
     alignSelf: 'center',

@@ -15,9 +15,9 @@ const atenderViajes = ({navigation}) => {
 
 
     return (
-      <View >
+      <ScrollView >
         <ViajesAtenderTable/>
-      </View>
+      </ScrollView>
     )
   }
   

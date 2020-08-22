@@ -123,18 +123,12 @@ export const SignInComponent = ({navigation}) => {
                 "Error",
                 "Los campos están vacios",
                 [
-                  {
-                    text: "Cancel",
-                    onPress: () => console.log("Cancel Pressed"),
-                    
-                  },
+                 
                   { text: "OK", onPress: () => console.log("OK Pressed") }
                 ],
                 { cancelable: true }
               );
-        }
-       
-
+        }else{
             try {
 
                 if ( data.isValidUser === true && data.isValidPassword === true ) {
@@ -172,10 +166,10 @@ export const SignInComponent = ({navigation}) => {
                             console.log(e);
                         }
                         console.log("Login jalando")
-                    }else if(String(dataServer.message) == "Error! Taxista no encontrado"){
+                    }else {
                         Alert.alert(
                             "Error",
-                            dataServer.message+". Checa tus datos",
+                            dataServer.message,
                             [
                               {
                                 text: "Cancel",
@@ -217,14 +211,13 @@ export const SignInComponent = ({navigation}) => {
         catch (error) {
             console.error(error);
         } 
+        }
+       
+
+            
 
         
-         
-
-        // const foundUser = respuesta.filter( item => {
-        //     return  email == item.email && password == item.password;
-        // });
-        
+ 
         
     }
 
