@@ -42,18 +42,7 @@ const NotificacionesScreen = ({navigation}) => {
 
 
 
-  const list = [
-    {
-       name: 'Administradora Leticia',
-       avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/brynn/128.jpg',
-       subtitle: 'Tu sanción ha sido revocada'
-    },
-    {
-        name: 'Administrador Squarepants',
-        avatar_url: 'https://s3.amazonaws.com/uifaces/faces/twitter/adhamdannaway/128.jpg',
-        subtitle: 'Tienes una nueva sancion'
-    },
-   ];
+ 
 
    
  
@@ -76,13 +65,18 @@ const NotificacionesScreen = ({navigation}) => {
           key={i}
           leftAvatar={{  source: require("../assets/logolleida2.png") }}
           title={e.encabezado}
-          titleStyle= {{marginLeft: 15}}
-          subtitleStyle= {{marginLeft: 15}}
-          subtitle={e.descripcion}
+          titleStyle= {{marginLeft: 15, marginBottom: 10}}
+          subtitle= {
+            <View>
+              <Text style={{color: '#757575', marginLeft: 15,}} >{e.descripcion}</Text>
+              <Text style={{color: '#00796b', marginTop: 7, alignSelf: 'flex-end', fontSize: 15}} > Presiona para atender la notificación  </Text>
+            </View>
+          }
           bottomDivider
           onPress={() => {navigation.navigate('NotificacionDetalle', {
             encabezado: e.encabezado, 
-            descripcion: e.descripcion 
+            descripcion: e.descripcion,
+            tipo: e.tipo
           })}}
           
         />

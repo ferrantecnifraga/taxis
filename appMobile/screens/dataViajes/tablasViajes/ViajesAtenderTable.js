@@ -6,7 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 
 
-const ViajesAtenderTable = () => { 
+const ViajesAtenderTable = ({navigation}) => { 
 
   const [data, setData] = useState([])
   const [current_page2, setCurrent_page2] = useState(1)
@@ -79,19 +79,43 @@ setTotal2(total)
 
         let response2 = await response.json()
 
+        if(response2.tipo == "Confirmado") {
+
+          Alert.alert(
+            "Atender viaje",
+            response2.estatus,
+            [
+              {
+                text: "Ok",
+                onPress: () => navigation.navigate('Viajes', {screen: 'ProximosViajes'})
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        } else if(response2.tipo == "Rechazado")
         Alert.alert(
           "Atender viaje",
           response2.estatus,
           [
             {
               text: "Ok",
-              onPress: () => console.warn("OK"),
-              
+              onPress: () => navigation.navigate('Viajes', {screen: 'rechazadosViajes'})
             }
   
           ],
           { cancelable: true }
         )
+
+
+      
+      
+      
+      
+      
+      
+      
+      
       } catch (error) {
         Alert.alert(
           "Atender viaje",

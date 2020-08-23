@@ -58,7 +58,7 @@ setTotal2(total)
     const alertFactura = (idVP) => {
       return(
         Alert.alert(
-          "Facturación del viake",
+          "Facturación del viaje",
           "Las facturas estaran disponibles próximamente",
           [
         
@@ -102,7 +102,6 @@ return (
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
                 <Cell key={i+16} data={e.idVP} textStyle={styles.text} style={styles.celda} />
-                      <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />

@@ -128,7 +128,7 @@ useEffect(() => {
                               />
                           )}
                           label="Notificaciones"
-                          onPress={() => {props.navigation.navigate('Notificaciones')}}
+                          onPress={() => {props.navigation.navigate('Notificaciones', {screen: 'Notificaciones'})}}
                       />
                       <DrawerItem 
                             icon={({color, size}) => (

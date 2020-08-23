@@ -54,7 +54,7 @@ setTotal2(total)
     }, [] )
 
   //Headers de tabla(categorias):
-  const tableHead = ['Tipo', 'Estatus', 'Pendiente' ];
+  const tableHead = ['Numero de sanción', 'Tipo', 'Descripción', 'Estatus' ];
   //Mi Data donde deberia de ir toda nuestra info
 
 
@@ -74,10 +74,10 @@ setTotal2(total)
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                
-                    <Cell key={i+1} data={e.tipo} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+2} data={e.estatus} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+1} data={e.idSancionTaxista} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+2} data={e.tipo} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.descripcion} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+4} data={e.estatus} textStyle={styles.text} style={styles.celda} />
 
                   
               </TableWrapper>
