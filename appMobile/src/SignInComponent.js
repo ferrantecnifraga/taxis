@@ -5,7 +5,9 @@ import {
     StyleSheet,
     TextInput,
     TouchableOpacity,
-    Alert
+    Alert,
+    ScrollView
+    
 // @ts-ignore
 } from "react-native";
 // @ts-ignore
@@ -225,7 +227,7 @@ export const SignInComponent = ({navigation}) => {
 
         
         return ( 
-            <View style={styles.container}>
+            <ScrollView style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.text_header}>¡Bienvenido Taxista!</Text>
                 </View>
@@ -356,7 +358,7 @@ export const SignInComponent = ({navigation}) => {
                         
                     </View>
                 </Animatable.View >
-            </View>
+            </ScrollView>
         )
     }
 
@@ -370,20 +372,24 @@ var styles = StyleSheet.create({
         flex:1,
         justifyContent:'flex-end',
         paddingHorizontal:20,
-        paddingBottom:50
+        paddingBottom:0,
+        marginTop: '20%'
     },
     footer: {
-        flex:3,
+        flex:1,
         backgroundColor: 'white',
         borderTopLeftRadius:30,
         borderTopRightRadius:30,
+        borderBottomLeftRadius: 30,
+        borderBottomRightRadius: 30,
         paddingHorizontal:20,
         paddingVertical:30
     },
     text_header: {
         color: 'white',
         fontWeight:'bold',
-        fontSize:30
+        fontSize:30,
+        marginTop: 50
     },
     text_footer: {
         color: '#05375a',

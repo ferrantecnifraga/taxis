@@ -66,6 +66,15 @@ const ButtonRender = () =>{
           />
     )
   }
+  else if(tipo == 'Sanción') {
+    return (
+      <Button
+            title="Ir a sanciones"
+            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+            onPress={() => navigation.navigate('Viajes', {screen: 'sancionesViajes'})}
+          />
+    )
+  }
 }
 
 
