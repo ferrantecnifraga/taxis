@@ -8,12 +8,20 @@ const { encabezado, descripcion, tipo } = route.params;
 
 
 const ButtonRender = () =>{
-  if(tipo == 'Atender viaje') {
+  if(tipo == 'Viaje iniciado') {
     return (
       <Button
             title="Ir a viajes por atender"
             buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
-            onPress={() => navigation.navigate('Viajes', {screen: 'atenderViajes'})}
+            onPress={() => navigation.navigate('Viajes', {screen: 'ProximosViajes'})}
+          />
+    )
+  } else if(tipo == 'Viaje terminado') {
+    return (
+      <Button
+            title="Ir a viajes programados"
+            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+            onPress={() => navigation.navigate('Viajes', {screen: 'historialViajes'})}
           />
     )
   } else if(tipo == 'Viaje confirmado') {
@@ -24,12 +32,37 @@ const ButtonRender = () =>{
             onPress={() => navigation.navigate('Viajes', {screen: 'ProximosViajes'})}
           />
     )
-  } else if(tipo == 'Viaje rechazado') {
+  }else if(tipo == 'Viaje rechazado') {
     return (
       <Button
             title="Ir a viajes rechazados"
             buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
             onPress={() => navigation.navigate('Viajes', {screen: 'rechazadosViajes'})}
+          />
+    )
+  }else if(tipo == 'Atender viaje') {
+    return (
+      <Button
+            title="Ir a viajes por atender"
+            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+            onPress={() => navigation.navigate('Viajes', {screen: 'atenderViajes'})}
+          />
+    )
+  }else if(tipo == 'Viaje reasignado') {
+    return (
+      <Button
+            title="Ir a viajes por atender"
+            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+            onPress={() => navigation.navigate('Viajes', {screen: 'ProximosViajes'})}
+          />
+    )
+  }
+  else if(tipo == 'Viaje cancelado') {
+    return (
+      <Button
+            title="Ir a viajes por atender"
+            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+            onPress={() => navigation.navigate('Viajes', {screen: 'historialViajes'})}
           />
     )
   }

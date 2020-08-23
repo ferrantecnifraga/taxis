@@ -93,27 +93,35 @@ setTotal2(total)
             ],
             { cancelable: true }
           )
-        } else if(String(response2.tipo) == "Rechazado")
-        Alert.alert(
-          "Atender viaje",
-          response2.estatus,
-          [
-            {
-              text: "Ok",
-              onPress: () => console.log("rechazado")
-            }
-  
-          ],
-          { cancelable: true }
-        )
+        } else if(String(response2.tipo) == "Rechazado") {
 
+          Alert.alert(
+            "Atender viaje",
+            response2.estatus,
+            [
+              {
+                text: "Ok",
+                onPress: () => console.log("rechazado")
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        } else if(String(response2.tipo) == 'Atendido') {
+          Alert.alert(
+            "Atender viaje",
+            response2.estatus,
+            [
+              {
+                text: "Ok",
+                onPress: () => console.log("ya atendido")
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
 
-      
-      
-      
-      
-      
-      
       
       
       } catch (error) {
