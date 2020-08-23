@@ -55,7 +55,7 @@ setTotal2(total)
 
 
     //Fetch a la API atender viaje
-    const atenderElViaje = async(idVP, respuesta) => {
+    const atenderElViaje = async(idVP, respuesta,{navigation}) => {
       let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
@@ -79,7 +79,7 @@ setTotal2(total)
 
         let response2 = await response.json()
 
-        if(response2.tipo == "Confirmado") {
+        if(String(response2.tipo) == "Confirmado") {
 
           Alert.alert(
             "Atender viaje",
@@ -87,20 +87,20 @@ setTotal2(total)
             [
               {
                 text: "Ok",
-                onPress: () => navigation.navigate('Viajes', {screen: 'ProximosViajes'})
+                onPress: () => console.log("Confirmado")
               }
     
             ],
             { cancelable: true }
           )
-        } else if(response2.tipo == "Rechazado")
+        } else if(String(response2.tipo) == "Rechazado")
         Alert.alert(
           "Atender viaje",
           response2.estatus,
           [
             {
               text: "Ok",
-              onPress: () => navigation.navigate('Viajes', {screen: 'rechazadosViajes'})
+              onPress: () => console.log("rechazado")
             }
   
           ],
@@ -161,7 +161,7 @@ setTotal2(total)
   }
 
   //AlertaAtender menu
-const alertAtender = (idVP) =>{
+const alertAtender = (idVP, {navigation}) =>{
   return(
     Alert.alert(
       "Atender Viaje",
@@ -169,12 +169,12 @@ const alertAtender = (idVP) =>{
       [
         {
           text: "Si, confirmar viaje",
-          onPress: () => atenderElViaje(idVP, "Confirmar"),
+          onPress: () => atenderElViaje(idVP, "Confirmar", {navigation}),
           
         },
         {
           text: "No, rechazar viaje",
-          onPress: () => atenderElViaje(idVP, "Rechazar"),
+          onPress: () => atenderElViaje(idVP, "Rechazar",{navigation}),
           
         },
         {
@@ -196,9 +196,9 @@ const alertAtender = (idVP) =>{
   
 
 
-  const element2 = (idVP) => {
+  const element2 = (idVP, {navigation}) => {
     return(
-      <TouchableOpacity onPress={() => alertAtender(idVP)}>
+      <TouchableOpacity onPress={() => alertAtender(idVP, {navigation})}>
       <View style={styles.btn}>
     <Text style={styles.btnText}>Atender viaje</Text>
       </View>
@@ -247,7 +247,7 @@ return (
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+15} data={element2(e.idVP)}  />
+                    <Cell key={i+15} data={element2(e.idVP, {navigation})}  />
 
                   
               </TableWrapper>
