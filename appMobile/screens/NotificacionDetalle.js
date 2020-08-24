@@ -4,7 +4,7 @@ import { Card, Divider, Button } from "react-native-elements";
 
 const   NotificacionDetalle = ({route, navigation}) => {
 
-const { encabezado, descripcion, tipo } = route.params;
+const { encabezado, descripcion, tipo, fecha } = route.params;
 
 
 const ButtonRender = () =>{
@@ -96,6 +96,9 @@ const ButtonRender = () =>{
         <Divider style={{marginBottom: 20, marginTop:10}} />
         <View >
           <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{JSON.stringify(descripcion)}</Text>          
+        </View>
+        <View>
+          <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{JSON.stringify(fecha)}</Text>   
         </View>
         <ButtonRender />
       </View>
