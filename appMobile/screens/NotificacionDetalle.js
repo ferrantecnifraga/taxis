@@ -94,11 +94,11 @@ const ButtonRender = () =>{
           <Text style={{fontSize: 19,marginTop: 30, marginHorizontal: 30, textAlign: 'center'}}  >{JSON.stringify(encabezado)}</Text>
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
+        <View>
+          <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >Recibida: {JSON.stringify(fecha)}</Text>   
+        </View>
         <View >
           <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{JSON.stringify(descripcion)}</Text>          
-        </View>
-        <View>
-          <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{JSON.stringify(fecha)}</Text>   
         </View>
         <ButtonRender />
       </View>
