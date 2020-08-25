@@ -6,6 +6,12 @@ const   NotificacionDetalle = ({route, navigation}) => {
 
 const { encabezado, descripcion, tipo, fecha } = route.params;
 
+let fecha2 = fecha.split(" ")
+
+let fecha3 = fecha2[0].split("-")
+console.warn(fecha3)
+
+let fecha4 = ` ${fecha3[2]}/${fecha3[1]}/${fecha3[0]} a las ${fecha2[1]}`
 
 const ButtonRender = () =>{
   if(tipo == 'Viaje iniciado') {
@@ -79,7 +85,7 @@ const ButtonRender = () =>{
 
 
   return (
-
+    
 
     <ScrollView>
 
@@ -95,7 +101,7 @@ const ButtonRender = () =>{
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
         <View>
-          <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >Recibida: {JSON.stringify(fecha)}</Text>   
+          <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >Recibida: {fecha4}</Text>   
         </View>
         <View >
           <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{JSON.stringify(descripcion)}</Text>          
