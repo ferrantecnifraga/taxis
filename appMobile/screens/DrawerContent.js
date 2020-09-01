@@ -236,7 +236,7 @@ useEffect(() => {
                         size={size}
                         />
                     )}
-                    label="Sign Out"
+                    label="Cerrar sesión"
                     onPress={() => {signOut()}}
                 />
             </Drawer.Section>
