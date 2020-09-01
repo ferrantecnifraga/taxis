@@ -238,8 +238,20 @@ if(data == null ){
           <Text style={styles.infoText}>Nombre del primer Paciente</Text>
           <Text style={styles.dataText}>{e.pacientePrimero}</Text>
           <Divider/>
+          <Text style={styles.infoText}>Telefono del primer Paciente</Text>
+          <Text style={styles.dataText}>{e.telfPrimerPaciente}</Text>
+          <Divider/>
+          <Text style={styles.infoText}>Dirección del primer Paciente</Text>
+          <Text style={styles.dataText}>{e.direccionPrimerPaciente}</Text>
+          <Divider/>
           <Text style={styles.infoText}>Nombre del segundo Paciente</Text>
           <Text style={styles.dataText}>{e.pacienteSegundo}</Text>
+          <Divider/>
+          <Text style={styles.infoText}>Telefono del segundo Paciente</Text>
+          <Text style={styles.dataText}>{e.telfSegundoPaciente}</Text>
+          <Divider/>
+          <Text style={styles.infoText}>Direccion del segundo Paciente</Text>
+          <Text style={styles.dataText}>{e.direccionSegundoPaciente}</Text>
           <Divider/>
           <Text style={styles.infoText}>Fecha de inicio</Text>
           <Text style={styles.dataText}>{e.fechaInicio}</Text>
@@ -255,6 +267,9 @@ if(data == null ){
           <Divider/>
           <Text style={styles.infoText}>Destino</Text>
           <Text style={styles.dataText}>{e.destino}</Text>
+          <Divider/>
+          <Text style={styles.infoText}>Dirección de Hospital</Text>
+          <Text style={styles.dataText}>{e.direccionHospital}</Text>
           <Divider/>
           <Text style={styles.infoText}>Cliente</Text>
           <Text style={styles.dataText}>{e.cliente}</Text>

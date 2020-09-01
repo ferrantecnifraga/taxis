@@ -84,8 +84,9 @@ setTotal2(total)
 
 
 
-const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Fecha Termino', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
+    const tableHead = ['Número de viaje', 'Costo Parcial €', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+    'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1',  'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Fecha Inicio', 'Fecha terminó', 'Vehículo', 'Origen',
+    'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones']
 
 
 return (
@@ -101,25 +102,30 @@ return (
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                <Cell key={i+16} data={e.idVP} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+4} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+5} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+6} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+7} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+17} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.fechaTermino} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+15} data={element2(e.idVP)}  />
+                    <Cell key={i+1} data={e.idVP} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+3} data={e.nombre} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+4} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+5} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+6} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+7} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
 
-                  
+                    <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+9} data={e.telfPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+10} data={e.direccionPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+11} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+12} data={e.telfSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+14} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+15} data={e.fechaTermino} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+16} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+17} data={e.origen} textStyle={styles.text} style={styles.celda}/>
+                    
+                    <Cell key={i+18} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+19} data={e.destino} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+20} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+21} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+22} data={element2(e.idVP)}  />
               </TableWrapper>
             ))
           }
