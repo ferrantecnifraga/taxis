@@ -175,7 +175,7 @@ useEffect(() => {
                           label="Incidencias"
                           onPress={() => {props.navigation.navigate('Incidencias')}}
                       />
-                      <DrawerItem 
+                      {/* <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
                               name="note-outline"
@@ -200,7 +200,7 @@ useEffect(() => {
                             );
                           }}
                           
-                      />
+                      /> */}
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon

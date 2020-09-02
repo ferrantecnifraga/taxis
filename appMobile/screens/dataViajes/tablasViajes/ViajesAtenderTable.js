@@ -221,7 +221,7 @@ const alertAtender = (idVP, {navigation}) =>{
     
 
 const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
-'Paciente 1',  'Telefono Paciente 1', 'Dirección Paciente 1', 'Paciente 2', 'Telfono Paciente 2', 'Dirección Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 
+'Paciente 1',  'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telfono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Vehiculo', 'Origen', 
 'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones']
 
 
@@ -252,9 +252,11 @@ return (
                     <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+9} data={e.telfPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.direccionPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+10} data={e.puebloPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+12} data={e.telfSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+13} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
