@@ -35,6 +35,7 @@ export const SignInComponent = ({navigation}) => {
         isValidUser: true,
         isValidPassword: true,
     });
+    const [estatus, setEstatus] = useState('Entrar')
 
     const [respuesta, setRespuesta] = useState()
 
@@ -144,6 +145,7 @@ export const SignInComponent = ({navigation}) => {
                 if ( data.isValidUser === true && data.isValidPassword === true ) {
                     console.log(data.email)
                     console.log(data.password)
+                    setEstatus('Entrando...')
                     let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/login', {
                         method: 'POST',
                         headers: {
@@ -172,6 +174,7 @@ export const SignInComponent = ({navigation}) => {
                             await AsyncStorage.setItem('userToken', userToken)
                             await AsyncStorage.setItem('email', email)
                             await AsyncStorage.setItem('idTaxista', idTaxista)
+
                             signIn(data.email, data.password, userToken)
                         } catch(e){
                             console.log(e);
@@ -191,6 +194,7 @@ export const SignInComponent = ({navigation}) => {
                             ],
                             { cancelable: true }
                           );
+                          setEstatus('Entrar')
                     } 
         
         
@@ -363,7 +367,7 @@ export const SignInComponent = ({navigation}) => {
                                 }]}>
                                 <Text style={[styles.textSign,{
                                     color:'#eceff1'
-                                }]}>Entrar</Text>
+                                }]}> {estatus} </Text>
                         </TouchableOpacity>
 
                         

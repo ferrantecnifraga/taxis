@@ -4,6 +4,7 @@ import { StyleSheet,TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndic
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
+import { useNavigation } from '@react-navigation/native';
 
 const ViajesHistorialTable = () => { 
 
@@ -86,7 +87,25 @@ setTotal2(total)
 
     const tableHead = ['Número de viaje', 'Costo Parcial €', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
     'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Fecha terminó', 'Vehículo', 'Origen',
-    'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones']
+    'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones', 'Detalles']
+
+    const detallesButton = (idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+      pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
+      direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, origen, pasando_por, destino, direccionHospital, cliente) => {
+        const navigation = useNavigation();
+      return(
+        <TouchableOpacity 
+        onPress={() => {navigation.navigate('ViajeDetalleHistorial', {
+          idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+      pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
+      direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, origen, pasando_por, destino, direccionHospital, cliente})}}>
+          <View style={styles.btn}>
+            <Text style={styles.btnText}>Detalles viaje</Text>
+          </View>
+        </TouchableOpacity>
+      )
+    
+    }
 
 
 return (
@@ -128,6 +147,9 @@ return (
                     <Cell key={i+20} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+21} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+22} data={element2(e.idVP)}  />
+                    <Cell key={i+23} data={detallesButton(e.idVP, e.costoParcial, e.nombre, e.primerApellido, e.segundoApellido, e.servicio, e.estatus, e.pacientePrimero, e.telfPrimerPaciente,
+                      e.direccionPrimerPaciente, e.puebloPrimerPaciente, e.pacienteSegundo, e.telfSegundoPaciente, e.direccionSegundoPaciente, e.puebloSegundoPaciente, e.fechaInicio, e.fechaTermino, e.vehiculo, e.origen,
+                      e.pasando_por, e.destino, e.direccionHospital, e.cliente)} />
               </TableWrapper>
             ))
           }
