@@ -28,7 +28,8 @@ export const SignInComponent = ({navigation}) => {
     const [data, setData] = useState({
         email: '',
         password: '',
-        numLicencia: '',
+        // numLicencia: '',
+        numSocio: '',
         secureTextEntry: true,
         isValidNumLicencia: true,
         isValidUser: true,
@@ -70,12 +71,19 @@ export const SignInComponent = ({navigation}) => {
           
     // }
 
-    const handleNumLicencia = (val) => {
+    // const handleNumLicencia = (val) => {
+    //     setData({
+    //         ...data,
+    //         numLicencia: val
+    //     })
+
+    // }
+
+    const handleNumSocio = (val) => {
         setData({
             ...data,
-            numLicencia: val
+            numSocio: val
         })
-
     }
 
     const handlePasswordChange = (val) => {
@@ -146,7 +154,8 @@ export const SignInComponent = ({navigation}) => {
                         body: JSON.stringify({
                             email : data.email ,
                             password : data.password,
-                            numLicencia : data.numLicencia
+                            // numLicencia : data.numLicencia
+                            numSocio : data.numSocio,
                         })
                       } )
                       
@@ -235,7 +244,7 @@ export const SignInComponent = ({navigation}) => {
                 animation="fadeInUpBig"
                 style={styles.footer}>
 
-                    <Text style={styles.text_footer}>Numero de licencia</Text>
+                    <Text style={styles.text_footer}>Numero de socio</Text>
                     <View style={styles.action}>
                         <FontAwesome 
                             name="user-o"
@@ -243,12 +252,13 @@ export const SignInComponent = ({navigation}) => {
                             size={20}
                         />
                         <TextInput
-                            placeholder="Numero de licencia"
+                            placeholder="Numero de socio"
                             style={styles.textInput}
-                            autoCapitalize='none'
+                            keyboardType={'numeric'}
+                            
                             // onChange={e => setEmail(e.target.value)}
                             // onChangeText={(val)=>textInputChange(val)}
-                            onChangeText={(e)=>handleNumLicencia(e)}
+                            onChangeText={(e)=>handleNumSocio(e)}
                             required
                         />
                         {data.check_textInputChange ?
@@ -273,6 +283,7 @@ export const SignInComponent = ({navigation}) => {
                             placeholder="Email"
                             style={styles.textInput}
                             autoCapitalize='none'
+                            keyboardType={'email-address'}
                             // onChange={e => setEmail(e.target.value)}
                             // onChangeText={(val)=>textInputChange(val)}
                             onChangeText={(e)=>handleValidUser(e)}
