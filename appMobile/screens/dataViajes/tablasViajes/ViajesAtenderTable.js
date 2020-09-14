@@ -97,26 +97,41 @@ setTotal2(total)
               location: direccionHospital,
               notes: "Servicio: "+servicio
             }
+            try {
+              const crear = await Calendar.createEventAsync(calendario, details)
             
-              const crear = await Calendar.createEventAsync("3", details)
             console.warn("ID del evento: "+crear)
-            var calendar = "Se agrego tu viaje al calendario."
+            var calendar = "Se agrego tu viaje al calendario"
+            Alert.alert(
+              "Atender viaje",
+              "Confirmaste el viaje, se agrego el viaje a tu calendario."
+              [
+                {
+                  text: "Ok",
+                  onPress: () => console.log("Confirmado")
+                }
+      
+              ],
+              { cancelable: true }
+            )
+            } catch (error) {
+              Alert.alert(
+                "Atender viaje",
+                error,
+                [
+                  {
+                    text: "Ok",
+                    onPress: () => console.log("Confirmado")
+                  }
+        
+                ],
+                { cancelable: true }
+              )
+            }
+              
             
             //Viaje calendario
           
-
-          Alert.alert(
-            "Atender viaje",
-            response2.estatus + " . "+calendar,
-            [
-              {
-                text: "Ok",
-                onPress: () => console.log("Confirmado")
-              }
-    
-            ],
-            { cancelable: true }
-          )
         } else if(String(response2.tipo) == "Rechazado") {
 
           Alert.alert(

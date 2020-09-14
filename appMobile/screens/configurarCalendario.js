@@ -12,15 +12,17 @@ const configurarCalendario = ({navigation}) => {
         (async () => {
             
           const { status } = await Calendar.requestCalendarPermissionsAsync();
-          let calendario = await AsyncStorage.getItem('idCalendario')
-            if (calendario != null) {
-              setTitulo("Ya está configurado, verás tus viajes en tu calendario personal")  
-            }
+          
           if (status === 'granted') {
             const calendars = await Calendar.getCalendarsAsync();
             // console.warn('Here are all your calendars:');
             console.warn({ calendars });
-            
+            let calendario = await AsyncStorage.getItem('idCalendario')
+            if (calendario != null) {
+              setTitulo("Ya está configurado, verás tus viajes en tu calendario personal")  
+            }else{
+              setTitulo("Crear mi calendario de viajes")
+            }
           }else{
             navigation.navigate('errorCalendario')
           }
@@ -46,7 +48,7 @@ const configurarCalendario = ({navigation}) => {
         console.warn(`Your new calendar ID is: ${newCalendarID}`);
         if(newCalendarID != undefined){
             let id = await AsyncStorage.setItem('idCalendario', newCalendarID)
-            setTitulo("Ya está configurado, verás tus viajes en tu calendario personal")
+            setTitulo("Ya está configurado, verás tus viajes en tu calendario personal. ID del calendario: "+id)
             navigation.navigate('exitosoCalendario')
         }else{
             navigation.navigate('errorCalendario')
