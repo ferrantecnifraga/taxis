@@ -99,10 +99,8 @@ useEffect(() => {
                             />
                             <View style={{marginLeft:15,
                             flexDirection:'column'}}>
-                                <Title style={styles.title}> {nombre}
-                                </Title>
-                                <Caption style={styles.caption}> {numSocio}
-                                </Caption>
+                                <Title style={styles.title}>{nombre}</Title>
+                                <Caption style={styles.caption}>{numSocio}</Caption>
                             </View>
                         </View>
                     </View>

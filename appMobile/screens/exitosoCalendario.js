@@ -37,7 +37,7 @@ const exitosoCalendario = ({navigation}) => {
                 }
                 title="Ir a inicio"
                 buttonStyle={{width: '70%', alignSelf: 'center', backgroundColor: '#009387', marginBottom: 20}}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.navigate('Home', {screen: 'Home'} )}
                 />
           </Card>
       </View>

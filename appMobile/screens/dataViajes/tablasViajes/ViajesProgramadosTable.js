@@ -81,7 +81,7 @@ setTotal2(total)
       return(
         <TouchableOpacity onPress={() => detalles(idVP, fecha)}>
           <View style={styles.btn}>
-            <Text style={styles.btnText}>estatus viaje</Text>
+            <Text style={styles.btnText}>Estatus viaje</Text>
           </View>
         </TouchableOpacity>
       )

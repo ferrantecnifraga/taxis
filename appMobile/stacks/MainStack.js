@@ -27,6 +27,10 @@ import sancionesViajes from '../screens/dataViajes/sancionesViajes'
 import ViajeDetalle from '../screens/dataViajes/tablasViajes/ViajeDetalle'
 import ViajeDetalleHistorial from '../screens/dataViajes/tablasViajes/ViajeDetalleHistorial'
 
+import atenderViajeDetalles from '../screens/dataViajes/tablasViajes/atenderViajeDetalles'
+import viajeAtendido from '../screens/dataViajes/tablasViajes/viajeAtendido'
+import viajeRechazado from '../screens/dataViajes/tablasViajes/viajeRechazado'
+
 //Stack de estadisticas
 import viajesPasados from '../screens/dataEstadisticas/viajesPasados'
 import proxViajesEst from '../screens/dataEstadisticas/proxViajesEst'
@@ -177,6 +181,34 @@ export const ViajesStackScreen = ({navigation}) => (
         onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
       )
     }}/>
+    <ViajesStack.Screen name="atenderViajeDetalles" component={atenderViajeDetalles} 
+    options={{
+      title:'Detalles del Viaje',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'atenderViajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="viajeRechazado" component={viajeRechazado} 
+    options={{
+      title:'Viaje rechazado',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'atenderViajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="viajeAtendido" component={viajeAtendido} 
+    options={{
+      title:'Viaje atendido',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'atenderViajes'})}/>
+      )
+    }}/>
+
     <ViajesStack.Screen name="historialViajes" component={historialViajes} 
     options={{
       title:'Historial de viajes',

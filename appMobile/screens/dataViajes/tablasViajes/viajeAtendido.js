@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import { Card,  Button, Icon } from "react-native-elements";
 import * as Animatable from 'react-native-animatable';
 
-const errorCalendario = ({navigation}) => {
+const viajeAtendido = ({navigation}) => {
 
   return (
       <View>
@@ -12,17 +12,29 @@ const errorCalendario = ({navigation}) => {
             animation="bounceIn"
             duration={1500}>
                 <Icon
-                name='warning'
-                type='font-awesome'
-                color='#f44336'
+                name='check-circle'
+                type='material-community'
+                color='#4caf50'
                 size={70}
                 iconStyle={styles.icon}
                 />
             </Animatable.View>
-              <Text style={styles.textMsg} >
-                Ha habido un error, no se ha podido sincronizar con tu calendario
+              <Text style={styles.titleMsg} >
+                ¡Gracias!
+              </Text>
+              <Text style={styles.textMsg}>
+                  Confirmaste el viaje, se creo el evento en tu calendario. Ve al calendario y asigna un recordatorio.
               </Text>
               <Button
+                icon={
+                    <Icon
+                    name="check-circle"
+                    type='material-community'
+                    size={25}
+                    color="white"
+                    iconStyle={{marginRight:10}}
+                    />
+                }
                 title="Ir a inicio"
                 buttonStyle={{width: '70%', alignSelf: 'center', backgroundColor: '#009387', marginBottom: 20}}
                 onPress={() => navigation.navigate('Home', {screen: 'Home'} )}
@@ -32,14 +44,21 @@ const errorCalendario = ({navigation}) => {
   );
 };
 
-export default errorCalendario;
+export default viajeAtendido;
 
 const styles = StyleSheet.create({
+    titleMsg: {
+        alignSelf: 'center',
+        fontSize: 20,
+        textAlign: 'center',
+        marginTop: 60,
+        color: '#424242'
+    },
     textMsg: {
         alignSelf: 'center',
         fontSize: 20,
         textAlign: 'center',
-        marginVertical: 60,
+        marginBottom: 50,
         color: '#424242'
     },
     icon:{

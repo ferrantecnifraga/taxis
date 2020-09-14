@@ -8,6 +8,8 @@ import * as Calendar from 'expo-calendar';
 import * as Localization from 'expo-localization';
 import moment, {add} from "moment";
 
+import { useNavigation } from '@react-navigation/native';
+
 const ViajesAtenderTable = ({navigation}) => { 
 
   const [data, setData] = useState([])
@@ -220,13 +222,16 @@ const alertAtender = (idVP, {navigation}, fechaInicio, direccionHospital, servic
   
 
 
-  const element2 = (idVP, {navigation}, fechaInicio, direccionHospital, servicio) => {
+  const element2 = (idVP, fechaInicio, direccionHospital, servicio) => {
+    const navigation = useNavigation();
     return(
-      <TouchableOpacity onPress={() => alertAtender(idVP, {navigation}, fechaInicio, direccionHospital, servicio)}>
-      <View style={styles.btn}>
-    <Text style={styles.btnText}>Atender viaje</Text>
-      </View>
-    </TouchableOpacity>
+      <TouchableOpacity onPress={() => {navigation.navigate('atenderViajeDetalles', {
+        idVP, fechaInicio, direccionHospital,servicio
+      })}}>
+        <View style={styles.btn}>
+          <Text style={styles.btnText}>Atender viaje</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 
@@ -282,7 +287,7 @@ return (
                     <Cell key={i+19} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+20} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
                     
-                    <Cell key={i+21} data={element2(e.idVP, {navigation}, e.fechaInicio, e.direccionHospital, e.servicio)}  />
+                    <Cell key={i+21} data={element2(e.idVP, e.fechaInicio, e.direccionHospital, e.servicio)}  />
 
                   
               </TableWrapper>

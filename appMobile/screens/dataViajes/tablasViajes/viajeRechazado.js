@@ -3,7 +3,7 @@ import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
 import { Card,  Button, Icon } from "react-native-elements";
 import * as Animatable from 'react-native-animatable';
 
-const errorCalendario = ({navigation}) => {
+const viajeRechazado = ({navigation}) => {
 
   return (
       <View>
@@ -12,15 +12,15 @@ const errorCalendario = ({navigation}) => {
             animation="bounceIn"
             duration={1500}>
                 <Icon
-                name='warning'
-                type='font-awesome'
+                name='cancel'
+                type='material-community'
                 color='#f44336'
                 size={70}
                 iconStyle={styles.icon}
                 />
             </Animatable.View>
               <Text style={styles.textMsg} >
-                Ha habido un error, no se ha podido sincronizar con tu calendario
+                Haz rechazado el viaje, Se te tomara en cuenta como realizado. ¡No rechazes viajes!
               </Text>
               <Button
                 title="Ir a inicio"
@@ -32,7 +32,7 @@ const errorCalendario = ({navigation}) => {
   );
 };
 
-export default errorCalendario;
+export default viajeRechazado;
 
 const styles = StyleSheet.create({
     textMsg: {
