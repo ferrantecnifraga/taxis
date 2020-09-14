@@ -8,6 +8,8 @@ import * as Calendar from 'expo-calendar';
 import * as Localization from 'expo-localization';
 import moment from "moment";
 
+import { useNavigation } from '@react-navigation/native';
+
 const   atenderViajeDetalles = ({route, navigation}) => {
 
 const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
@@ -36,12 +38,12 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
                     type="outline"
                     titleStyle={{color:'#009387'}}
                     buttonStyle={{alignSelf: 'center', marginTop: 30, marginLeft: 10, borderColor:'#009387' }}
-                    onPress={atenderElViaje(idVP, "Rechazar", )} //Pasale navigation anda mas
+                    onPress={ () => atenderElViaje(idVP, "Rechazar" )} //Pasale navigation anda mas
                 />
                 <Button
                     title="Aceptar viaje"
                     buttonStyle={{alignSelf: 'center', marginTop: 30,  marginRight: 10 ,backgroundColor: '#009387'}}
-                    onPress={atenderElViaje(idVP, "Confirmar") } //Pasale todo los ´parametros de la linea 56
+                    onPress={ () => atenderElViaje(idVP, "Confirmar", fechaInicio, direccionHospital, servicio)} //Pasale todo los ´parametros de la linea 56
                 />
                 </View>
         
@@ -52,7 +54,10 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
 };
 
  //Fetch a la API atender viaje
- const atenderElViaje = async(idVP, respuesta, {navigation}, fechaInicio, direccionHospital, servicio) => {
+const atenderElViaje = async(idVP, respuesta, fechaInicio, direccionHospital, servicio) => {
+
+const navigation = useNavigation();
+
   let email2 = await AsyncStorage.getItem('email')
     let password2 = await AsyncStorage.getItem('password')
     let idTaxista2 = await AsyncStorage.getItem('idTaxista')
@@ -75,7 +80,7 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
     })
 
     let response2 = await response.json()
-
+    
 
     if(String(response2.tipo) == "Confirmado") {
 
@@ -122,6 +127,7 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
   
     }
   } catch (error) {
+    console.warn(error)
     Alert.alert(
       "Atender viaje",
       error,
