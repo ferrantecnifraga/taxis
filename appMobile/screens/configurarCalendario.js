@@ -46,6 +46,7 @@ const configurarCalendario = ({navigation}) => {
         console.warn(`Your new calendar ID is: ${newCalendarID}`);
         if(newCalendarID != undefined){
             let id = await AsyncStorage.setItem('idCalendario', newCalendarID)
+            setTitulo("Ya está configurado, verás tus viajes en tu calendario personal")
             navigation.navigate('exitosoCalendario')
         }else{
             navigation.navigate('errorCalendario')

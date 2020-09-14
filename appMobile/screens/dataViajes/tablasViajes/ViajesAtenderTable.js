@@ -4,7 +4,9 @@ import { StyleSheet,TouchableOpacity, Text, View, Alert, ActivityIndicator, Scro
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
+import * as Calendar from 'expo-calendar';
+import * as Localization from 'expo-localization';
+import moment, {add} from "moment";
 
 const ViajesAtenderTable = ({navigation}) => { 
 
@@ -21,7 +23,7 @@ const ViajesAtenderTable = ({navigation}) => {
         let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
-        let calendario = await AsyncStorage.getItem('idCalendario')
+        
         let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/viajesPorAtender', {
           method: 'POST',
           headers: {
@@ -56,11 +58,11 @@ setTotal2(total)
 
 
     //Fetch a la API atender viaje
-    const atenderElViaje = async(idVP, respuesta,{navigation}, fecha) => {
+    const atenderElViaje = async(idVP, respuesta, {navigation}, fechaInicio, direccionHospital, servicio) => {
       let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
-
+        let calendario = await AsyncStorage.getItem('idCalendario')
 
       try {
         let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/atenderViaje', {
@@ -79,34 +81,33 @@ setTotal2(total)
         })
 
         let response2 = await response.json()
+    
 
         if(String(response2.tipo) == "Confirmado") {
 
           //Viaje calendario
-            const fecha = moment("2020-09-14 20:00:00").toDate();
-            const fecha2 = moment("2020-09-14 22:00:00").toDate();
+            let fecha = moment(fechaInicio).toDate();
             console.warn("Fecha: "+fecha)
             let details = {
-              title: "parranda",
+              title: "Viaje asignado: " +servicio,
               startDate: fecha,
-              endDate: fecha2,
+              endDate: fecha,
               timeZone: Localization.timezone,
               endTimeZone: Localization.timezone,
-              location: "Sevilla"
+              location: direccionHospital,
+              notes: "Servicio: "+servicio
             }
-            try {
+            
               const crear = await Calendar.createEventAsync("3", details)
             console.warn("ID del evento: "+crear)
-            } catch (error) {
-              console.warn(error)
-            }
+            var calendar = "Se agrego tu viaje al calendario."
             
             //Viaje calendario
           
 
           Alert.alert(
             "Atender viaje",
-            response2.estatus,
+            response2.estatus + " . "+calendar,
             [
               {
                 text: "Ok",
@@ -166,33 +167,10 @@ setTotal2(total)
       
   }
 
-//Alert para confirmar
 
-    const createAlert = (title, msg, idVP) => {
-      return(
-      Alert.alert(
-        title,
-        msg,
-        [
-          {
-            text: "Si, voy a atenderlo",
-            onPress: () => alertAtender(idVP),
-            
-          },
-          {
-            text: "No, olvidalo",
-            onPress: () => console.warn("Abortando accion"),
-            
-          }
-
-        ],
-        { cancelable: true }
-      )
-      )
-  }
 
   //AlertaAtender menu
-const alertAtender = (idVP, {navigation}) =>{
+const alertAtender = (idVP, {navigation}, fechaInicio, direccionHospital, servicio) =>{
   return(
     Alert.alert(
       "Atender Viaje",
@@ -200,7 +178,7 @@ const alertAtender = (idVP, {navigation}) =>{
       [
         {
           text: "Si, confirmar viaje",
-          onPress: () => atenderElViaje(idVP, "Confirmar", {navigation}),
+          onPress: () => atenderElViaje(idVP, "Confirmar", {navigation}, fechaInicio, direccionHospital, servicio),
           
         },
         {
@@ -227,9 +205,9 @@ const alertAtender = (idVP, {navigation}) =>{
   
 
 
-  const element2 = (idVP, {navigation}) => {
+  const element2 = (idVP, {navigation}, fechaInicio, direccionHospital, servicio) => {
     return(
-      <TouchableOpacity onPress={() => alertAtender(idVP, {navigation})}>
+      <TouchableOpacity onPress={() => alertAtender(idVP, {navigation}, fechaInicio, direccionHospital, servicio)}>
       <View style={styles.btn}>
     <Text style={styles.btnText}>Atender viaje</Text>
       </View>
@@ -289,7 +267,7 @@ return (
                     <Cell key={i+19} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+20} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
                     
-                    <Cell key={i+21} data={element2(e.idVP, {navigation})}  />
+                    <Cell key={i+21} data={element2(e.idVP, {navigation}, e.fechaInicio, e.direccionHospital, e.servicio)}  />
 
                   
               </TableWrapper>
