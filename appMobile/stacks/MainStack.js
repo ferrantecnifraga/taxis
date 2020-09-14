@@ -42,6 +42,11 @@ import pedirFacturas from '../screens/dataFacturas/pedirFacturas'
 import incidenciasFormulario from '../screens/incidenciasFormulario'
 import NotificacionDetalle from '../screens/NotificacionDetalle';
 
+//Stack de CALENDARIO
+import configurarCalendario from '../screens/configurarCalendario'
+import exitosoCalendario from '../screens/exitosoCalendario';
+import errorCalendario from '../screens/errorCalendario';
+
 //Stack del drawer
 const HomeStack = createStackNavigator();
 const NotificacionesStack = createStackNavigator();
@@ -52,6 +57,7 @@ const IncidenciasStack = createStackNavigator();
 const FacturacionStack = createStackNavigator();
 const AyudaStack = createStackNavigator();
 const SoporteStack = createStackNavigator();
+const CalendarioStack = createStackNavigator();
 
 
 //Styles header:
@@ -219,6 +225,40 @@ export const ViajesStackScreen = ({navigation}) => (
     
   </ViajesStack.Navigator>
 );
+
+//Stack de calendario
+
+export const CalendarioStackScreen = ({navigation}) => (
+  <CalendarioStack.Navigator screenOptions={screenOpt}>
+    <CalendarioStack.Screen name="configurarCalendario" component={configurarCalendario} options={{
+      title: 'Calendario',
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size= {30}
+        backgroundColor="#009387" onPress={() => 
+        navigation.openDrawer()}/>
+      )
+    }}
+    />
+    <CalendarioStack.Screen name="exitosoCalendario" component={exitosoCalendario} options={{
+      title: 'Calendario sincronizado',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('configurarCalendario', {screen:'configurarCalendario'} )}/>
+      )
+    }}
+    />
+    <CalendarioStack.Screen name="errorCalendario" component={errorCalendario} options={{
+      title: 'Error al sincronizar',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('configurarCalendario', {screen:'configurarCalendario'})}/>
+      )
+    }}
+    />
+  </CalendarioStack.Navigator>
+)
 
 //Mi stack para navegar entre screens de ESTADISTICAS
 export const EstadisticasStackScreen = ({navigation}) => ( 

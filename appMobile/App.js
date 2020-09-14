@@ -13,6 +13,7 @@ import {IncidenciasStackScreen} from './stacks/MainStack';
 import {FacturacionStackScreen} from './stacks/MainStack';
 import {AyudaStackScreen} from './stacks/MainStack';
 import {SoporteStackScreen} from './stacks/MainStack';
+import {CalendarioStackScreen} from './stacks/MainStack'
 
 import {AuthContext } from './src/context'
 import AsyncStorage from '@react-native-community/async-storage';
@@ -130,6 +131,7 @@ const App = () => {
           <Drawer.Screen name="Perfil" component={PerfilStackScreen} />
           <Drawer.Screen name="Notificaciones" component={NotificacionesStackScreen} />
           <Drawer.Screen name="Viajes" component={ViajesStackScreen} />
+          <Drawer.Screen name="configurarCalendario" component={CalendarioStackScreen} />
           <Drawer.Screen name="Estadisticas" component={EstadisticasStackScreen} />
           <Drawer.Screen name="Incidencias" component={IncidenciasStackScreen} />
           <Drawer.Screen name="Facturacion" component={FacturacionStackScreen} />

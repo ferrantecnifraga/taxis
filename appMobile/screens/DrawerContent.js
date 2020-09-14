@@ -155,6 +155,17 @@ useEffect(() => {
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
+                              name="calendar-month"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Configurar calendario"
+                          onPress={() => {props.navigation.navigate('configurarCalendario')}}
+                      />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <Icon
                               name="alert-octagon"
                               color={color}
                               size={size}
