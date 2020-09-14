@@ -9,7 +9,7 @@ import moment from "moment";
 
 const iniciarViaje = ({navigation}) => {
 
-  const [calendario, setCalendario] = useState("No tengo nada")
+  const [calendario, setCalendario] = useState({})
 
   useEffect(() => {
     (async () => {
@@ -18,6 +18,7 @@ const iniciarViaje = ({navigation}) => {
         const calendars = await Calendar.getCalendarsAsync();
         console.warn('Here are all your calendars:');
         console.warn({ calendars });
+        
       }
     })();
   }, []);
@@ -34,31 +35,18 @@ const iniciarViaje = ({navigation}) => {
       }}>
       <Text>Calendar Module Example</Text>
       <Button title="Create a new calendar" onPress={createCalendar} />
-      <Button title="Ver mi calendario de lleida" onPress={getDefaultCalendarSource} />
       <Button title="Crear eveneto" onPress={crearEvento} />
+    <Text>XD</Text>
     </View>
     )
 
-
-
-
-
-
-    async function getDefaultCalendarSource() {
-      const calendars = await Calendar.getCalendarsAsync();
-      const defaultCalendars = calendars.filter(each => each.source.name === 'Taxis Lleida 2');
-      // return defaultCalendars[0].source;
-      // setCalendario(defaultCalendars[0].source)
-      console.warn(defaultCalendars[0].source)
-    }
-    
     async function createCalendar() {
       const defaultCalendarSource =
         Platform.OS === 'ios'
           ? await getDefaultCalendarSource()
-          : { isLocalAccount: true, name: 'Taxis Lleida 2' };
+          : { isLocalAccount: true, name: "ASSOCIACIÓ PROVINCIAL D'AUTO TAXIS - LLEIDA"};
       const newCalendarID = await Calendar.createCalendarAsync({
-        title: 'Taxis Lleida',
+        title: "ASSOCIACIÓ PROVINCIAL D'AUTO TAXIS - LLEIDA",
         color: 'blue',
         entityType: Calendar.EntityTypes.EVENT,
         sourceId: defaultCalendarSource.id,
@@ -70,13 +58,18 @@ const iniciarViaje = ({navigation}) => {
       console.warn(`Your new calendar ID is: ${newCalendarID}`);
     }
 
+    async function getDefaultCalendarSource() {
+  const calendars = await Calendar.getCalendarsAsync();
+  const defaultCalendars = calendars.filter(each => each.source.name === 'Default');
+  return defaultCalendars[0].source;
+}
 
     async function crearEvento(){
-      const fecha = moment("2020-09-14 15:00:00").toDate();
-      const fecha2 = moment("2020-09-14 17:00:00").toDate();
+      const fecha = moment("2020-09-14 20:00:00").toDate();
+      const fecha2 = moment("2020-09-14 22:00:00").toDate();
       console.warn("Fecha: "+fecha)
       let details = {
-        title: "Fiesta",
+        title: "parranda",
         startDate: fecha,
         endDate: fecha2,
         timeZone: Localization.timezone,
@@ -84,7 +77,7 @@ const iniciarViaje = ({navigation}) => {
         location: "Sevilla"
       }
       try {
-        const crear = await Calendar.createEventAsync("1", details)
+        const crear = await Calendar.createEventAsync("3", details)
       console.warn("ID del evento: "+crear)
       } catch (error) {
         console.warn(error)

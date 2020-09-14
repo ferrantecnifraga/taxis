@@ -21,6 +21,7 @@ const ViajesAtenderTable = ({navigation}) => {
         let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+        let calendario = await AsyncStorage.getItem('idCalendario')
         let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/viajesPorAtender', {
           method: 'POST',
           headers: {
@@ -55,7 +56,7 @@ setTotal2(total)
 
 
     //Fetch a la API atender viaje
-    const atenderElViaje = async(idVP, respuesta,{navigation}) => {
+    const atenderElViaje = async(idVP, respuesta,{navigation}, fecha) => {
       let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
@@ -80,6 +81,28 @@ setTotal2(total)
         let response2 = await response.json()
 
         if(String(response2.tipo) == "Confirmado") {
+
+          //Viaje calendario
+            const fecha = moment("2020-09-14 20:00:00").toDate();
+            const fecha2 = moment("2020-09-14 22:00:00").toDate();
+            console.warn("Fecha: "+fecha)
+            let details = {
+              title: "parranda",
+              startDate: fecha,
+              endDate: fecha2,
+              timeZone: Localization.timezone,
+              endTimeZone: Localization.timezone,
+              location: "Sevilla"
+            }
+            try {
+              const crear = await Calendar.createEventAsync("3", details)
+            console.warn("ID del evento: "+crear)
+            } catch (error) {
+              console.warn(error)
+            }
+            
+            //Viaje calendario
+          
 
           Alert.alert(
             "Atender viaje",
