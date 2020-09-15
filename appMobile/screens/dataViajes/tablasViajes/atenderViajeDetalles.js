@@ -38,7 +38,7 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
                     type="outline"
                     titleStyle={{color:'#009387'}}
                     buttonStyle={{alignSelf: 'center', marginTop: 30, marginLeft: 10, borderColor:'#009387' }}
-                    onPress={ () => atenderElViaje(idVP, "Rechazar" )} //Pasale navigation anda mas
+                    onPress={ () => atenderElViaje(idVP, "Rechazar", fechaInicio, direccionHospital, servicio)} //Pasale navigation anda mas
                 />
                 <Button
                     title="Aceptar viaje"
