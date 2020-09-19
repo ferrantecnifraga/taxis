@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, ScrollView, StyleSheet,Image, Alert } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
 
@@ -10,9 +10,13 @@ import moment from "moment";
 
 import { useNavigation } from '@react-navigation/native';
 
-const   atenderViajeDetalles = ({route, navigation}) => {
+const atenderViajeDetalles = ({route, navigation}) => {
+
+  const [estado, setEstado] = useState("Aceptar")
+  const [estado2, setEstado2] = useState("Rechazar")
 
 const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
+
 
 
   return (
@@ -34,16 +38,16 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
                 <Divider style={styles.divider}/>
                 <View style={{flex: 1, flexDirection: 'row' , justifyContent: 'space-between'}}>
                 <Button
-                    title="Rechazar viaje"
+                    title="Rechazar"
                     type="outline"
                     titleStyle={{color:'#009387'}}
                     buttonStyle={{alignSelf: 'center', marginTop: 30, marginLeft: 10, borderColor:'#009387' }}
-                    onPress={ () => atenderElViaje(idVP, "Rechazar", fechaInicio, direccionHospital, servicio)} //Pasale navigation anda mas
+                    onPress={ () => atenderElViaje(idVP, "Rechazar", {navigation} )} //Pasale navigation anda mas
                 />
                 <Button
-                    title="Aceptar viaje"
+                    title="Aceptar"
                     buttonStyle={{alignSelf: 'center', marginTop: 30,  marginRight: 10 ,backgroundColor: '#009387'}}
-                    onPress={ () => atenderElViaje(idVP, "Confirmar", fechaInicio, direccionHospital, servicio)} //Pasale todo los ´parametros de la linea 56
+                    onPress={ () => atenderElViaje(idVP, "Confirmar", {navigation}, fechaInicio, direccionHospital, servicio)} //Pasale todo los ´parametros de la linea 56
                 />
                 </View>
         
@@ -54,9 +58,7 @@ const { idVP, fechaInicio, direccionHospital, servicio } = route.params;
 };
 
  //Fetch a la API atender viaje
-const atenderElViaje = async(idVP, respuesta, fechaInicio, direccionHospital, servicio) => {
-
-const navigation = useNavigation();
+const atenderElViaje = async(idVP, respuesta, {navigation} , fechaInicio, direccionHospital, servicio) => {
 
   let email2 = await AsyncStorage.getItem('email')
     let password2 = await AsyncStorage.getItem('password')
@@ -80,7 +82,7 @@ const navigation = useNavigation();
     })
 
     let response2 = await response.json()
-    
+
 
     if(String(response2.tipo) == "Confirmado") {
 
@@ -99,7 +101,7 @@ const navigation = useNavigation();
         
         const crear = await Calendar.createEventAsync(calendario, details)
         if (crear != undefined) {
-          navigation.navigate( 'viajeAtendido' )
+          navigation.navigate( 'viajeAtendido')
         }else{
           Alert.alert(
             "Atender viaje",
@@ -121,7 +123,6 @@ const navigation = useNavigation();
         //Viaje calendario
       
     } else if(String(response2.tipo) == "Rechazado") {
-      
       navigation.navigate( 'viajeRechazado')
 
   

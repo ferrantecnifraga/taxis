@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
+import moment, {add} from "moment";
+
 
 const NotificacionesScreen = ({navigation}) => {
 
@@ -69,7 +71,7 @@ const NotificacionesScreen = ({navigation}) => {
           subtitle= {
             <View>
               <Text style={{color: '#757575', marginLeft: 15,}} >{e.descripcion}</Text>
-              <Text style={{color: '#757575', marginLeft: 15, marginTop: 10}} >Recibida el: {e.fecha}</Text>
+              <Text style={{color: '#757575', marginLeft: 15, marginTop: 10}} >Recibida el: {moment(e.created_at).format('DD/MM/YYYY hh:mm')}</Text>
               <Text style={{color: '#00796b', marginTop: 7, alignSelf: 'flex-end', fontSize: 15}} > Presiona para atender la notificación  </Text>
             </View>
           }
@@ -78,7 +80,7 @@ const NotificacionesScreen = ({navigation}) => {
             encabezado: e.encabezado, 
             descripcion: e.descripcion,
             tipo: e.tipo,
-            fecha: e.fecha
+            fecha: moment(e.created_at).format('DD/MM/YYYY hh:mm')
           })}}
           
         />

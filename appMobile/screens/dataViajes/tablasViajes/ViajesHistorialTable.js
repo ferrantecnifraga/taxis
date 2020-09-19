@@ -85,9 +85,9 @@ setTotal2(total)
 
 
 
-    const tableHead = ['Número de viaje', 'Costo Parcial €', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+    const tableHead = ['Número', 'Detalles', 'Costo Parcial €', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
     'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Fecha terminó', 'Vehículo', 'Origen',
-    'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones', 'Detalles']
+    'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones']
 
     const detallesButton = (idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
       pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
@@ -122,6 +122,10 @@ return (
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
                     <Cell key={i+1} data={e.idVP} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+23} data={detallesButton(e.idVP, e.costoParcial, e.nombre, e.primerApellido, e.segundoApellido, e.servicio, e.estatus, e.pacientePrimero, e.telfPrimerPaciente,
+                      e.direccionPrimerPaciente, e.puebloPrimerPaciente, e.pacienteSegundo, e.telfSegundoPaciente, e.direccionSegundoPaciente, e.puebloSegundoPaciente, e.fechaInicio, e.fechaTermino, e.vehiculo, e.origen,
+                      e.pasando_por, e.destino, e.direccionHospital, e.cliente)} />
+                    
                     <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+4} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
@@ -147,9 +151,7 @@ return (
                     <Cell key={i+20} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+21} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+22} data={element2(e.idVP)}  />
-                    <Cell key={i+23} data={detallesButton(e.idVP, e.costoParcial, e.nombre, e.primerApellido, e.segundoApellido, e.servicio, e.estatus, e.pacientePrimero, e.telfPrimerPaciente,
-                      e.direccionPrimerPaciente, e.puebloPrimerPaciente, e.pacienteSegundo, e.telfSegundoPaciente, e.direccionSegundoPaciente, e.puebloSegundoPaciente, e.fechaInicio, e.fechaTermino, e.vehiculo, e.origen,
-                      e.pasando_por, e.destino, e.direccionHospital, e.cliente)} />
+                    
               </TableWrapper>
             ))
           }

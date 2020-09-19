@@ -6,12 +6,6 @@ const   NotificacionDetalle = ({route, navigation}) => {
 
 const { encabezado, descripcion, tipo, fecha } = route.params;
 
-let fecha2 = fecha.split(" ")
-
-let fecha3 = fecha2[0].split("-")
-console.warn(fecha3)
-
-let fecha4 = ` ${fecha3[2]}/${fecha3[1]}/${fecha3[0]} a las ${fecha2[1]}`
 
 const ButtonRender = () =>{
   if(tipo == 'Viaje iniciado') {
@@ -97,14 +91,14 @@ const ButtonRender = () =>{
       
       <View>
         <View>
-          <Text style={{fontSize: 19,marginTop: 30, marginHorizontal: 30, textAlign: 'center'}}  >{JSON.stringify(encabezado)}</Text>
+          <Text style={{fontSize: 19,marginTop: 30, marginHorizontal: 30, textAlign: 'center'}}  >{encabezado}</Text>
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
         <View>
-          <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >Recibida: {fecha4}</Text>   
+          <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >Recibida: {fecha}</Text>   
         </View>
         <View >
-          <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{JSON.stringify(descripcion)}</Text>          
+          <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{descripcion}</Text>          
         </View>
         <ButtonRender />
       </View>

@@ -97,7 +97,7 @@ setTotal2(total)
               timeZone: Localization.timezone,
               endTimeZone: Localization.timezone,
               location: direccionHospital,
-              notes: "Servicio: "+servicio
+              notes: "Servicio: "+servicio ///origen pacientes, nombres, destino
             }
             try {
               const crear = await Calendar.createEventAsync(calendario, details)
