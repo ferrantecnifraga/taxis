@@ -5,6 +5,7 @@ import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { useNavigation } from '@react-navigation/native';
+import moment, {add} from "moment";
 
  
 const ViajesProgramadosTable = ({navigation}) => {
@@ -67,7 +68,7 @@ setTotal2(total)
       return(
         Alert.alert(
           "Información del viaje",
-          "El viaje número "+idVP+ ", es a las "+fecha+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
+          "El viaje número "+idVP+ ", es a las "+moment(fecha).format('DD/MM/YYYY hh:mm')+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
           [
         
             { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
@@ -137,7 +138,7 @@ setTotal2(total)
                     <Cell key={i+12} data={e.telfSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
 

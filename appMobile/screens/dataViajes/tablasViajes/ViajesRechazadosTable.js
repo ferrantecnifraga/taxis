@@ -4,7 +4,7 @@ import { StyleSheet,TouchableOpacity, Text, View, Alert, ActivityIndicator, Scro
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
-
+import moment, {add} from "moment";
  
 const ViajesRechazadosTable = () => {
 
@@ -86,7 +86,7 @@ setTotal2(total)
                     <Cell key={i+6} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+7} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+9} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>

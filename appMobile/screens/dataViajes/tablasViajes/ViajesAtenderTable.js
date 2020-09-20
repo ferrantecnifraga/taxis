@@ -278,7 +278,7 @@ return (
                     <Cell key={i+12} data={e.telfSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={e.fechaInicio} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
 

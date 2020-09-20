@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, ScrollView, StyleSheet,Image } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
-
+import moment, {add} from "moment";
 const ViajeDetalleHistorial = ({route, navigation}) => {
 
 const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
@@ -65,10 +65,10 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Text style={styles.respuesta} >{puebloSegundoPaciente}</Text>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Fecha de inicio:</Text>          
-          <Text style={styles.respuesta} >{fechaInicio}</Text> 
+          <Text style={styles.respuesta} >{moment(fechaInicio).format('DD/MM/YYYY hh:mm')}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Fecha de termino:</Text>          
-          <Text style={styles.respuesta} >{fechaTermino}</Text> 
+          <Text style={styles.respuesta} >{fechaTermino != null ? moment(fechaTermino).format('DD/MM/YYYY hh:mm'): fechaTermino}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Vehiculo:</Text>          
           <Text style={styles.respuesta} >{vehiculo}</Text> 
