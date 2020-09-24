@@ -241,7 +241,7 @@ const alertAtender = (idVP, {navigation}, fechaInicio, direccionHospital, servic
   // }
     
 
-const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
+const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Num Licencia', 'Pueblo Taxista', 'Servicio', 'Estatus',
 'Paciente 1',  'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telfono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Vehiculo', 'Origen', 
 'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones']
 
@@ -267,6 +267,8 @@ return (
                     <Cell key={i+3} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+4} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+5} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+5} data={e.numLicencia} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+5} data={e.puebloTaxista} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+6} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+7} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
 
