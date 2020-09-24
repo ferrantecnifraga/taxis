@@ -16,6 +16,9 @@ import IncidenciasScreen from '../screens/IncidenciasScreen';
 import FacturacionScreen from '../screens/FacturacionScreen';
 import AyudaScreen from '../screens/AyudaScreen';
 import SoporteScreen from '../screens/SoporteScreen';
+import LicenciasScreen from '../screens/LicenciasScreen'
+
+import LicenciaDetalle from '../screens/LicenciaDetalle';
 
 //Stack de viajes
 import iniciarViaje from '../screens/dataViajes/iniciarViaje'
@@ -55,6 +58,7 @@ import errorCalendario from '../screens/errorCalendario';
 const HomeStack = createStackNavigator();
 const NotificacionesStack = createStackNavigator();
 const PerfilStack = createStackNavigator();
+const LicenciasStack = createStackNavigator();
 const ViajesStack = createStackNavigator();
 const EstadisticasStack = createStackNavigator();
 const IncidenciasStack = createStackNavigator();
@@ -141,6 +145,27 @@ export const PerfilStackScreen = ({navigation}) => (
       )
     }} />
   </PerfilStack.Navigator> 
+);
+
+export const LicenciasStackScreen = ({navigation}) => ( 
+  <LicenciasStack.Navigator screenOptions={screenOpt}>
+    <LicenciasStack.Screen name="Mis Licencias" component={LicenciasScreen} 
+    options={{
+      headerLeft: () => (
+        <Icon.Button name="ios-menu" size= {30}
+        backgroundColor="#009387" onPress={() => 
+        navigation.openDrawer()}/>
+      )
+    }} />
+    <LicenciasStack.Screen name="Detalles de Licencia" component={LicenciaDetalle} 
+    options={{
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Licencias', {screen: 'Licencias'})}/>
+      )
+    }}/>
+  </LicenciasStack.Navigator> 
 );
 
 //Mi stack para navegar entre screens de viajes

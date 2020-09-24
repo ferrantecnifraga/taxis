@@ -142,6 +142,17 @@ useEffect(() => {
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
+                              name="id-card"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Mis Licencias"
+                          onPress={() => {props.navigation.navigate('Licencias')}}
+                      />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <Icon
                               name="car-side"
                               color={color}
                               size={size}
@@ -210,7 +221,7 @@ useEffect(() => {
                           }}
                           
                       /> */}
-                      <DrawerItem 
+                      {/* <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
                               name="help-box"
@@ -220,7 +231,7 @@ useEffect(() => {
                           )}
                           label="Ayuda"
                           onPress={() => {props.navigation.navigate('Ayuda')}}
-                      />
+                      /> */}
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon

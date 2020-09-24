@@ -4,9 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import { DrawerContent } from './screens/DrawerContent'
 
-import {HomeStackScreen} from './stacks/MainStack';
+import {HomeStackScreen, LicenciasStack} from './stacks/MainStack';
 import {NotificacionesStackScreen} from './stacks/MainStack';
 import {PerfilStackScreen} from './stacks/MainStack';
+import {LicenciasStackScreen} from './stacks/MainStack';
 import {ViajesStackScreen} from './stacks/MainStack';
 import {EstadisticasStackScreen} from './stacks/MainStack';
 import {IncidenciasStackScreen} from './stacks/MainStack';
@@ -129,13 +130,13 @@ const App = () => {
         <Drawer.Navigator drawerContent={props => <DrawerContent {...props} /> } >
           <Drawer.Screen name="HomeDrawer" component={HomeStackScreen} />
           <Drawer.Screen name="Perfil" component={PerfilStackScreen} />
+          <Drawer.Screen name="Licencias" component={LicenciasStackScreen} />
           <Drawer.Screen name="Notificaciones" component={NotificacionesStackScreen} />
           <Drawer.Screen name="Viajes" component={ViajesStackScreen} />
           <Drawer.Screen name="configurarCalendario" component={CalendarioStackScreen} />
           <Drawer.Screen name="Estadisticas" component={EstadisticasStackScreen} />
           <Drawer.Screen name="Incidencias" component={IncidenciasStackScreen} />
           <Drawer.Screen name="Facturacion" component={FacturacionStackScreen} />
-          <Drawer.Screen name="Ayuda" component={AyudaStackScreen} />
           <Drawer.Screen name="Soporte" component={SoporteStackScreen} />
         </Drawer.Navigator>
       )
