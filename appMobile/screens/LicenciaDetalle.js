@@ -2,9 +2,9 @@ import React from "react";
 import { View, Text, ScrollView, StyleSheet,Image } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
 
-const   LicenciaDetalle = ({route, navigation}) => {
+const  LicenciaDetalle = ({route, navigation}) => {
 
-const { encabezado, descripcion, tipo, fecha } = route.params;
+const { nombre, primerApellido, segundoApellido, vehiculo, matricula } = route.params;
 
   return (
     
@@ -19,14 +19,14 @@ const { encabezado, descripcion, tipo, fecha } = route.params;
       
       <View>
         <View>
-          <Text style={{fontSize: 19,marginTop: 30, marginHorizontal: 30, textAlign: 'center'}}  >{encabezado}</Text>
+  <Text style={{fontSize: 19,marginTop: 30, marginHorizontal: 30, textAlign: 'center'}}  >{nombre} {primerApellido} {segundoApellido}</Text>
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
         <View>
-          <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >Recibida: {fecha}</Text>   
+  <Text style={{fontSize: 15, marginHorizontal: 15, marginBottom: 5, color: '#757575' }}  >{vehiculo}</Text>   
         </View>
         <View >
-          <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{descripcion}</Text>          
+          <Text style={{fontSize: 15, marginHorizontal: 15 }}  >{matricula}</Text>          
         </View>
       </View>
       </Card>

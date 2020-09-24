@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Button, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import moment, {add} from "moment";
@@ -16,7 +16,7 @@ const LicenciasScreen = ({navigation}) => {
       let password2 = await AsyncStorage.getItem('password')
       let idTaxista = await AsyncStorage.getItem('idTaxista')
       
-        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/notificaciones', {
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/licencias', {
           method: 'POST',
             headers: {
               'Accept': 'application/json',
@@ -30,9 +30,9 @@ const LicenciasScreen = ({navigation}) => {
           })
   
         let response2 = await response.json()
-        console.warn(response2.notificaciones)
+        console.warn(response2.licencias)
         
-          setData(response2.notificaciones)
+          setData(response2.licencias)
           setLoading(false)       
          
          
@@ -59,28 +59,32 @@ const LicenciasScreen = ({navigation}) => {
     </View>
     :
 
-  <View>
+  <ScrollView>
     {
       data.map((e, i) => {
         return(
         <ListItem
           key={i}
-          leftAvatar={{  source: require("../assets/logolleida2.png") }}
-          title={e.encabezado}
+          leftAvatar={{  source: require("../assets/carro.jpg") }}
+          title={e.nombre +" "+e.primerApellido +" "+ e.segundoApellido}
           titleStyle= {{marginLeft: 15, marginBottom: 10}}
           subtitle= {
             <View>
-              <Text style={{color: '#757575', marginLeft: 15,}} >{e.descripcion}</Text>
-              <Text style={{color: '#757575', marginLeft: 15, marginTop: 10}} >Ejemplo SCREEN {moment(e.created_at).format('DD/MM/YYYY hh:mm')}</Text>
-              <Text style={{color: '#00796b', marginTop: 7, alignSelf: 'flex-end', fontSize: 15}} > LicenciasScreen </Text>
+              <Text style={{color: '#757575', marginLeft: 15,}} >Matricula: {e.numMatricula}</Text>
+          <Text style={{color: '#757575', marginLeft: 15, marginTop: 10}} >Vehículo: {e.vehiculo}</Text>
+              {/* <Text style={{color: '#00796b', marginTop: 15, alignSelf: 'flex-end', fontSize: 15}} > {e.zona} </Text> */}
             </View>
           }
           bottomDivider
           onPress={() => {navigation.navigate('LicenciaDetalle', {
-            encabezado: e.encabezado, 
-            descripcion: e.descripcion,
-            tipo: e.tipo,
-            fecha: moment(e.created_at).format('DD/MM/YYYY hh:mm')
+            nombre: e.nombre, 
+            primerApellido: e.primerApellido,
+            segundoApellido: e.segundoApellido,
+            vehiculo: e.vehiculo,
+            matricula: e.numMatricula,
+            pueblo: e.zona,
+            region: e.region,
+            regionSanitaria: e.regionSanitaria
           })}}
           
         />
@@ -88,7 +92,7 @@ const LicenciasScreen = ({navigation}) => {
     }
         )
     }
-  </View>
+  </ScrollView>
   )
 };
 
