@@ -149,16 +149,18 @@ export const PerfilStackScreen = ({navigation}) => (
 
 export const LicenciasStackScreen = ({navigation}) => ( 
   <LicenciasStack.Navigator screenOptions={screenOpt}>
-    <LicenciasStack.Screen name="Mis Licencias" component={LicenciasScreen} 
+    <LicenciasStack.Screen name="Licencias" component={LicenciasScreen} 
     options={{
+      title:'Mis Licencias',
       headerLeft: () => (
         <Icon.Button name="ios-menu" size= {30}
         backgroundColor="#009387" onPress={() => 
         navigation.openDrawer()}/>
       )
     }} />
-    <LicenciasStack.Screen name="Detalles de Licencia" component={LicenciaDetalle} 
+    <LicenciasStack.Screen name="LicenciaDetalle" component={LicenciaDetalle} 
     options={{
+      title:'Detalles de la licencian',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"

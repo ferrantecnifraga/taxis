@@ -65,7 +65,7 @@ const LicenciasScreen = ({navigation}) => {
         return(
         <ListItem
           key={i}
-          leftAvatar={{  source: require("../assets/carro.jpg") }}
+          leftAvatar={{  source: require("../assets/carro.png") }}
           title={e.nombre +" "+e.primerApellido +" "+ e.segundoApellido}
           titleStyle= {{marginLeft: 15, marginBottom: 10}}
           subtitle= {
