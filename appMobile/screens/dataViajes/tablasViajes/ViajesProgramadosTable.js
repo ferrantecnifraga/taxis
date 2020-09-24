@@ -60,8 +60,8 @@ setTotal2(total)
 
 
 
-    const tableHead = ['Número','Detalles rápidos', 'Costo Parcial €', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Num Licencia', 'Pueblo Taxista', 'Servicio', 'Estatus',
-    'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Vehículo', 'Origen', 
+    const tableHead = ['Número','Estatus', 'Detalles', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Num Licencia', 'Pueblo Taxista', 'Vehículo', 'Servicio', 'Costo Parcial €',
+    'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Origen', 
     'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Detalles del viaje']
 
     const detalles = (idVP, fecha) => {
@@ -122,15 +122,17 @@ setTotal2(total)
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
                     <Cell key={i+1} data={e.idVP} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+7} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+21} data={boton(e.idVP, e.fechaInicio)}  />
-                    <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
+                    
                     <Cell key={i+3} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+4} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+5} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+5} data={e.numLicencia} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+5} data={e.puebloTaxista} textStyle={styles.text} style={styles.celda} />
+                    <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+6} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+7} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
 
                     <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+9} data={e.telfPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
@@ -141,7 +143,7 @@ setTotal2(total)
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
+                   
                     <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
 
                     <Cell key={i+17} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
