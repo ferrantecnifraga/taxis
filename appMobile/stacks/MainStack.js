@@ -160,7 +160,7 @@ export const LicenciasStackScreen = ({navigation}) => (
     }} />
     <LicenciasStack.Screen name="LicenciaDetalle" component={LicenciaDetalle} 
     options={{
-      title:'Detalles de la licencian',
+      title:'Detalles de la licencia',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"

@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet,TouchableOpacity, ScrollView, Text, View, Alert, ActivityIndicator } from "react-native";
+import { Linking,Platform,StyleSheet,TouchableOpacity, ScrollView, Text, View, Alert, ActivityIndicator } from "react-native";
 
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -63,6 +63,27 @@ setTotal2(total)
     const tableHead = ['Número','Estatus', 'Detalles', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Matricula', 'Pueblo Taxista', 'Vehículo', 'Servicio', 'Costo Parcial €',
     'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Origen', 
     'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Detalles del viaje']
+
+
+    const llamar = (number) => {
+      let phoneNumber = '';
+    if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
+      else {phoneNumber = `telprompt:${number}`; }
+    Linking.openURL(phoneNumber);
+    }
+
+    const telefono = (number) => {
+      return(
+        <TouchableOpacity
+           style={styles.btn}
+         onPress={()=>{llamar( parseInt(number) )}}
+        >
+          <View style={styles.btn}>
+        <Text style={styles.btnText}>Llamar</Text>
+        </View>
+        </TouchableOpacity>
+      )
+    }
 
     const detalles = (idVP, fecha) => {
       return(
@@ -135,11 +156,11 @@ setTotal2(total)
                     <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
 
                     <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={e.telfPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+9} data={telefono(e.telfPrimerPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.direccionPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.puebloPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+12} data={e.telfSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+12} data={telefono(e.telfSegundoPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
