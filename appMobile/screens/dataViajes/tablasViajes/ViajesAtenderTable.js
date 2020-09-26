@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet,TouchableOpacity, Text, View, Alert, ActivityIndicator, ScrollView } from "react-native";
+import {Linking,Platform, StyleSheet,TouchableOpacity, Text, View, Alert, ActivityIndicator, ScrollView } from "react-native";
 
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -235,6 +235,27 @@ const alertAtender = (idVP, {navigation}, fechaInicio, direccionHospital, servic
     )
   }
 
+
+  const llamar = (number) => {
+    let phoneNumber = '';
+  if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
+    else {phoneNumber = `telprompt:${number}`; }
+  Linking.openURL(phoneNumber);
+  }
+
+  const telefono = (number) => {
+    return(
+      <TouchableOpacity
+         style={styles.btn}
+       onPress={()=>{llamar( parseInt(number) )}}
+      >
+        <View style={styles.btn}>
+      <Text style={styles.btnText}>Llamar</Text>
+      </View>
+      </TouchableOpacity>
+    )
+  }
+
   //cancelar viaje
   // const cancelarViaje = (idVP) => {
 
@@ -275,11 +296,11 @@ return (
                     <Cell key={i+6} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={e.telfPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+9} data={telefono(e.telfPrimerPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.direccionPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.puebloPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+12} data={e.telfSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+12} data={telefono(e.telfSegundoPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
