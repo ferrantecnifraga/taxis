@@ -20,6 +20,8 @@ import LicenciasScreen from '../screens/LicenciasScreen'
 
 import LicenciaDetalle from '../screens/LicenciaDetalle';
 
+import vigsoft from '../screens/vigsoft'
+
 //Stack de viajes
 import iniciarViaje from '../screens/dataViajes/iniciarViaje'
 import ProximosViajes from '../screens/dataViajes/ProximosViajes'
@@ -103,6 +105,15 @@ export const HomeStackScreen = ({navigation}) => (
     }} />
     <HomeStack.Screen name="incidenciasFormulario" component={incidenciasFormulario} options={{
       title:'Reportar incidencia',
+      headerLeft: () => ( 
+        <View paddingLeft={1}>
+          <Icon.Button style={styles.Icon} name="ios-menu" size= {30} onPress={() => 
+          navigation.openDrawer()}/>
+        </View>
+      ),  
+    }} />
+    <HomeStack.Screen name="vigsoft" component={vigsoft} options={{
+      title:'Vigsoft',
       headerLeft: () => ( 
         <View paddingLeft={1}>
           <Icon.Button style={styles.Icon} name="ios-menu" size= {30} onPress={() => 

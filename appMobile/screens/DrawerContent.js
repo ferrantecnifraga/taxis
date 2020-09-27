@@ -128,17 +128,7 @@ useEffect(() => {
                           label="Notificaciones"
                           onPress={() => {props.navigation.navigate('Notificaciones', {screen: 'Notificaciones'})}}
                       />
-                      <DrawerItem 
-                            icon={({color, size}) => (
-                              <Icon
-                              name="account-outline"
-                              color={color}
-                              size={size}
-                              />
-                          )}
-                          label="Mi Perfil"
-                          onPress={() => {props.navigation.navigate('Perfil')}}
-                      />
+                      
                       <DrawerItem 
                             icon={({color, size}) => (
                               <Icon
@@ -242,6 +232,18 @@ useEffect(() => {
                           )}
                           label="Soporte"
                           onPress={() => {props.navigation.navigate('Soporte')}}
+                      />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <Icon
+                              name="information"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Acerca de nosotros"
+                          onPress={() => {props.navigation.navigate('vigsoft')}}
+
                       />
                       
                     </Drawer.Section>

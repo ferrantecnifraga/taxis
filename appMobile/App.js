@@ -134,7 +134,7 @@ const App = () => {
           <Drawer.Screen name="Notificaciones" component={NotificacionesStackScreen} />
           <Drawer.Screen name="Viajes" component={ViajesStackScreen} />
           <Drawer.Screen name="configurarCalendario" component={CalendarioStackScreen} />
-          <Drawer.Screen name="Estadisticas" component={EstadisticasStackScreen} />
+          {/* <Drawer.Screen name="Estadisticas" component={EstadisticasStackScreen} /> */}
           <Drawer.Screen name="Incidencias" component={IncidenciasStackScreen} />
           <Drawer.Screen name="Facturacion" component={FacturacionStackScreen} />
           <Drawer.Screen name="Soporte" component={SoporteStackScreen} />
