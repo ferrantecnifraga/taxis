@@ -250,7 +250,7 @@ const alertAtender = (idVP, {navigation}, fechaInicio, direccionHospital, servic
        onPress={()=>{llamar( parseInt(number) )}}
       >
         <View style={styles.btn}>
-      <Text style={styles.btnText}>Llamar</Text>
+    <Text style={styles.btnText}>{number}</Text>
       </View>
       </TouchableOpacity>
     )

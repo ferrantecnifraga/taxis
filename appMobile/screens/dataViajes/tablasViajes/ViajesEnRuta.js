@@ -8,7 +8,7 @@ import { set } from 'react-native-reanimated';
 
 const ViajesEnRuta = () => { 
 
-  const [data, setData] = useState([])
+  const [viajes, setViajes] = useState({})
   const [current_page2, setCurrent_page2] = useState(1)
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
@@ -40,17 +40,19 @@ const ViajesEnRuta = () => {
         let response2 = await response.json()
 
         // console.log(idCliente2)
-        console.log(response2.viajes)
+        
         console.warn(response2.viajes)
-    
-        setData(response2.viajes)
-        if(response2.viajes != null){
-          if(response2.viajes.estatus == "En ruta"){
-            setEstado("Terminar viaje")
-          }else if(response2.viajes.estatus == "Confirmado"){
-            setEstado("Iniciar viaje")
-          }
+        console.log(response2.viajes)
+        setViajes(response2.viajes)
+        console.log("Viajes:" + viajes)
+        if (response2.viajes.estatus == "Confirmado") {
+          setEstado("Iniciar viaje")
+        }else if(response2.viajes.estatus == "En ruta"){
+          setEstado("Terminar viaje")
+        }else if(response2.viajes.estatus == "Terminado"){
+          setEstado("Terminado. ¡Gracias!")
         }
+        
         
         
         
@@ -85,10 +87,12 @@ const ViajesEnRuta = () => {
         })
 
         let response2 = await response.json()
+        console.warn(response2)
+
 
         Alert.alert(
           "Viajes en ruta",
-          response2.estatus,
+          String(response2.estatus),
           [
             {
               text: "Ok",
@@ -102,7 +106,7 @@ const ViajesEnRuta = () => {
       } catch (error) {
         Alert.alert(
           "Viajes en ruta",
-          error,
+          String(error),
           [
             {
               text: "Ok",
@@ -116,14 +120,6 @@ const ViajesEnRuta = () => {
       }
 
       
-  }
-
-  const actualizarEstado = () => {
-    if(estado == "Iniciar viaje"){
-      setEstado("Terminar viaje")
-    }else if(estado == "Terminar viaje"){
-      setEstado("Terminado")
-    }
   }
 
 
@@ -140,9 +136,20 @@ const ViajesEnRuta = () => {
      
      
       }
+
+      const actualizarEstado = () => {
+        if(estado == "Iniciar viaje"){
+          setEstado("Terminar viaje")
+        }else if(estado == "Terminar viaje"){
+          setEstado("Terminado")
+        }
+      }
     
 
       const iniciarViaje = (idVP) =>{
+
+        console.log("Jaloo")
+        console.warn(estado)
         if(estado == "Iniciar viaje"){
           return(
             Alert.alert(
@@ -164,7 +171,7 @@ const ViajesEnRuta = () => {
               { cancelable: true }
             )
             )
-        }else if(estado == "En ruta"){
+        }else if(estado == "Terminar viaje"){
           return(
             Alert.alert(
               "Estatus del viaje",
@@ -196,7 +203,15 @@ const ViajesEnRuta = () => {
 const tableHead = ['Numero del viaje', 'Costo Parcial', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Servicio', 'Estatus',
 'Paciente 1', 'Paciente 2', 'Fecha Inicio', 'Vehiculo', 'Origen', 'Pasando por', 'Destino', 'Cliente', 'Acciones']
 
-if(data == null ){
+// if(viajes == null ){
+//   return(
+//     <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
+//       <Text style={styles.titulo}  >No hay viajes para iniciar por el momento</Text>
+//   </View>
+//   )
+// }else{
+
+if(viajes == null){
   return(
     <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
       <Text style={styles.titulo}  >No hay viajes para iniciar por el momento</Text>
@@ -205,89 +220,88 @@ if(data == null ){
 }else{
   return(
     
-  <ScrollView>
-        
-  {
-    
-      data.map((e, i) => (
-        <Card style={styles.userInfoSection}>
-          <Text style={styles.titulo}  >Datos del viaje</Text>
-          <Divider style={styles.dividerTit}  />
-
-          <Text style={styles.infoText}>Numero de Viaje</Text>
-          <Text style={styles.dataText}>{e.idVP}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Costo Parcial</Text>
-          <Text style={styles.dataText}>{e.costoParcial}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Nombre</Text>
-          <Text style={styles.dataText}>{e.nombre}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Primer Apellido</Text>
-          <Text style={styles.dataText}>{e.primerApellido}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Segundo Apellido</Text>
-          <Text style={styles.dataText}>{e.segundoApellido}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Servicio</Text>
-          <Text style={styles.dataText}>{e.servicio}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Estatus</Text>
-          <Text style={styles.dataText}>{e.estatus}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Nombre del primer Paciente</Text>
-          <Text style={styles.dataText}>{e.pacientePrimero}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Telefono del primer Paciente</Text>
-          <Text style={styles.dataText}>{e.telfPrimerPaciente}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Dirección del primer Paciente</Text>
-          <Text style={styles.dataText}>{e.direccionPrimerPaciente}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Nombre del segundo Paciente</Text>
-          <Text style={styles.dataText}>{e.pacienteSegundo}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Telefono del segundo Paciente</Text>
-          <Text style={styles.dataText}>{e.telfSegundoPaciente}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Direccion del segundo Paciente</Text>
-          <Text style={styles.dataText}>{e.direccionSegundoPaciente}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Fecha de inicio</Text>
-          <Text style={styles.dataText}>{e.fechaInicio}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Vehiculo</Text>
-          <Text style={styles.dataText}>{e.vehiculo}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Origen</Text>
-          <Text style={styles.dataText}>{e.origen}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Pasando por</Text>
-          <Text style={styles.dataText}>{e.pasando_por}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Destino</Text>
-          <Text style={styles.dataText}>{e.destino}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Dirección de Hospital</Text>
-          <Text style={styles.dataText}>{e.direccionHospital}</Text>
-          <Divider/>
-          <Text style={styles.infoText}>Cliente</Text>
-          <Text style={styles.dataText}>{e.cliente}</Text>
-          <Divider/>
-          <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(idVP) }>
-            {estado}
-          </Button>
-        </Card>
-        
-      ))
-    }
+    <ScrollView>
   
-</ScrollView>
-  )
+        
+          <Card style={styles.userInfoSection}>
+            <Text style={styles.titulo}  >Datos del viaje</Text>
+            <Divider style={styles.dividerTit}  />
+  
+            <Text style={styles.infoText}>Numero de Viaje</Text>
+            <Text style={styles.dataText}>{viajes.idVP}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Costo Parcial</Text>
+            <Text style={styles.dataText}>{viajes.costoParcial}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Nombre</Text>
+            <Text style={styles.dataText}>{viajes.nombre}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Primer Apellido</Text>
+            <Text style={styles.dataText}>{viajes.primerApellido}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Segundo Apellido</Text>
+            <Text style={styles.dataText}>{viajes.segundoApellido}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Servicio</Text>
+            <Text style={styles.dataText}>{viajes.servicio}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Estatus</Text>
+            <Text style={styles.dataText}>{viajes.estatus}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Nombre del primer Paciente</Text>
+            <Text style={styles.dataText}>{viajes.pacientePrimero}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Telefono del primer Paciente</Text>
+            <Text style={styles.dataText}>{viajes.telfPrimerPaciente}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Dirección del primer Paciente</Text>
+            <Text style={styles.dataText}>{viajes.direccionPrimerPaciente}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Nombre del segundo Paciente</Text>
+            <Text style={styles.dataText}>{viajes.pacienteSegundo}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Telefono del segundo Paciente</Text>
+            <Text style={styles.dataText}>{viajes.telfSegundoPaciente}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Direccion del segundo Paciente</Text>
+            <Text style={styles.dataText}>{viajes.direccionSegundoPaciente}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Fecha de inicio</Text>
+            <Text style={styles.dataText}>{viajes.fechaInicio}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Vehiculo</Text>
+            <Text style={styles.dataText}>{viajes.vehiculo}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Origen</Text>
+            <Text style={styles.dataText}>{viajes.origen}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Pasando por</Text>
+            <Text style={styles.dataText}>{viajes.pasando_por}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Destino</Text>
+            <Text style={styles.dataText}>{viajes.destino}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Dirección de Hospital</Text>
+            <Text style={styles.dataText}>{viajes.direccionHospital}</Text>
+            <Divider/>
+            <Text style={styles.infoText}>Cliente</Text>
+            <Text style={styles.dataText}>{viajes.cliente}</Text>
+            <Divider/>
+            <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(viajes.idVP) }>
+              {estado}
+            </Button>
+          </Card>
+          
+    
+  </ScrollView>
+    )
+}
+
+  
 }
   
 
-};
+// };
 
 export default ViajesEnRuta;
 
