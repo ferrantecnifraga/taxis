@@ -1,8 +1,17 @@
 import React from "react";
-import { Text, ScrollView, StyleSheet,Image } from "react-native";
+import { Text, ScrollView, StyleSheet,Image, Button, TouchableOpacity, View } from "react-native";
 import { Card } from "react-native-elements";
+import { Linking } from 'react-native'
 
 const vigsoft = ({navigation}) => {
+
+
+    const dialCall = (number) => {
+        let phoneNumber = '';
+        if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
+        else {phoneNumber = `telprompt:${number}`; }
+        Linking.openURL(phoneNumber);
+     };
 
       return (
         <ScrollView>
@@ -11,8 +20,25 @@ const vigsoft = ({navigation}) => {
                 source={  require("../assets/vigLogo.png")}
                 style={{width: 200, height: 100, alignSelf: 'center', marginTop: 30 }}
             />
-                <Text style={styles.title} > Aqui va el texto</Text>
-                <Text style={styles.text} > Aqui va el texto</Text>
+                <Button styles={styles.title} onPress={() => Linking.openURL('mailto:ferrantclk@gmail.com?subject=SendMail&body=Description') }
+      title="Envíanos un correo: Ferran Prieto - CEO" />
+      <Button styles={styles.title} onPress={() => Linking.openURL('mailto:ferrantclk@gmail.com?subject=SendMail&body=Description') }
+      title="Envíanos un correo: Jimmy Vasquez - CTO" />
+                <TouchableOpacity
+
+                 onPress={()=>{dialCall(+34647738533)}}
+                >
+                <View style={styles.btn}>
+    <Text style={styles.btnText}>Llámanos: +34647738533</Text>
+      </View>
+                </TouchableOpacity>
+                <Button buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#009387'}} onPress={() => Linking.openURL('vigsoft.tech') }
+      title="Checa nuestra web" />
+
+<Button buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#009387'}} onPress={() => Linking.openURL('https://www.facebook.com/Vigsoft/') }
+      title="Vísitanos en Facebook" />
+      
+      
             </Card>
         </ScrollView>
       );
@@ -29,5 +55,17 @@ const styles = StyleSheet.create({
     text: {
         textAlign: 'auto',
         marginTop: 10
-    }
+    },
+    btn: { 
+        width: 100, 
+        height: 25, 
+        backgroundColor: '#f9a825',  
+        borderRadius: 5,
+        padding:1,
+        alignSelf: 'center',
+      },
+      btnText: { 
+        textAlign: 'center', 
+        color: '#fff' 
+      },
 });
