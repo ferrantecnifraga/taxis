@@ -86,7 +86,7 @@ setTotal2(total)
                     <Cell key={i+6} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+7} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+9} data={moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>

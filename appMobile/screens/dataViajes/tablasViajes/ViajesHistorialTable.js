@@ -168,8 +168,8 @@ return (
                     <Cell key={i+12} data={telefono(e.telfSegundoPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+15} data={e.fechaTermino != null ? moment(e.fechaTermino).format('DD/MM/YYYY hh:mm') : e.fechaTermino} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+15} data={e.fechaTermino != null ? moment(e.fechaTermino).format('DD/MM/YYYY HH:mm') : e.fechaTermino} textStyle={styles.text} style={styles.celda}/>
                     
                     <Cell key={i+17} data={e.origen} textStyle={styles.text} style={styles.celda}/>
                     

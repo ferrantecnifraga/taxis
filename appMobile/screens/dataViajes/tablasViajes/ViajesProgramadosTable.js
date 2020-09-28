@@ -89,7 +89,7 @@ setTotal2(total)
       return(
         Alert.alert(
           "Información del viaje",
-          "El viaje número "+idVP+ ", es a las "+moment(fecha).format('DD/MM/YYYY hh:mm')+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
+          "El viaje número "+idVP+ ", es a las "+moment(fecha).format('DD/MM/YYYY HH:mm')+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
           [
         
             { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
@@ -163,7 +163,7 @@ setTotal2(total)
                     <Cell key={i+12} data={telefono(e.telfSegundoPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY hh:mm')} textStyle={styles.text} style={styles.celda}/>
+                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')} textStyle={styles.text} style={styles.celda}/>
                    
                     <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
 

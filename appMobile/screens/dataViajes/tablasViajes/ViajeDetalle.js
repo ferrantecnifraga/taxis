@@ -65,7 +65,7 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Text style={styles.respuesta} >{puebloSegundoPaciente}</Text>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Fecha de inicio:</Text>          
-          <Text style={styles.respuesta} >{moment(fechaInicio).format('DD/MM/YYYY hh:mm')}</Text> 
+          <Text style={styles.respuesta} >{moment(fechaInicio).format('DD/MM/YYYY HH:mm')}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Vehiculo:</Text>          
           <Text style={styles.respuesta} >{vehiculo}</Text> 

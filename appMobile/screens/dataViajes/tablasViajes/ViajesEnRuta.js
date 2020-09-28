@@ -5,6 +5,7 @@ import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Table, TableWrapper, Row, Rows, Col, Cols, Cell } from 'react-native-table-component';
 import { set } from 'react-native-reanimated';
+import moment, {add} from "moment";
 
 const ViajesEnRuta = () => { 
 
@@ -267,7 +268,7 @@ if(viajes == null){
             <Text style={styles.dataText}>{viajes.direccionSegundoPaciente}</Text>
             <Divider/>
             <Text style={styles.infoText}>Fecha de inicio</Text>
-            <Text style={styles.dataText}>{viajes.fechaInicio}</Text>
+            <Text style={styles.dataText}>{moment(viajes.fechaInicio).format('DD/MM/YYYY HH:mm')}</Text>
             <Divider/>
             <Text style={styles.infoText}>Vehiculo</Text>
             <Text style={styles.dataText}>{viajes.vehiculo}</Text>

@@ -128,6 +128,17 @@ useEffect(() => {
                           label="Notificaciones"
                           onPress={() => {props.navigation.navigate('Notificaciones', {screen: 'Notificaciones'})}}
                       />
+                      <DrawerItem 
+                            icon={({color, size}) => (
+                              <Icon
+                              name="account-outline"
+                              color={color}
+                              size={size}
+                              />
+                          )}
+                          label="Mi Perfil"
+                          onPress={() => {props.navigation.navigate('Perfil')}}
+                      />
                       
                       <DrawerItem 
                             icon={({color, size}) => (
