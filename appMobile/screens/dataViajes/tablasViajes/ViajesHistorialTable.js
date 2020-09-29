@@ -89,36 +89,36 @@ const ViajesHistorialTable = () => {
         if(estatus == "Esperando confirmación"){
           //Color naranja
          return(
-           <Text>{estatus}</Text>
+           <Text style={{color:'#ff9800'}} >{estatus}</Text>
          ) 
        }else if(estatus == "Confirmado"){
          //Color verde
          return(
-           <Text>{estatus}</Text>
+           <Text style={{color:'#00c853'}} >{estatus}</Text>
          ) 
    
        }else if(estatus == "Esperando asignación"){
          //Color amarillo
          return(
-           <Text>{estatus}</Text>
+           <Text style={{color:'#fdd835'}}>{estatus}</Text>
          ) 
    
        }else if(estatus == "En ruta"){
          //Color azul  
          return(
-           <Text>{estatus}</Text>
+           <Text style={{color:'#01579b'}}>{estatus}</Text>
          ) 
    
        }else if(estatus == "Cancelado"){
          //Color rojo
          return(
-           <Text>{estatus}</Text>
+           <Text style={{color:'#dd2c00'}}>{estatus}</Text>
          ) 
    
        }else if(estatus == "Terminado"){
          //Color gris
          return(
-           <Text>{estatus}</Text>
+           <Text style={{color:'#616161'}}>{estatus}</Text>
          ) 
    
        }
@@ -179,7 +179,7 @@ export default ViajesHistorialTable;
 
 const styles = StyleSheet.create({
   celda:{
-    width: 150,
+    width: 100,
     padding: 5,
     textAlign: 'center'
   },

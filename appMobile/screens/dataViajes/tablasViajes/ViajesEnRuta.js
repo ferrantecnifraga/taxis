@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet,TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndicator  } from "react-native";
+import { StyleSheet, TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndicator  } from "react-native";
 import { ListItem } from 'react-native-elements';
 
 import {Card, Divider} from 'react-native-elements'
@@ -210,7 +210,7 @@ return (
   loading ?
 
   <View style={[styles.loading]}>
-  <ActivityIndicator size="large" color="#00ff00" />
+  <ActivityIndicator size="large" color="#009387" style={{marginTop: 280}} />
   </View>
   :
 
@@ -233,7 +233,7 @@ return (
           </View>
         }
         bottomDivider
-        onPress={() => {navigation.navigate('detallesViaje', {
+        onPress={() => {navigation.navigate('DetallesViajesEnRuta', {
           idVP: e.idVP, 
           costoParcial: e.costoParcial,
            nombre: e.nombre, 
@@ -241,21 +241,21 @@ return (
            segundoApellido: e.segundoApellido, 
            servicio: e.servicio, 
            estatus: e.estatus,
-    pacientePrimero: e.pacientePrimero, 
-    telfPrimerPaciente: e.telfPrimerPaciente, 
-    direccionPrimerPaciente: e.direccionPrimerPaciente, 
-    puebloPrimerPaciente: e.puebloPrimerPaciente, 
-    pacienteSegundo: e.pacienteSegundo, 
-    telfSegundoPaciente: e.telfSegundoPaciente, 
-    direccionSegundoPaciente: e.direccionSegundoPaciente, 
-    puebloSegundoPaciente: e.puebloSegundoPaciente, 
-    fechaInicio: moment(e.fechaInicio).format('DD/MM/YYYY HH:mm'), 
-    vehiculo: e.vehiculo, 
-    origen: e.origen, 
-    pasando_por: e.pasando_por, 
-    destino: e.destino, 
-    direccionHospital: e.direccionHospital, 
-    cliente: e.cliente
+          pacientePrimero: e.pacientePrimero, 
+          telfPrimerPaciente: e.telfPrimerPaciente, 
+          direccionPrimerPaciente: e.direccionPrimerPaciente, 
+          puebloPrimerPaciente: e.puebloPrimerPaciente, 
+          pacienteSegundo: e.pacienteSegundo, 
+          telfSegundoPaciente: e.telfSegundoPaciente, 
+          direccionSegundoPaciente: e.direccionSegundoPaciente, 
+          puebloSegundoPaciente: e.puebloSegundoPaciente, 
+          fechaInicio: moment(e.fechaInicio).format('DD/MM/YYYY HH:mm'), 
+          vehiculo: e.vehiculo, 
+          origen: e.origen, 
+          pasando_por: e.pasando_por, 
+          destino: e.destino, 
+          direccionHospital: e.direccionHospital, 
+          cliente: e.cliente
         })}}
         
       />

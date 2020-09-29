@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, ScrollView, StyleSheet,Image, TouchableOpacity, Linking } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
 import moment, {add} from "moment";
+
 const ViajeDetalle = ({route, navigation}) => {
 
 const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
@@ -52,13 +53,13 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Divider style={styles.divider}/>      
           <Text style={styles.textLabel} >Telefono del primer paciente:</Text>
           <TouchableOpacity
-           style={styles.btn}
-         onPress={()=>{llamar( parseInt(telfPrimerPaciente) )}}
-        >
+              style={{alignSelf: 'flex-end'}}
+            onPress={()=>{llamar( parseInt(telfPrimerPaciente) )}}
+          >
           <View style={styles.btn}>
-      <Text style={styles.btnText}>{telfPrimerPaciente}</Text>
-        </View>
-        </TouchableOpacity>
+            <Text style={{fontSize: 20, color: '#0288d1'}}>{telfPrimerPaciente}</Text>
+          </View>
+          </TouchableOpacity>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Direccion del primer paciente:</Text>
           <Text style={styles.respuesta} >{direccionPrimerPaciente}</Text>    
@@ -71,12 +72,12 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Telefono del segundo paciente:</Text>          
           <TouchableOpacity
-           style={styles.btn}
+           style={{alignSelf: 'flex-end'}}
          onPress={()=>{llamar( parseInt(telfSegundoPaciente) )}}
         >
           <View style={styles.btn}>
-      <Text style={styles.btnText}>{telfSegundoPaciente}</Text>
-        </View>
+            <Text style={{fontSize: 20, color: '#0288d1'}}>{telfSegundoPaciente}</Text>
+          </View>
         </TouchableOpacity>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Direccion del segundo paciente:</Text>          
@@ -113,6 +114,7 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
 };
 
 export default ViajeDetalle;
+
 
 const styles = StyleSheet.create({
   

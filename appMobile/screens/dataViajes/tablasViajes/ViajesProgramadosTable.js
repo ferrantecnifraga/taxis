@@ -92,36 +92,36 @@ const ViajesProgramadosTable = ({navigation}) => {
       if(estatus == "Esperando confirmación"){
         //Color naranja
        return(
-         <Text>{estatus}</Text>
+         <Text style={{color:'#ff9800'}} >{estatus}</Text>
        ) 
      }else if(estatus == "Confirmado"){
        //Color verde
        return(
-         <Text>{estatus}</Text>
+         <Text style={{color:'#00c853'}} >{estatus}</Text>
        ) 
  
      }else if(estatus == "Esperando asignación"){
        //Color amarillo
        return(
-         <Text>{estatus}</Text>
+         <Text style={{color:'#fdd835'}}>{estatus}</Text>
        ) 
  
      }else if(estatus == "En ruta"){
        //Color azul  
        return(
-         <Text>{estatus}</Text>
+         <Text style={{color:'#01579b'}}>{estatus}</Text>
        ) 
  
      }else if(estatus == "Cancelado"){
        //Color rojo
        return(
-         <Text>{estatus}</Text>
+         <Text style={{color:'#dd2c00'}}>{estatus}</Text>
        ) 
  
      }else if(estatus == "Terminado"){
        //Color gris
        return(
-         <Text>{estatus}</Text>
+         <Text style={{color:'#616161'}}>{estatus}</Text>
        ) 
  
      }
@@ -150,7 +150,7 @@ const ViajesProgramadosTable = ({navigation}) => {
     return (
 
       loading ? 
-  <View style={{flex:1,justifyContent:'center', alignItems:'center', marginTop: 280}}>
+  <View style={{flex:1,justifyContent:'center', alignItems:'center'}}>
     <ActivityIndicator size="large" color='#009387' />
   </View>
   : 
@@ -184,7 +184,7 @@ export default ViajesProgramadosTable
  
 const styles = StyleSheet.create({
   celda:{
-    width: 150,
+    width: 100,
     padding: 5,
     textAlign: 'center'
   },

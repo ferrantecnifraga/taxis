@@ -1,22 +1,24 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet,Image, TouchableOpacity, Linking } from "react-native";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
 import moment, {add} from "moment";
-const ViajeDetalleHistorial = ({route, navigation}) => {
 
-const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+const DetallesViajesEnRuta = ({route, navigation}) => {
+
+  const {idVP, estatus, fechaInicio, nombre, primerApellido, segundoApellido, servicio,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, origen, pasando_por, destino, direccionHospital, cliente, } = route.params;
+    direccionSegundoPaciente, puebloSegundoPaciente, vehiculo, origen, pasando_por, destino, direccionHospital, cliente, costoParcial } = route.params;
 
+     
     const llamar = (number) => {
       let phoneNumber = '';
     if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
       else {phoneNumber = `telprompt:${number}`; }
     Linking.openURL(phoneNumber);
     }
-  return (
-    
 
+
+  return (
     <ScrollView>
 
       <Card  >
@@ -50,11 +52,11 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Divider style={styles.divider}/>      
           <Text style={styles.textLabel} >Telefono del primer paciente:</Text>
           <TouchableOpacity
-           style={{alignSelf: 'flex-end'}}
+           style={styles.btn}
          onPress={()=>{llamar( parseInt(telfPrimerPaciente) )}}
         >
           <View style={styles.btn}>
-          <Text style={{fontSize: 20, color: '#0288d1'}}>{telfPrimerPaciente}</Text>
+      <Text style={styles.btnText}>{telfPrimerPaciente}</Text>
         </View>
         </TouchableOpacity>
           <Divider style={styles.divider}/>
@@ -69,11 +71,11 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Telefono del segundo paciente:</Text>          
           <TouchableOpacity
-           style={{alignSelf: 'flex-end'}}
+           style={styles.btn}
          onPress={()=>{llamar( parseInt(telfSegundoPaciente) )}}
         >
           <View style={styles.btn}>
-      <Text style={{fontSize: 20, color: '#0288d1'}}>{telfSegundoPaciente}</Text>
+      <Text style={styles.btnText}>{telfSegundoPaciente}</Text>
         </View>
         </TouchableOpacity>
           <Divider style={styles.divider}/>
@@ -85,9 +87,6 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Fecha de inicio:</Text>          
           <Text style={styles.respuesta} >{moment(fechaInicio).format('DD/MM/YYYY HH:mm')}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Fecha de termino:</Text>          
-          <Text style={styles.respuesta} >{fechaTermino != null ? moment(fechaTermino).format('DD/MM/YYYY HH:mm'): fechaTermino}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Vehiculo:</Text>          
           <Text style={styles.respuesta} >{vehiculo}</Text> 
@@ -107,13 +106,17 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Text style={styles.textLabel} >Cliente:</Text>          
           <Text style={styles.respuesta} >{cliente}</Text> 
         </View>
+        <Button
+            title="Iniciar viaje"
+            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
+          />
       </View>
       </Card>
     </ScrollView>
   );
 };
 
-export default ViajeDetalleHistorial;
+export default DetallesViajesEnRuta;
 
 const styles = StyleSheet.create({
   
@@ -128,5 +131,5 @@ const styles = StyleSheet.create({
   },
   divider:{
       height:2
-  }
+  },
 });

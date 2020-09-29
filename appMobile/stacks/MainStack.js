@@ -32,7 +32,7 @@ import sancionesViajes from '../screens/dataViajes/sancionesViajes'
 import ViajeDetalle from '../screens/dataViajes/tablasViajes/ViajeDetalle'
 import ViajeDetalleHistorial from '../screens/dataViajes/tablasViajes/ViajeDetalleHistorial'
 
-import detallesViaje from '../screens/dataViajes/detallesViaje'
+import DetallesViajesEnRuta from '../screens/dataViajes/DetallesViajesEnRuta'
 
 import atenderViajeDetalles from '../screens/dataViajes/tablasViajes/atenderViajeDetalles'
 import viajeAtendido from '../screens/dataViajes/tablasViajes/viajeAtendido'
@@ -273,7 +273,7 @@ export const ViajesStackScreen = ({navigation}) => (
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"
-        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+        onPress={() => navigation.navigate('Viajes', {screen: 'ProximosViajes'})}/>
       )
     }}/>
     <ViajesStack.Screen name="ViajeDetalleHistorial" component={ViajeDetalleHistorial} 
@@ -282,7 +282,7 @@ export const ViajesStackScreen = ({navigation}) => (
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"
-        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+        onPress={() => navigation.navigate('Viajes', {screen: 'historialViajes'})}/>
       )
     }}/>
     <ViajesStack.Screen name="sancionesViajes" component={sancionesViajes} 
@@ -291,16 +291,16 @@ export const ViajesStackScreen = ({navigation}) => (
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"
-        onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+        onPress={() => navigation.navigate('Viajes', {screen: 'historialViajes'})}/>
       )
     }}/>
-    <ViajesStack.Screen name="detallesViaje" component={detallesViaje} 
+    <ViajesStack.Screen name="DetallesViajesEnRuta" component={DetallesViajesEnRuta} 
     options={{
       title:'Detalles del viaje',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"
-        onPress={() => navigation.navigate('Viajes', {screen: 'ProximosViajes'})}/>
+        onPress={() => navigation.navigate('Viajes', {screen: 'iniciarViaje'})}/>
       )
     }}/>
     

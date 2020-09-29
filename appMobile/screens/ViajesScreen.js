@@ -93,7 +93,7 @@ const ViajesScreen = ({navigation}) => {
               onPress={() => {navigation.navigate('sancionesViajes')}}
             />
             <Divider/>
-            <Text style={styles.cardText}>    Sanciones   </Text>
+            <Text style={styles.cardText}>Sanciones</Text>
           </Card>
         </View>
       </View>
