@@ -1,14 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
+import AsyncStorage from '@react-native-community/async-storage';
 import moment, {add} from "moment";
 
 const DetallesViajesEnRuta = ({route, navigation}) => {
+
+  const [estadoViaje, setEstadoViaje] = useState("Cargando...")
 
   const {idVP, estatus, fechaInicio, nombre, primerApellido, segundoApellido, servicio,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
     direccionSegundoPaciente, puebloSegundoPaciente, vehiculo, origen, pasando_por, destino, direccionHospital, cliente, costoParcial } = route.params;
 
+
+    if (estatus == "Confirmado") {
+      setEstadoViaje("Iniciar viaje")
+    }else if(estatus == "En ruta"){
+      setEstadoViaje("Terminar viaje")
+    }else if(estatus == "Terminado"){
+      setEstadoViaje("Terminado. ¡Gracias!")
+    }
      
     const llamar = (number) => {
       let phoneNumber = '';
@@ -17,6 +28,131 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
     Linking.openURL(phoneNumber);
     }
 
+    ///Actualizar viaje
+
+    //Fetch a la API atender viaje
+    const actualizarElViaje = async(idVP) => {
+      let email2 = await AsyncStorage.getItem('email')
+        let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+
+
+      try {
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/actualizarViaje', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email2,
+            password: password2,
+            idTaxista: idTaxista2,
+            idVP: idVP,
+            estatus: estadoViaje
+          })
+        })
+
+        let response2 = await response.json()
+        console.warn(response2)
+
+
+        Alert.alert(
+          "Viajes en ruta",
+          String(response2.estatus),
+          [
+            {
+              text: "Ok",
+              onPress: () => actualizarEstado(),
+              
+            }
+  
+          ],
+          { cancelable: true }
+        )
+      } catch (error) {
+        Alert.alert(
+          "Viajes en ruta",
+          String(error),
+          [
+            {
+              text: "Ok",
+              onPress: () => console.warn("OK"),
+              
+            }
+  
+          ],
+          { cancelable: true }
+        )
+      }
+
+      
+  }
+
+    //actualizar viaje
+
+    //Actualizar estado
+    const actualizarEstado = () => {
+      if(estadoViaje == "Iniciar viaje"){
+        setEstadoViaje("Terminar viaje")
+      }else if(estadoViaje == "Terminar viaje"){
+        setEstadoViaje("Terminado")
+      }
+    }
+
+    //
+
+    //Iniciar viaje
+    const iniciarViaje = (idVP) =>{
+
+      console.log("Jaloo")
+      console.warn(estadoViaje)
+      if(estadoViaje == "Iniciar viaje"){
+        return(
+          Alert.alert(
+            "Estatus del viaje",
+            "¿Segur@ de iniciar el viaje? Si inicias el viaje antes de la fecha, se te multara. ",
+            [
+              {
+                text: "Si, iniciar viaje",
+                onPress: () => actualizarElViaje(idVP),
+                
+              },
+              {
+                text: "No",
+                onPress: () => console.warn("Abortando"),
+                
+              }
+      
+            ],
+            { cancelable: true }
+          )
+          )
+      }else if(estadoViaje == "Terminar viaje"){
+        return(
+          Alert.alert(
+            "Estatus del viaje",
+            "¿Segur@ de terminar el viaje?",
+            [
+              {
+                text: "Si, terminar viaje",
+                onPress: () => actualizarElViaje(idVP),
+                
+              },
+              {
+                text: "No",
+                onPress: () => console.warn("Abortando"),
+                
+              }
+      
+            ],
+            { cancelable: true }
+          )
+          )
+      }
+        
+    }
+    //
 
   return (
     <ScrollView>
@@ -29,9 +165,7 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
         <View >
-          <Text style={styles.textLabel} >Costo parcial: </Text>
-          <Text style={styles.respuesta} >{costoParcial}</Text> 
-          <Divider style={styles.divider}/>
+        
           <Text style={styles.textLabel} >Nombre:</Text>
           <Text style={styles.respuesta} >{nombre}</Text>
           <Divider style={styles.divider}/>  
@@ -86,7 +220,7 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           <Text style={styles.respuesta} >{puebloSegundoPaciente}</Text>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Fecha de inicio:</Text>          
-          <Text style={styles.respuesta} >{moment(fechaInicio).format('DD/MM/YYYY HH:mm')}</Text> 
+          <Text style={styles.respuesta} >{fechaInicio}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Vehiculo:</Text>          
           <Text style={styles.respuesta} >{vehiculo}</Text> 
@@ -106,10 +240,9 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           <Text style={styles.textLabel} >Cliente:</Text>          
           <Text style={styles.respuesta} >{cliente}</Text> 
         </View>
-        <Button
-            title="Iniciar viaje"
-            buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 30, backgroundColor: '#009387'}}
-          />
+        <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(idVP) }>
+              {estadoViaje}
+            </Button>
       </View>
       </Card>
     </ScrollView>
@@ -131,5 +264,13 @@ const styles = StyleSheet.create({
   },
   divider:{
       height:2
+  },
+  btn: { 
+    width: 200, 
+    backgroundColor: '#78B7BB',  
+    borderRadius: 5,
+    padding:1,
+    marginTop: 10,
+    alignSelf: 'center',
   },
 });

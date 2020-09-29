@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndicator  } from "react-native";
+import { RefreshControl, StyleSheet, TouchableOpacity, Text, View, Alert,ScrollView,ActivityIndicator  } from "react-native";
 import { ListItem } from 'react-native-elements';
 
 import {Card, Divider} from 'react-native-elements'
@@ -48,159 +48,43 @@ const ViajesEnRuta = () => {
         setViajes(response2.viajes)
         setLoading(false)
         console.log("Viajes:" + viajes)
-        // if (response2.viajes.estatus == "Confirmado") {
-        //   setEstado("Iniciar viaje")
-        // }else if(response2.viajes.estatus == "En ruta"){
-        //   setEstado("Terminar viaje")
-        // }else if(response2.viajes.estatus == "Terminado"){
-        //   setEstado("Terminado. ¡Gracias!")
-        // }
-        
-        
-        
-        
         
       }
 
       fetchMyAPI()
     }, [] )
 
-
-     //Fetch a la API atender viaje
-     const actualizarElViaje = async(idVP) => {
-      let email2 = await AsyncStorage.getItem('email')
-        let password2 = await AsyncStorage.getItem('password')
-        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
-
-
-      try {
-        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/actualizarViaje', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: email2,
-            password: password2,
-            idTaxista: idTaxista2,
-            idVP: idVP,
-            estatus: estado
-          })
+//Refresh
+const onRefresh = React.useCallback(async () => {
+  setRefreshing(true);
+  let email2 = await AsyncStorage.getItem('email')
+      let password2 = await AsyncStorage.getItem('password')
+      let idCliente2 = await AsyncStorage.getItem('idCliente')
+    try {
+      let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/viajesEnRuta', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email2,
+          password: password2,
+          idTaxista: idTaxista2
         })
-
-        let response2 = await response.json()
-        console.warn(response2)
-
-
-        Alert.alert(
-          "Viajes en ruta",
-          String(response2.estatus),
-          [
-            {
-              text: "Ok",
-              onPress: () => actualizarEstado(),
-              
-            }
+      })
+      let responseJson = await response.json();
+      console.warn(responseJson.viajes);
+      setViajes(responseJson.viajes)
+      setRefreshing(false)
+    } catch (error) {
+      console.error(error);
+    }
   
-          ],
-          { cancelable: true }
-        )
-      } catch (error) {
-        Alert.alert(
-          "Viajes en ruta",
-          String(error),
-          [
-            {
-              text: "Ok",
-              onPress: () => console.warn("OK"),
-              
-            }
-  
-          ],
-          { cancelable: true }
-        )
-      }
-
-      
-  }
+}, [refreshing]);
 
 
-    const boton = (idVP, estatus) => {
-    
-       return(
-         <TouchableOpacity onPress={() => iniciarViaje(idVP) }>
-           <View style={styles.btn}>
-            <Text style={styles.btnText}>Iniciar viaje</Text>
-           </View>
-         </TouchableOpacity>
-       ) 
-     
-     
-     
-      }
-
-      const actualizarEstado = () => {
-        if(estado == "Iniciar viaje"){
-          setEstado("Terminar viaje")
-        }else if(estado == "Terminar viaje"){
-          setEstado("Terminado")
-        }
-      }
-    
-
-      const iniciarViaje = (idVP) =>{
-
-        console.log("Jaloo")
-        console.warn(estado)
-        if(estado == "Iniciar viaje"){
-          return(
-            Alert.alert(
-              "Estatus del viaje",
-              "¿Segur@ de iniciar el viaje? Si inicias el viaje antes de la fecha, se te multara. ",
-              [
-                {
-                  text: "Si, iniciar viaje",
-                  onPress: () => actualizarElViaje(idVP),
-                  
-                },
-                {
-                  text: "No",
-                  onPress: () => console.warn("Abortando"),
-                  
-                }
-        
-              ],
-              { cancelable: true }
-            )
-            )
-        }else if(estado == "Terminar viaje"){
-          return(
-            Alert.alert(
-              "Estatus del viaje",
-              "¿Segur@ de terminar el viaje?",
-              [
-                {
-                  text: "Si, terminar viaje",
-                  onPress: () => actualizarElViaje(idVP),
-                  
-                },
-                {
-                  text: "No",
-                  onPress: () => console.warn("Abortando"),
-                  
-                }
-        
-              ],
-              { cancelable: true }
-            )
-            )
-        }
-          
-        
-
-       
-      }
+// refresh
   
 
 const navigation = useNavigation();
@@ -214,7 +98,9 @@ return (
   </View>
   :
 
-<View>
+<ScrollView refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    }>
   {
     viajes.map((e, i) => {
       return(
@@ -263,7 +149,7 @@ return (
   }
       )
   }
-</View>
+</ScrollView>
 )
 
  
