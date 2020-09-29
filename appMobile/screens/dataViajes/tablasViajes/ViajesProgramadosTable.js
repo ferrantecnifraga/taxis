@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react';
-import { Linking,Platform,StyleSheet,TouchableOpacity, ScrollView, Text, View, Alert, ActivityIndicator } from "react-native";
+import { RefreshControl, Linking,Platform,StyleSheet,TouchableOpacity, ScrollView, Text, View, Alert, ActivityIndicator } from "react-native";
 
 import { DataTable, Button } from 'react-native-paper';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -15,6 +15,7 @@ const ViajesProgramadosTable = ({navigation}) => {
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = React.useState(false);
   
 
     useEffect(() => {
@@ -44,14 +45,6 @@ const ViajesProgramadosTable = ({navigation}) => {
         
         setData(response2.proximosViajes.data)
         setLoading(false)
-        const {current_page, last_page, total} = response2
-
-setCurrent_page2(current_page)
-setTotal2(total)
-
-        let paginacion = `${current_page2} de ${total2}`
-
-        setPaginacion2(paginacion)
         
       }
 
@@ -59,55 +52,81 @@ setTotal2(total)
     }, [] )
 
 
+    //Refresh
+    const onRefresh = React.useCallback(async () => {
+      setRefreshing(true);
+      let email2 = await AsyncStorage.getItem('email')
+          let password2 = await AsyncStorage.getItem('password')
+          let idCliente2 = await AsyncStorage.getItem('idCliente')
+        try {
+          let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/proximosViajes', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: email2,
+              password: password2,
+              idTaxista: idTaxista2
+            })
+          })
+          let responseJson = await response.json();
+          console.warn(responseJson.viajes);
+          setData(responseJson.viajes.data)
+          setRefreshing(false)
+        } catch (error) {
+          console.error(error);
+        }
+      
+    }, [refreshing]);
 
-    const tableHead = ['Número','Estatus', 'Detalles', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Matricula', 'Pueblo Taxista', 'Vehículo', 'Servicio', 'Costo Parcial €',
-    'Paciente 1', 'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telefono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Origen', 
-    'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Detalles del viaje']
+
+    // refresh
 
 
-    const llamar = (number) => {
-      let phoneNumber = '';
-    if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
-      else {phoneNumber = `telprompt:${number}`; }
-    Linking.openURL(phoneNumber);
+
+    const tableHead = ['Número','Estatus', 'Acciones']
+
+    const estatusViaje = (estatus) =>{
+      if(estatus == "Esperando confirmación"){
+        //Color naranja
+       return(
+         <Text>{estatus}</Text>
+       ) 
+     }else if(estatus == "Confirmado"){
+       //Color verde
+       return(
+         <Text>{estatus}</Text>
+       ) 
+ 
+     }else if(estatus == "Esperando asignación"){
+       //Color amarillo
+       return(
+         <Text>{estatus}</Text>
+       ) 
+ 
+     }else if(estatus == "En ruta"){
+       //Color azul  
+       return(
+         <Text>{estatus}</Text>
+       ) 
+ 
+     }else if(estatus == "Cancelado"){
+       //Color rojo
+       return(
+         <Text>{estatus}</Text>
+       ) 
+ 
+     }else if(estatus == "Terminado"){
+       //Color gris
+       return(
+         <Text>{estatus}</Text>
+       ) 
+ 
+     }
     }
 
-    const telefono = (number) => {
-      return(
-        <TouchableOpacity
-           style={styles.btn}
-         onPress={()=>{llamar( parseInt(number) )}}
-        >
-          <View style={styles.btn}>
-      <Text style={styles.btnText}>{number}</Text>
-        </View>
-        </TouchableOpacity>
-      )
-    }
-
-    const detalles = (idVP, fecha) => {
-      return(
-        Alert.alert(
-          "Información del viaje",
-          "El viaje número "+idVP+ ", es a las "+moment(fecha).format('DD/MM/YYYY HH:mm')+". A partir de esa hora, puedes iniciar tu viaje en Iniciar viaje",
-          [
-        
-            { text: "Ok", onPress: () => console.warn("OK Pressed: " +idVP) }
-          ],
-          { cancelable: true }
-        )
-        )
-    }
-
-    const boton = (idVP, fecha) => {
-      return(
-        <TouchableOpacity onPress={() => detalles(idVP, fecha)}>
-          <View style={styles.btn}>
-            <Text style={styles.btnText}>Estatus viaje</Text>
-          </View>
-        </TouchableOpacity>
-      )
-    }
 
     const detallesButton = (idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
       pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
@@ -120,7 +139,7 @@ setTotal2(total)
       pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
       direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, vehiculo, origen, pasando_por, destino, direccionHospital, cliente})}}>
           <View style={styles.btn}>
-            <Text style={styles.btnText}>Detalles viaje</Text>
+            <Text style={styles.btnText}>Ver viaje</Text>
           </View>
         </TouchableOpacity>
       )
@@ -136,42 +155,16 @@ setTotal2(total)
   </View>
   : 
 
-     <ScrollView style={styles.container} horizontal={true} >
+     <ScrollView style={styles.container}  refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+    }>
       <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
                     <Cell key={i+1} data={e.idVP} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+7} data={e.estatus} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+21} data={boton(e.idVP, e.fechaInicio)}  />
-                    
-                    <Cell key={i+3} data={e.nombre} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+4} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+5} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+5} data={e.numMatricula} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+5} data={e.puebloTaxista} textStyle={styles.text} style={styles.celda} />
-                    <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+6} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
-
-                    <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+9} data={telefono(e.telfPrimerPaciente)} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.direccionPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.puebloPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+11} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+12} data={telefono(e.telfSegundoPaciente)} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+10} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')} textStyle={styles.text} style={styles.celda}/>
-                   
-                    <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
-
-                    <Cell key={i+17} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+18} data={e.destino} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+19} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+20} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
-                    
+                    <Cell key={i+7} data={estatusViaje(e.estatus)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+22} data={detallesButton(e.idVP, e.costoParcial, e.nombre, e.primerApellido, e.segundoApellido, e.servicio, e.estatus, e.pacientePrimero, e.telfPrimerPaciente,
                       e.direccionPrimerPaciente, e.puebloPrimerPaciente, e.pacienteSegundo, e.telfSegundoPaciente, e.direccionSegundoPaciente, e.puebloSegundoPaciente, e.fechaInicio, e.vehiculo, e.origen,
                       e.pasando_por, e.destino, e.direccionHospital, e.cliente)} />

@@ -29,7 +29,7 @@ const vigsoft = ({navigation}) => {
                   <Text style={styles.btnText}>Llámanos: +34647738533</Text>
               </View>
             </TouchableOpacity>
-            <Button buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#009387'}} onPress={() => Linking.openURL('vigsoft.tech') }
+            <Button buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#009387'}} onPress={() => Linking.openURL('https://vigsoft.tech') }
               title="Checa nuestra web" />
             <Button buttonStyle={{width: '70%', alignSelf: 'center', marginTop: 5, marginBottom: 5, backgroundColor: '#009387'}} onPress={() => Linking.openURL('https://www.facebook.com/Vigsoft/') }
               title="Vísitanos en Facebook" />

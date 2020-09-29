@@ -11,13 +11,7 @@ const ProximosViajes = ({navigation}) => {
 
 
     return (
-      <ScrollView>
-        
         <ViajesProgramadosTable />
-
-      </ScrollView>
-    
-      
     )
   }
 

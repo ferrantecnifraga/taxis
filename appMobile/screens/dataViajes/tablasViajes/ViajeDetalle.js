@@ -1,13 +1,20 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet,Image } from "react-native";
+import { View, Text, ScrollView, StyleSheet,Image, TouchableOpacity, Linking } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
 import moment, {add} from "moment";
 const ViajeDetalle = ({route, navigation}) => {
 
 const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, vehiculo, origen, pasando_por, destino, direccionHospital, cliente, } = route.params;
-
+    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, vehiculo, origen, pasando_por, destino, direccionHospital, cliente } = route.params;
+    
+    
+    const llamar = (number) => {
+      let phoneNumber = '';
+    if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
+      else {phoneNumber = `telprompt:${number}`; }
+    Linking.openURL(phoneNumber);
+    }
 
   return (
     
@@ -44,7 +51,14 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Text style={styles.respuesta} >{pacientePrimero}</Text>  
           <Divider style={styles.divider}/>      
           <Text style={styles.textLabel} >Telefono del primer paciente:</Text>
-          <Text style={styles.respuesta} >{telfPrimerPaciente} </Text>
+          <TouchableOpacity
+           style={styles.btn}
+         onPress={()=>{llamar( parseInt(telfPrimerPaciente) )}}
+        >
+          <View style={styles.btn}>
+      <Text style={styles.btnText}>{telfPrimerPaciente}</Text>
+        </View>
+        </TouchableOpacity>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Direccion del primer paciente:</Text>
           <Text style={styles.respuesta} >{direccionPrimerPaciente}</Text>    
@@ -56,7 +70,14 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Text style={styles.respuesta} >{pacienteSegundo}</Text>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Telefono del segundo paciente:</Text>          
-          <Text style={styles.respuesta} >{telfSegundoPaciente}</Text>
+          <TouchableOpacity
+           style={styles.btn}
+         onPress={()=>{llamar( parseInt(telfSegundoPaciente) )}}
+        >
+          <View style={styles.btn}>
+      <Text style={styles.btnText}>{telfSegundoPaciente}</Text>
+        </View>
+        </TouchableOpacity>
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Direccion del segundo paciente:</Text>          
           <Text style={styles.respuesta} >{direccionSegundoPaciente}</Text>
