@@ -1,5 +1,5 @@
-import React, {useState} from "react";
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking } from "react-native";
+import React, {useState, useEffect} from "react";
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Linking, Alert } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
 import AsyncStorage from '@react-native-community/async-storage';
 import moment, {add} from "moment";
@@ -10,17 +10,20 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
 
   const {idVP, estatus, fechaInicio, nombre, primerApellido, segundoApellido, servicio,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-    direccionSegundoPaciente, puebloSegundoPaciente, vehiculo, origen, pasando_por, destino, direccionHospital, cliente, costoParcial } = route.params;
+    direccionSegundoPaciente, puebloSegundoPaciente, vehiculo, origen, pasando_por, destino, direccionHospital, cliente} = route.params;
 
+    useEffect(() => {
+      const fetchMyAPI = async () => {
+        
+        if (estatus == "Confirmado") {
+          setEstadoViaje("Iniciar viaje")
+        }else if(estatus == "En ruta")
+          setEstadoViaje("Terminar viaje")
+      }
 
-    if (estatus == "Confirmado") {
-      setEstadoViaje("Iniciar viaje")
-    }else if(estatus == "En ruta"){
-      setEstadoViaje("Terminar viaje")
-    }else if(estatus == "Terminado"){
-      setEstadoViaje("Terminado. ¡Gracias!")
-    }
-     
+      fetchMyAPI()
+    }, [] )
+
     const llamar = (number) => {
       let phoneNumber = '';
     if (Platform.OS === 'android') { phoneNumber = `tel:${number}`; }
@@ -28,7 +31,7 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
     Linking.openURL(phoneNumber);
     }
 
-    ///Actualizar viaje
+    //Actualizar viaje
 
     //Fetch a la API atender viaje
     const actualizarElViaje = async(idVP) => {
@@ -89,7 +92,7 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
       
   }
 
-    //actualizar viaje
+   // actualizar viaje
 
     //Actualizar estado
     const actualizarEstado = () => {
@@ -100,11 +103,11 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
       }
     }
 
-    //
+    
 
-    //Iniciar viaje
+//    Iniciar viaje
     const iniciarViaje = (idVP) =>{
-
+  
       console.log("Jaloo")
       console.warn(estadoViaje)
       if(estadoViaje == "Iniciar viaje"){
@@ -152,7 +155,7 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
       }
         
     }
-    //
+    
 
   return (
     <ScrollView>
@@ -186,11 +189,11 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           <Divider style={styles.divider}/>      
           <Text style={styles.textLabel} >Telefono del primer paciente:</Text>
           <TouchableOpacity
-           style={styles.btn}
+           style={{alignSelf: 'flex-end'}}
          onPress={()=>{llamar( parseInt(telfPrimerPaciente) )}}
         >
           <View style={styles.btn}>
-      <Text style={styles.btnText}>{telfPrimerPaciente}</Text>
+          <Text style={{fontSize: 20, color: '#0288d1'}}>{telfPrimerPaciente}</Text>
         </View>
         </TouchableOpacity>
           <Divider style={styles.divider}/>
@@ -205,11 +208,11 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Telefono del segundo paciente:</Text>          
           <TouchableOpacity
-           style={styles.btn}
+           style={{alignSelf: 'flex-end'}}
          onPress={()=>{llamar( parseInt(telfSegundoPaciente) )}}
         >
           <View style={styles.btn}>
-      <Text style={styles.btnText}>{telfSegundoPaciente}</Text>
+      <Text style={{fontSize: 20, color: '#0288d1'}}>{telfSegundoPaciente}</Text>
         </View>
         </TouchableOpacity>
           <Divider style={styles.divider}/>
@@ -240,8 +243,8 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           <Text style={styles.textLabel} >Cliente:</Text>          
           <Text style={styles.respuesta} >{cliente}</Text> 
         </View>
-        <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(idVP) }>
-              {estadoViaje}
+        <Button style={styles.btn} mode="contained"  onPress={() => iniciarViaje(idVP) } title={estadoViaje}>
+              
             </Button>
       </View>
       </Card>

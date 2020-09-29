@@ -12,13 +12,14 @@ import { useNavigation } from '@react-navigation/native';
 
 const ViajesEnRuta = () => { 
 
-  const [viajes, setViajes] = useState({})
+  const [viajes, setViajes] = useState([])
   const [current_page2, setCurrent_page2] = useState(1)
   const [total2, setTotal2] = useState(6)
   const [paginacion2, setPaginacion2] = useState("")
   const [loading, setLoading] = useState(true)
   const [estado, setEstado] = useState("Cargando...")
   const [data, setData] = useState([])
+  const [refreshing, setRefreshing] = React.useState(false);
 
     useEffect(() => {
       const fetchMyAPI = async () => {
