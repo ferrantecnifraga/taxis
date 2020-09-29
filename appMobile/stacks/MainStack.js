@@ -32,6 +32,8 @@ import sancionesViajes from '../screens/dataViajes/sancionesViajes'
 import ViajeDetalle from '../screens/dataViajes/tablasViajes/ViajeDetalle'
 import ViajeDetalleHistorial from '../screens/dataViajes/tablasViajes/ViajeDetalleHistorial'
 
+import detallesViaje from '../screens/dataViajes/detallesViaje'
+
 import atenderViajeDetalles from '../screens/dataViajes/tablasViajes/atenderViajeDetalles'
 import viajeAtendido from '../screens/dataViajes/tablasViajes/viajeAtendido'
 import viajeRechazado from '../screens/dataViajes/tablasViajes/viajeRechazado'
@@ -194,7 +196,7 @@ export const ViajesStackScreen = ({navigation}) => (
     }}/>
     <ViajesStack.Screen name="iniciarViaje" component={iniciarViaje} 
     options={{
-      title:'Iniciar Viaje',
+      title:'Viajes proximos',
       headerLeft: () => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"
@@ -290,6 +292,15 @@ export const ViajesStackScreen = ({navigation}) => (
         <Icon.Button name="md-arrow-back" size= {30}
         backgroundColor="#009387"
         onPress={() => navigation.navigate('Viajes', {screen: 'Viajes'})}/>
+      )
+    }}/>
+    <ViajesStack.Screen name="detallesViaje" component={detallesViaje} 
+    options={{
+      title:'Detalles del viaje',
+      headerLeft: () => (
+        <Icon.Button name="md-arrow-back" size= {30}
+        backgroundColor="#009387"
+        onPress={() => navigation.navigate('Viajes', {screen: 'ProximosViajes'})}/>
       )
     }}/>
     

@@ -40,14 +40,7 @@ const NotificacionesScreen = ({navigation}) => {
        }
   
       fetchMyAPI()
-     }, [])
-
-
-
- 
-
-   
- 
+     }, []) 
  
 
   return ( 

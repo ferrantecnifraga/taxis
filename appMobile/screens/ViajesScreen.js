@@ -33,7 +33,7 @@ const ViajesScreen = ({navigation}) => {
                 
             />
             <Divider/>
-            <Text style={styles.cardText}>  Iniciar viaje  </Text>
+            <Text style={styles.cardText}>Viajes en ruta</Text>
           </Card>
           <Card containerStyle={styles.cardContainer}>
             <Icon
