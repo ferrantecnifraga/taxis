@@ -107,7 +107,7 @@ return (
       return(
       <ListItem
         key={i}
-        leftAvatar={{  source: require("../../../assets/carro.png") }}
+        leftAvatar={{  source: require("../../../assets/turisme-normal.png") }}
         title={"Fecha del viaje: "+moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')}
         titleStyle= {{marginLeft: 15, marginBottom: 10}}
         subtitle= {
