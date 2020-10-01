@@ -154,8 +154,8 @@ const ViajesProgramadosTable = ({navigation}) => {
     <ActivityIndicator size="large" color='#009387' />
   </View>
   : 
-
-     <ScrollView style={styles.container}  refreshControl={
+    <View style={styles.container}>
+     <ScrollView  refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
     }>
       <Table borderStyle={{borderColor: 'transparent'}} >
@@ -175,6 +175,7 @@ const ViajesProgramadosTable = ({navigation}) => {
           }
         </Table>
     </ScrollView>
+    </View>
     
     )
   
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
   container: { 
     marginHorizontal: 10,
     paddingVertical: 30,
+    flex: 1
   },
   head: { 
     height: 40, 

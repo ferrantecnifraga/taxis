@@ -99,6 +99,7 @@ return (
   </View>
   :
 
+<View style={styles.container} >
 <ScrollView refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
     }>
@@ -107,7 +108,7 @@ return (
       return(
       <ListItem
         key={i}
-        leftAvatar={{  source: require("../../../assets/carro.png") }}
+        leftAvatar={{  source: require("../../../assets/turisme-normal.png") }}
         title={"Fecha del viaje: "+moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')}
         titleStyle= {{marginLeft: 15, marginBottom: 10}}
         subtitle= {
@@ -151,6 +152,7 @@ return (
       )
   }
 </ScrollView>
+</View>
 )
 
  
@@ -164,9 +166,8 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center'
   },
-  container: { 
-    marginHorizontal: 10,
-    paddingVertical: 30,
+  container: {
+    flex:1
   },
   head: { 
     height: 40, 

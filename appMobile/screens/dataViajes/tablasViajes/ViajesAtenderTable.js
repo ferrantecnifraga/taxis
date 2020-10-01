@@ -276,8 +276,8 @@ return (
   
   : 
 
-
-  <ScrollView horizontal={true} style={styles.container} >
+  <View style={styles.container}>
+  <ScrollView horizontal={true} style={styles.containerScroll} >
         <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
@@ -320,6 +320,7 @@ return (
           }
         </Table>
       </ScrollView>
+      </View>
 )
 };
 
@@ -331,7 +332,10 @@ const styles = StyleSheet.create({
     padding: 5,
     textAlign: 'center'
   },
-  container: { 
+  container: {
+    flex:1
+  },
+  containerScroll: { 
     marginHorizontal: 10,
     paddingVertical: 30,
   },

@@ -47,7 +47,7 @@ const LicenciasScreen = ({navigation}) => {
      const changeIcon = (plazas, tipo) => {
        console.warn("Plazas: "+"plazas y"+ " Tipo: "+tipo)
       if (plazas <= 5 && tipo == "TURISME"){
-        return require('../assets/turismo-normal.png')
+        return require('../assets/turisme-normal.png')
       }else if(plazas <= 5 && tipo == "ADAPTAT"){
         return require('../assets/adaptado-normal.png')
       }else if(plazas > 5 && tipo == "TURISME"){

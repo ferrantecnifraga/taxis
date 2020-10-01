@@ -70,8 +70,8 @@ setTotal2(total)
       
       : 
 
-
-      <ScrollView style={styles.container} horizontal={true}>
+      <View style={styles.container} >
+      <ScrollView style={styles.containerScroll} horizontal={true}>
       <Table borderStyle={{borderColor: 'transparent'}} >
           <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
           {
@@ -100,6 +100,7 @@ setTotal2(total)
           }
         </Table>
     </ScrollView>
+    </View>
     )
   }
 
@@ -112,7 +113,10 @@ export default ViajesRechazadosTable;
       padding: 5,
       textAlign: 'center'
     },
-    container: { 
+    container: {
+      flex:1
+    },
+    containerScroll: { 
       marginHorizontal: 10,
       paddingVertical: 30,
     },
