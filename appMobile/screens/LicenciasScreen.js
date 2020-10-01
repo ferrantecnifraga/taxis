@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import { View, Text, Button, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
-import { ListItem } from 'react-native-elements';
+import { View, Text, Button, StyleSheet, ActivityIndicator, ScrollView, Image } from 'react-native';
+import { ListItem, Avatar } from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
 import moment, {add} from "moment";
 
@@ -33,6 +33,7 @@ const LicenciasScreen = ({navigation}) => {
         console.warn(response2.licencias)
         
           setData(response2.licencias)
+          console.warn(response2.licencias)
           setLoading(false)       
          
          
@@ -43,7 +44,19 @@ const LicenciasScreen = ({navigation}) => {
      }, [])
 
 
-
+     const changeIcon = (plazas, tipo) => {
+       console.warn("Plazas: "+"plazas y"+ " Tipo: "+tipo)
+      if (plazas <= 5 && tipo == "TURISME"){
+        return require('../assets/turismo-normal.png')
+      }else if(plazas <= 5 && tipo == "ADAPTAT"){
+        return require('../assets/adaptado-normal.png')
+      }else if(plazas > 5 && tipo == "TURISME"){
+        return require('../assets/turisme-combi.png')
+      }else if(plazas > 5 && tipo == "ADAPTAT"){
+        return require('../assets/adaptado-combi.png')
+      }
+        
+    }
  
 
    
@@ -65,7 +78,6 @@ const LicenciasScreen = ({navigation}) => {
         return(
         <ListItem
           key={i}
-          leftAvatar={{  source: require("../assets/carro.png") }}
           title={e.nombre +" "+e.primerApellido +" "+ e.segundoApellido}
           titleStyle= {{marginLeft: 15, marginBottom: 10}}
           subtitle= {
@@ -83,11 +95,13 @@ const LicenciasScreen = ({navigation}) => {
             vehiculo: e.vehiculo,
             matricula: e.numMatricula,
             pueblo: e.zona,
-            region: e.region,
-            regionSanitaria: e.regionSanitaria
+            tipo: e.tipo,
+            plazas: e.plazas
           })}}
           
-        />
+        >
+          <Avatar source={changeIcon(e.plazas, e.tipo)} />
+          </ListItem>
         )
     }
         )

@@ -4,7 +4,21 @@ import { Card, Divider, Button } from "react-native-elements";
 
 const  LicenciaDetalle = ({route, navigation}) => {
 
-const { nombre, primerApellido, segundoApellido, vehiculo, matricula, pueblo, region, regionSanitaria } = route.params;
+const { nombre, primerApellido, segundoApellido, vehiculo, matricula, pueblo, tipo, plazas } = route.params;
+
+const changeIcon = (plazas, tipo) => {
+  console.warn("Plazas: "+"plazas y"+ " Tipo: "+tipo)
+ if (plazas <= 5 && tipo == "TURISME"){
+   return require('../assets/turismo-normal.png')
+ }else if(plazas <= 5 && tipo == "ADAPTAT"){
+   return require('../assets/adaptado-normal.png')
+ }else if(plazas > 5 && tipo == "TURISME"){
+   return require('../assets/turisme-combi.png')
+ }else if(plazas > 5 && tipo == "ADAPTAT"){
+   return require('../assets/adaptado-combi.png')
+ }
+   
+}   
 
   return (
     
@@ -13,7 +27,7 @@ const { nombre, primerApellido, segundoApellido, vehiculo, matricula, pueblo, re
 
       <Card  >
           <Image
-            source={  require("../assets/carro.png")}
+            source={changeIcon(plazas, tipo)}
             style={{width: 100, height: 100, alignSelf: 'center', marginTop: 30 }}
           />
       
@@ -22,15 +36,16 @@ const { nombre, primerApellido, segundoApellido, vehiculo, matricula, pueblo, re
           <Text style={{fontSize: 19,marginTop: 30, marginHorizontal: 30, textAlign: 'center'}}  >{nombre} {primerApellido} {segundoApellido}</Text>
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
-          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', marginBottom: 5, color: '#757575' }}  >Vehiculo: {vehiculo}</Text>   
+        <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center',color: '#757575' }}  >Vehículo:</Text>          
+          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center',marginBottom: 10 }}  >{vehiculo}</Text>   
           <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center',color: '#757575' }}  >Matricula:</Text>          
           <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center',marginBottom: 10 }}  >{matricula}</Text>      
           <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center',color: '#757575' }}  >Pueblo:</Text>              
           <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', marginBottom: 10}}  >{pueblo}</Text>         
-          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', color: '#757575'}}  >Región:</Text> 
-          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', marginBottom: 10 }}  >{region}</Text>
-          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', color: '#757575'}}  >Región Sanitaria:</Text>          
-          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center' }}  >{regionSanitaria}</Text>          
+          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', color: '#757575'}}  >Tipo:</Text> 
+          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', marginBottom: 10 }}  >{tipo}</Text>
+          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center', color: '#757575'}}  >Plazas:</Text>          
+          <Text style={{fontSize: 15, marginHorizontal: 15, textAlign: 'center' }}  >{plazas}</Text>          
         
       </View>
       </Card>

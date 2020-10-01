@@ -31,6 +31,7 @@ const { signOut } = React.useContext(AuthContext);
 const [email, setEmail] = useState("");
 const [nombre, setNombre] = useState("Cargando...")
 const [numSocio, setNumSocio] = useState("Cargando...")
+const [estatus, setEstatus] = useState("Cargando...")
 
 useEffect(() => {
   const fetchMyAPI = async () => {
@@ -62,13 +63,14 @@ useEffect(() => {
       const {message} = response2
          
       //Aqui quiero llamar Id taxista para guardarlo en el async Storage
-      const {idTaxista, nombre, numSocio, primerApellido, segundoApellido} = response2.taxista
+      const {idTaxista, nombre, numSocio, primerApellido, segundoApellido, estatus} = response2.taxista
         console.log(response2)
         console.log(nombre)
         console.log(idTaxista)
 
           setNombre(""+nombre+" "+primerApellido)
           setNumSocio(numSocio)
+          setEstatus(estatus)
           
           //Aqui lo trato de guardar :C
           // let idPrueba = await AsyncStorage.getItem('idTaxista')
@@ -101,6 +103,7 @@ useEffect(() => {
                             flexDirection:'column'}}>
                                 <Title style={styles.title}>{nombre}</Title>
                                 <Caption style={styles.caption}>{numSocio}</Caption>
+                                <Caption style={styles.caption}>{estatus}</Caption>
                             </View>
                         </View>
                     </View>
@@ -287,12 +290,13 @@ const styles = StyleSheet.create({
     },
     title: {
       fontSize: 16,
-      marginTop: 2,
+      marginTop: 5,
       fontWeight: 'bold',
     },
     caption: {
       fontSize: 14,
       lineHeight: 14,
+      marginLeft: 5
     },
     row: {
       marginTop: 20,

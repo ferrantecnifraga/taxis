@@ -105,7 +105,14 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Text style={styles.respuesta} >{direccionHospital}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Cliente:</Text>          
-          <Text style={styles.respuesta} >{cliente}</Text> 
+          <Text style={styles.respuesta} >{cliente}</Text>
+          <Divider style={styles.divider}/>
+          <TouchableOpacity
+          style={styles.btn2}
+          onPress={() => console.log("Cancelando")}
+          underlayColor='#fff'>
+          <Text style={styles.textLabel}>Cancelar viaje</Text>
+ </TouchableOpacity>
         </View>
       </View>
       </Card>
@@ -129,5 +136,24 @@ const styles = StyleSheet.create({
   },
   divider:{
       height:2
-  }
+  },
+  btn: { 
+    width: 200, 
+    backgroundColor: '#78B7BB',  
+    borderRadius: 5,
+    padding:1,
+    marginTop: 15,
+    alignSelf: 'center',
+  },
+  btn2: { 
+    marginRight:40,
+    marginLeft:40,
+   marginTop:10,
+    paddingTop:10,
+    paddingBottom:10,
+    backgroundColor:'#ff0000',
+    borderRadius:10,
+    borderWidth: 1,
+    borderColor: '#fff'
+  },
 });
