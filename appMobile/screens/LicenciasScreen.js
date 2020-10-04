@@ -80,6 +80,7 @@ const LicenciasScreen = ({navigation}) => {
           key={i}
           title={e.nombre +" "+e.primerApellido +" "+ e.segundoApellido}
           titleStyle= {{marginLeft: 15, marginBottom: 10}}
+          rightAvatar={<Avatar rounded large source={changeIcon(e.plazas, e.tipo)} height={75} width={75}/>}
           subtitle= {
             <View>
               <Text style={{color: '#757575', marginLeft: 15,}} >Matricula: {e.numMatricula}</Text>
@@ -100,7 +101,7 @@ const LicenciasScreen = ({navigation}) => {
           })}}
           
         >
-          <Avatar source={changeIcon(e.plazas, e.tipo)} />
+          {/* <Avatar source={changeIcon(e.plazas, e.tipo)} /> */}
           </ListItem>
         )
     }

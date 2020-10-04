@@ -31,7 +31,7 @@ export const SplashComponent = (props) => {
                 style={styles.footer}
                 animation="fadeInUpBig"
                 >
-                    <Text style={styles.title}> Taxis Lleida V4 </Text>
+                    <Text style={styles.title}> Taxis Lleida V5 </Text>
                     <Text style={styles.text}> Viatge Segur</Text>
                     <View style={styles.button}>
                         <TouchableOpacity

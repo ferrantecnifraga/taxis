@@ -118,11 +118,7 @@ const [estatusT, setEstatusT] = useState("Cargando estatus")
           <Text style={styles.dataText}>{telfT}</Text>
         </View>
         <Divider style={{height: 2}}  />
-        <View style= {styles.row}>
-          <Text style={styles.infoText}>Plazas:</Text>
-          <Text style={styles.dataText}>{plazasT}</Text>
-        </View>
-        <Divider/>
+
         <View style= {styles.row}>
           <Text style={styles.infoText}>Estatus:</Text>
           <Text style={styles.dataText}>{estatusT}</Text>

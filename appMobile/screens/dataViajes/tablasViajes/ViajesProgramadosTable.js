@@ -56,8 +56,8 @@ const ViajesProgramadosTable = ({navigation}) => {
     const onRefresh = React.useCallback(async () => {
       setRefreshing(true);
       let email2 = await AsyncStorage.getItem('email')
-          let password2 = await AsyncStorage.getItem('password')
-          let idCliente2 = await AsyncStorage.getItem('idCliente')
+        let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
         try {
           let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/proximosViajes', {
             method: 'POST',
@@ -154,8 +154,8 @@ const ViajesProgramadosTable = ({navigation}) => {
     <ActivityIndicator size="large" color='#009387' />
   </View>
   : 
-
-     <ScrollView style={styles.container}  refreshControl={
+    <View style={styles.container}>
+     <ScrollView  refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
     }>
       <Table borderStyle={{borderColor: 'transparent'}} >
@@ -175,6 +175,7 @@ const ViajesProgramadosTable = ({navigation}) => {
           }
         </Table>
     </ScrollView>
+    </View>
     
     )
   
@@ -191,6 +192,7 @@ const styles = StyleSheet.create({
   container: { 
     marginHorizontal: 10,
     paddingVertical: 30,
+    flex: 1
   },
   head: { 
     height: 40, 

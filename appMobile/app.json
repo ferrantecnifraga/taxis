@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Taxis Lleida - Taxista",
+    "name": "Taxista",
     "icon": "./assets/archivo.png",
-    "version": "4.0.0",
+    "version": "5.0.0",
     "slug": "taxis-lleida-taxista",
     "ios": {
       "bundleIdentifier": "com.vigsoft.taxislleida.taxista",

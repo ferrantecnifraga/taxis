@@ -1,9 +1,12 @@
-import React from "react";
-import { View, Text, ScrollView, StyleSheet,Image, TouchableOpacity, Linking } from "react-native";
+import React, {useState} from "react";
+import { View, Text, ScrollView, StyleSheet,Image, TouchableOpacity, Linking, Alert } from "react-native";
 import { Card, Divider, Button } from "react-native-elements";
+import AsyncStorage from '@react-native-community/async-storage';
 import moment, {add} from "moment";
 
 const ViajeDetalle = ({route, navigation}) => {
+
+  const [estado, setEstado] = useState("Cancelar viaje")
 
 const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
@@ -16,6 +19,119 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
       else {phoneNumber = `telprompt:${number}`; }
     Linking.openURL(phoneNumber);
     }
+
+    const cancelarViaje = async(idVP) => {
+
+      if (estado == "Cancelado") {
+        Alert.alert(
+          "Cancelar viaje",
+          "Ya cancelaste este viaje",
+          [
+            {
+              text: "Ok",
+              onPress: () => console.log("rechazado")
+            }
+  
+          ],
+          { cancelable: true }
+        )
+        
+      }else{
+        let email2 = await AsyncStorage.getItem('email')
+        let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+
+      try {
+        let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/cancelarViaje', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: email2,
+            password: password2,
+            idTaxista: idTaxista2,
+            idVP: idVP
+          })
+        })
+
+        let response2 = await response.json()
+    
+
+        if(String(response2.message) == "Success!") {
+
+          Alert.alert(
+            "Cancelar viaje",
+            response2.estatus,
+            [
+              {
+                text: "Ok",
+                onPress: () => setEstado("Cancelado")
+              }
+    
+            ],
+            { cancelable: true }
+          )
+          
+        }
+
+      
+      
+      } catch (error) {
+        Alert.alert(
+          "Cancelar viaje",
+          error,
+          [
+            {
+              text: "Ok",
+              onPress: () => console.warn("OK"),
+              
+            }
+  
+          ],
+          { cancelable: true }
+        )
+      }
+
+      }
+
+      
+      
+  }
+
+
+
+  //
+
+  //
+
+const alertCancelar = (idVP) =>{
+  console.warn(idVP)
+  Alert.alert(
+    "Cancelar viaje",
+    "¿Seguro de cancelar el viaje?",
+    [
+      {
+        text: "Si, cancelar",
+        onPress: () => cancelarViaje(idVP)
+        ,
+        
+      },
+      {
+        text: "No, olvidalo",
+        onPress: () => console.warn("OK")
+        ,
+        
+      }
+
+
+    ],
+    { cancelable: true }
+  )
+}
+
+  //
 
   return (
     
@@ -109,9 +225,9 @@ const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, es
           <Divider style={styles.divider}/>
           <TouchableOpacity
           style={styles.btn2}
-          onPress={() => console.log("Cancelando")}
+          onPress={() => alertCancelar(idVP)}
           underlayColor='#fff'>
-          <Text style={styles.textLabel}>Cancelar viaje</Text>
+          <Text style={styles.botonsito}>{estado}</Text>
  </TouchableOpacity>
         </View>
       </View>
@@ -129,6 +245,11 @@ const styles = StyleSheet.create({
       fontSize:17,
       marginLeft: 15,
       marginTop: 15
+  },
+  botonsito: {
+    fontSize:20,
+    textAlign: "right",
+    alignSelf: 'center',
   },
   respuesta:{
     fontSize:20,
@@ -151,7 +272,7 @@ const styles = StyleSheet.create({
    marginTop:10,
     paddingTop:10,
     paddingBottom:10,
-    backgroundColor:'#ff0000',
+    backgroundColor:'#6ec6ff',
     borderRadius:10,
     borderWidth: 1,
     borderColor: '#fff'
