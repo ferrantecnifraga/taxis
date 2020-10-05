@@ -46,9 +46,27 @@ const ViajesEnRuta = () => {
         
         console.warn(response2.viajes)
         console.log(response2.viajes)
-        setViajes(response2.viajes)
+        if (response2.viajes.length > 0) {
+          setViajes(response2.viajes)
         setLoading(false)
         console.log("Viajes:" + viajes)
+        }else{
+          Alert.alert(
+            "Viajes en ruta",
+            "No hay viajes por el momento",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.log("Ya"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+          setLoading(false)
+        }
+        
         
       }
 
@@ -59,8 +77,8 @@ const ViajesEnRuta = () => {
 const onRefresh = React.useCallback(async () => {
   setRefreshing(true);
   let email2 = await AsyncStorage.getItem('email')
-      let password2 = await AsyncStorage.getItem('password')
-      let idCliente2 = await AsyncStorage.getItem('idCliente')
+        let password2 = await AsyncStorage.getItem('password')
+        let idTaxista2 = await AsyncStorage.getItem('idTaxista')
     try {
       let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/viajesEnRuta', {
         method: 'POST',
@@ -99,7 +117,7 @@ return (
   </View>
   :
 
-<View style={styles.container} >
+
 <ScrollView refreshControl={
       <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
     }>
@@ -152,7 +170,7 @@ return (
       )
   }
 </ScrollView>
-</View>
+
 )
 
  

@@ -21,6 +21,9 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           setEstadoViaje("Terminar viaje")
       }
 
+      console.warn("Telf primer paciente: "+telfPrimerPaciente)
+    console.warn("Tel seugndo: "+telfSegundoPaciente)
+
       fetchMyAPI()
     }, [] )
 
@@ -38,6 +41,22 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
       let email2 = await AsyncStorage.getItem('email')
         let password2 = await AsyncStorage.getItem('password')
         let idTaxista2 = await AsyncStorage.getItem('idTaxista')
+
+        if (estadoViaje == "Terminado") {
+          Alert.alert(
+            "Viajes en ruta",
+            "Ya terminaste el viaje, ¡Gracias!",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.log("Ya"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
 
 
       try {
