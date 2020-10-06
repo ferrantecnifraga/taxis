@@ -35,19 +35,26 @@ const sancionesViajes = ({navigation}) => {
         })
 
         let response2 = await response.json()
-        console.warn("Sanciones: "+response2.sanciones.data)
+        console.warn("Sanciones: "+response2.sanciones)
         
-        setData(response2.sanciones.data)
+        setData(response2.sanciones)
         setLoading(false)
-        const {current_page, last_page, total} = response2
-
-setCurrent_page2(current_page)
-setTotal2(total)
-
-        let paginacion = `${current_page2} de ${total2}`
-
-        setPaginacion2(paginacion)
         
+        if(response2.sanciones.length == 0){
+          Alert.alert(
+            "Sanciones",
+            "No hay sanciones",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.warn("OK"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
       }
 
       fetchMyAPI()

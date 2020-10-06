@@ -38,19 +38,26 @@ const IncidenciasScreen = () => {
         let response2 = await response.json()
 
         // console.log(idCliente2)
-        console.log(response2.incidentes.data)
-        console.warn(response2.incidentes.data)
+        console.log(response2.incidentes)
+        console.warn(response2.incidentes)
         
-        setData(response2.incidentes.data)
+        setData(response2.incidentes)
         setLoading(false)
-        const {current_page, last_page, total} = response2
-
-setCurrent_page2(current_page)
-setTotal2(total)
-
-        let paginacion = `${current_page2} de ${total2}`
-
-        setPaginacion2(paginacion)
+        if(response2.incidentes.length == 0){
+          Alert.alert(
+            "Incidencias",
+            "No hay incidentes",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.warn("OK"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
         
       }
 

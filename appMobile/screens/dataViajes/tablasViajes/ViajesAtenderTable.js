@@ -42,16 +42,24 @@ const ViajesAtenderTable = ({navigation}) => {
         let response2 = await response.json()
 
         
-        setData(response2.viajesPorAtender.data)
+        setData(response2.viajesPorAtender)
         setLoading(false)
-        const {current_page, last_page, total} = response2
-
-setCurrent_page2(current_page)
-setTotal2(total)
-
-        let paginacion = `${current_page2} de ${total2}`
-
-        setPaginacion2(paginacion)
+        
+        if(response2.viajesPorAtender.length == 0){
+          Alert.alert(
+            "Atender viaje",
+            "No hay viajes por atender",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.warn("OK"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
         
       }
 

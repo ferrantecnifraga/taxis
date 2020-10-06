@@ -38,11 +38,26 @@ const ViajesHistorialTable = () => {
         let response2 = await response.json()
 
         // console.log(idCliente2)
-        console.log(response2.viajes.data)
-        console.warn(response2.viajes.data)
+        console.log(response2.viajes)
+        console.warn(response2.viajes)
         
-        setData(response2.viajes.data)
+        setData(response2.viajes)
         setLoading(false)
+        if(response2.viajes.length == 0){
+          Alert.alert(
+            "Historial de viajes",
+            "No hay viajes",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.warn("OK"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
         
       }
 

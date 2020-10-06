@@ -40,10 +40,25 @@ const ViajesProgramadosTable = ({navigation}) => {
         let response2 = await response.json()
 
         // console.log(idCliente2)
-        console.log(response2.proximosViajes.data)
-        console.warn(response2.proximosViajes.data)
+        console.log(response2.proximosViajes)
+        console.warn(response2.proximosViajes)
         
-        setData(response2.proximosViajes.data)
+        setData(response2.proximosViajes)
+        if(response2.proximosViajes.length == 0){
+          Alert.alert(
+            "Próximos viajes",
+            "No hay viajes confirmados",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.warn("OK"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
         setLoading(false)
         
       }
@@ -73,7 +88,7 @@ const ViajesProgramadosTable = ({navigation}) => {
           })
           let responseJson = await response.json();
           console.warn(responseJson.viajes);
-          setData(responseJson.viajes.data)
+          setData(responseJson.viajes)
           setRefreshing(false)
         } catch (error) {
           console.error(error);

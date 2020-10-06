@@ -37,16 +37,25 @@ const ViajesRechazadosTable = () => {
         let response2 = await response.json()
 
         
-        setData(response2.viajes.data)
+        setData(response2.viajes)
         setLoading(false)
-        const {current_page, last_page, total} = response2
 
-setCurrent_page2(current_page)
-setTotal2(total)
-
-        let paginacion = `${current_page2} de ${total2}`
-
-        setPaginacion2(paginacion)
+        if(response2.viajes.length == 0){
+          Alert.alert(
+            "Viajes rechazados",
+            "No hay viajes rechazados",
+            [
+              {
+                text: "Ok",
+                onPress: () => console.warn("OK"),
+                
+              }
+    
+            ],
+            { cancelable: true }
+          )
+        }
+        
         
       }
 
