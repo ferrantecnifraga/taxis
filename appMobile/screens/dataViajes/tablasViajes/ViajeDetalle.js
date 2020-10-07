@@ -8,9 +8,9 @@ const ViajeDetalle = ({route, navigation}) => {
 
   const [estado, setEstado] = useState("Cancelar viaje")
 
-const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+const {idVP, nombre, primerApellido, segundoApellido, servicio, estatus,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, vehiculo, origen, pasando_por, destino, direccionHospital, cliente } = route.params;
+    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, vehiculo, direccionHospital, cliente } = route.params;
     
     
     const llamar = (number) => {
@@ -146,8 +146,6 @@ const alertCancelar = (idVP) =>{
         </View>
         <Divider style={{marginBottom: 20, marginTop:10}} />
         <View >
-          <Text style={styles.textLabel} >Costo parcial: </Text>
-          <Text style={styles.respuesta} >{costoParcial}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Nombre:</Text>
           <Text style={styles.respuesta} >{nombre}</Text>
@@ -207,15 +205,6 @@ const alertCancelar = (idVP) =>{
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Vehiculo:</Text>          
           <Text style={styles.respuesta} >{vehiculo}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Origen:</Text>          
-          <Text style={styles.respuesta} >{origen}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Pasando por:</Text>          
-          <Text style={styles.respuesta} >{pasando_por}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Destino:</Text>          
-          <Text style={styles.respuesta} >{destino}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Direccion del Hospital:</Text>          
           <Text style={styles.respuesta} >{direccionHospital}</Text> 

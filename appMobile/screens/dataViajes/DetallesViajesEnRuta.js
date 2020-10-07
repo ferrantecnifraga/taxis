@@ -10,7 +10,7 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
 
   const {idVP, estatus, fechaInicio, nombre, primerApellido, segundoApellido, servicio,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-    direccionSegundoPaciente, puebloSegundoPaciente, vehiculo, origen, pasando_por, destino, direccionHospital, cliente} = route.params;
+    direccionSegundoPaciente, puebloSegundoPaciente, vehiculo, direccionHospital, cliente} = route.params;
 
     useEffect(() => {
       const fetchMyAPI = async () => {
@@ -246,15 +246,6 @@ const DetallesViajesEnRuta = ({route, navigation}) => {
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Vehiculo:</Text>          
           <Text style={styles.respuesta} >{vehiculo}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Origen:</Text>          
-          <Text style={styles.respuesta} >{origen}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Pasando por:</Text>          
-          <Text style={styles.respuesta} >{pasando_por}</Text> 
-          <Divider style={styles.divider}/>
-          <Text style={styles.textLabel} >Destino:</Text>          
-          <Text style={styles.respuesta} >{destino}</Text> 
           <Divider style={styles.divider}/>
           <Text style={styles.textLabel} >Direccion del Hospital:</Text>          
           <Text style={styles.respuesta} >{direccionHospital}</Text> 

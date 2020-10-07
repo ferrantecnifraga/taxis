@@ -141,7 +141,6 @@ return (
         bottomDivider
         onPress={() => {navigation.navigate('DetallesViajesEnRuta', {
           idVP: e.idVP, 
-          costoParcial: e.costoParcial,
            nombre: e.nombre, 
            primerApellido: e.primerApellido, 
            segundoApellido: e.segundoApellido, 
@@ -157,9 +156,6 @@ return (
           puebloSegundoPaciente: e.puebloSegundoPaciente, 
           fechaInicio: moment(e.fechaInicio).format('DD/MM/YYYY HH:mm'), 
           vehiculo: e.vehiculo, 
-          origen: e.origen, 
-          pasando_por: e.pasando_por, 
-          destino: e.destino, 
           direccionHospital: e.direccionHospital, 
           cliente: e.cliente
         })}}

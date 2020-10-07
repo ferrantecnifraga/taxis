@@ -142,16 +142,16 @@ const ViajesHistorialTable = () => {
     
 
 
-    const detallesButton = (idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+    const detallesButton = (idVP, nombre, primerApellido, segundoApellido, servicio, estatus,
       pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-      direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, origen, pasando_por, destino, direccionHospital, cliente) => {
+      direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo,  direccionHospital, cliente) => {
         const navigation = useNavigation();
       return(
         <TouchableOpacity 
         onPress={() => {navigation.navigate('ViajeDetalleHistorial', {
-          idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+          idVP, nombre, primerApellido, segundoApellido, servicio, estatus,
       pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-      direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, origen, pasando_por, destino, direccionHospital, cliente})}}>
+      direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, direccionHospital, cliente})}}>
           <View style={styles.btn}>
             <Text style={styles.btnText}>Ver viaje</Text>
           </View>
@@ -178,9 +178,9 @@ return (
               <TableWrapper key={i} style={styles.row} >
                     <Cell key={i+1} data={e.idVP} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+7} data={estatusViaje(e.estatus)} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+23} data={detallesButton(e.idVP, e.costoParcial, e.nombre, e.primerApellido, e.segundoApellido, e.servicio, e.estatus, e.pacientePrimero, e.telfPrimerPaciente,
-                      e.direccionPrimerPaciente, e.puebloPrimerPaciente, e.pacienteSegundo, e.telfSegundoPaciente, e.direccionSegundoPaciente, e.puebloSegundoPaciente, e.fechaInicio, e.fechaTermino, e.vehiculo, e.origen,
-                      e.pasando_por, e.destino, e.direccionHospital, e.cliente)} />
+                    <Cell key={i+23} data={detallesButton(e.idVP, e.nombre, e.primerApellido, e.segundoApellido, e.servicio, e.estatus, e.pacientePrimero, e.telfPrimerPaciente,
+                      e.direccionPrimerPaciente, e.puebloPrimerPaciente, e.pacienteSegundo, e.telfSegundoPaciente, e.direccionSegundoPaciente, e.puebloSegundoPaciente, e.fechaInicio, e.fechaTermino, e.vehiculo, 
+                      e.direccionHospital, e.cliente)} />
                     
               </TableWrapper>
             ))

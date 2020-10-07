@@ -270,9 +270,9 @@ const alertAtender = (idVP, {navigation}, fechaInicio, direccionHospital, servic
   // }
     
 
-const tableHead = ['Numero del viaje', 'Estatus', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Matricula', 'Pueblo Taxista', 'Vehículo', 'Servicio', 'Costo Parcial €',
-'Paciente 1',  'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telfono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio', 'Origen', 
-'Pasando por', 'Destino', 'Dirección de Hospital', 'Cliente', 'Acciones']
+const tableHead = ['Numero del viaje', 'Estatus', 'Nombre', 'Primer Apellido', 'Segundo Apellido', 'Matricula', 'Pueblo Taxista', 'Vehículo', 'Servicio', 
+'Paciente 1',  'Telefono Paciente 1', 'Dirección Paciente 1', 'Pueblo Primer Paciente', 'Paciente 2', 'Telfono Paciente 2', 'Dirección Paciente 2', 'Pueblo Segundo Paciente', 'Fecha Inicio',  
+'Dirección de Hospital', 'Cliente', 'Acciones']
 
 
 return (
@@ -302,7 +302,6 @@ return (
                     <Cell key={i+15} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
 
                     <Cell key={i+6} data={e.servicio} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+2} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+8} data={e.pacientePrimero} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+9} data={telefono(e.telfPrimerPaciente)} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.direccionPrimerPaciente} textStyle={styles.text} style={styles.celda}/>
@@ -312,11 +311,6 @@ return (
                     <Cell key={i+13} data={e.direccionSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+13} data={e.puebloSegundoPaciente} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')} textStyle={styles.text} style={styles.celda}/>
-                    
-                    <Cell key={i+16} data={e.origen} textStyle={styles.text} style={styles.celda}/>
-
-                    <Cell key={i+17} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+18} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+19} data={e.direccionHospital} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+20} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
                     

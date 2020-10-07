@@ -86,8 +86,7 @@ const ViajesRechazadosTable = () => {
           {
             data.map((e, i) => (
               <TableWrapper key={i} style={styles.row} >
-                
-                    <Cell key={i+1} data={e.costoParcial} textStyle={styles.text} style={styles.celda} />
+              
                     <Cell key={i+2} data={e.nombre} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+3} data={e.primerApellido} textStyle={styles.text} style={styles.celda} />
                     <Cell key={i+4} data={e.segundoApellido} textStyle={styles.text} style={styles.celda} />
@@ -97,9 +96,6 @@ const ViajesRechazadosTable = () => {
                     <Cell key={i+8} data={e.pacienteSegundo} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+9} data={moment(e.fechaInicio).format('DD/MM/YYYY HH:mm')} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+10} data={e.vehiculo} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+11} data={e.origen} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+12} data={e.pasando_por} textStyle={styles.text} style={styles.celda}/>
-                    <Cell key={i+13} data={e.destino} textStyle={styles.text} style={styles.celda}/>
                     <Cell key={i+14} data={e.cliente} textStyle={styles.text} style={styles.celda}/>
                     {/* <Cell key={i+15} data={element2(e.idVP)}  /> */}
 
