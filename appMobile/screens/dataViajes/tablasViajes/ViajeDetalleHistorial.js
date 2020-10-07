@@ -4,9 +4,9 @@ import { Card, Divider, Button } from "react-native-elements";
 import moment, {add} from "moment";
 const ViajeDetalleHistorial = ({route, navigation}) => {
 
-const {idVP, costoParcial, nombre, primerApellido, segundoApellido, servicio, estatus,
+const {idVP,nombre, primerApellido, segundoApellido, servicio, estatus,
     pacientePrimero, telfPrimerPaciente, direccionPrimerPaciente, puebloPrimerPaciente, pacienteSegundo, telfSegundoPaciente, 
-    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, origen, pasando_por, destino, direccionHospital, cliente, } = route.params;
+    direccionSegundoPaciente, puebloSegundoPaciente, fechaInicio, fechaTermino, vehiculo, direccionHospital, cliente, } = route.params;
 
     const llamar = (number) => {
       let phoneNumber = '';
