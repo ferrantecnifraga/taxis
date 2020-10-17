@@ -2,7 +2,7 @@
   "expo": {
     "name": "Taxista",
     "icon": "./assets/archivo.png",
-    "version": "5.0.0",
+    "version": "7.0.0",
     "slug": "taxis-lleida-taxista",
     "ios": {
       "bundleIdentifier": "com.vigsoft.taxislleida.taxista",
