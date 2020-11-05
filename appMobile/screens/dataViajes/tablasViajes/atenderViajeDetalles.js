@@ -65,6 +65,7 @@ const atenderElViaje = async(idVP, respuesta, {navigation} , fechaInicio, direcc
     let idTaxista2 = await AsyncStorage.getItem('idTaxista')
     let calendario = await AsyncStorage.getItem('idCalendario')
 
+
   try {
     let response = await fetch('https://taxis-lleida.herokuapp.com/api/taxistas/atenderViaje', {
       method: 'POST',
@@ -83,46 +84,13 @@ const atenderElViaje = async(idVP, respuesta, {navigation} , fechaInicio, direcc
 
     let response2 = await response.json()
 
-
-    if(String(response2.tipo) == "Confirmado") {
-
-      //Viaje calendario
-        let fecha = moment(fechaInicio).toDate();
-        console.warn("Fecha: "+fecha)
-        let details = {
-          title: "Viaje asignado: " +servicio,
-          startDate: fecha,
-          endDate: fecha,
-          timeZone: Localization.timezone,
-          endTimeZone: Localization.timezone,
-          location: direccionHospital,
-          notes: "Servicio: "+servicio
-        }
-        
-        const crear = await Calendar.createEventAsync(calendario, details)
-        if (crear != undefined) {
-          navigation.navigate( 'viajeAtendido')
-        }else{
-          Alert.alert(
-            "Atender viaje",
-            "Confirmaste el viaje pero no pudimos agregarlo al calendario, disculpa :( . Verifica si configuraste el calendario en el menú. ",
-            [
-              {
-                text: "Ok",
-                onPress: () => console.warn("OK"),
-                
-              }
+    if(response2.tipo == "Confirmado") {
+      navigation.navigate( 'viajeAtendido', {
+        viajes: response2.viajes
+      })
+     
       
-            ],
-            { cancelable: true }
-          )
-        }
-        
-  
-        
-        //Viaje calendario
-      
-    } else if(String(response2.tipo) == "Rechazado") {
+    } else if(response2.tipo == "Rechazado") {
       navigation.navigate( 'viajeRechazado')
 
   

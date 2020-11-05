@@ -1,9 +1,87 @@
 import React from "react";
-import { View, Text, ScrollView, StyleSheet, Image } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Image, Alert } from "react-native";
 import { Card,  Button, Icon } from "react-native-elements";
 import * as Animatable from 'react-native-animatable';
+import * as Calendar from 'expo-calendar';
+import * as Localization from 'expo-localization';
+import moment from "moment";
 
-const viajeAtendido = ({navigation}) => {
+import AsyncStorage from '@react-native-community/async-storage';
+
+const viajeAtendido = ({navigation, route}) => {
+
+    const {viajes} = route.params;
+
+    const agregarViajes = async(viajes) => {
+
+        let arrayDetalles = []
+        let arrayIDS = []
+        
+        let calendario = await AsyncStorage.getItem('idCalendario')
+        console.warn("ID calendario: "+calendario)
+        viajes.map( e => {
+            let fecha = moment(e.fechaInicio).toDate();
+            let details = {
+                title: "Viaje asignado: " + "Diálisis",
+                    startDate: fecha,
+                    endDate: fecha,
+                    timeZone: Localization.timezone,
+                    endTimeZone: Localization.timezone,
+                    location: e.direccionHospital
+            }
+            arrayDetalles.push(details)
+        })
+        
+        arrayDetalles.map(e => {
+            console.warn(e)
+        })
+
+        arrayDetalles.forEach( async(e) => {
+            let crear = await Calendar.createEventAsync(calendario, e)
+            arrayIDS.push(crear)
+        });
+           
+        //    
+        arrayIDS.map(e => console.log(e))
+  
+
+        if (arrayIDS.length > 0) {
+            Alert.alert(
+                "Atender viaje",
+                "Agregamos los viajes a tu calendario. ¡Gracias! ",
+                [
+                  {
+                    text: "Ok",
+                    onPress: () => console.warn("OK"),
+                    
+                  }
+          
+                ],
+                { cancelable: true }
+              )
+            navigation.navigate('Home', {screen: 'Home'} ) 
+        }else{
+            Alert.alert(
+                "Atender viaje",
+                "Hubo un error al guardar los viajes. Lo sentimos. ",
+                [
+                  {
+                    text: "Ok",
+                    onPress: () => console.warn("OK"),
+                    
+                  }
+          
+                ],
+                { cancelable: true }
+              )
+              navigation.navigate('Home', {screen: 'Home'} ) 
+        }
+
+        // 
+
+    }
+
+
 
   return (
       <View>
@@ -23,21 +101,13 @@ const viajeAtendido = ({navigation}) => {
                 ¡Gracias!
               </Text>
               <Text style={styles.textMsg}>
-                  Confirmaste el viaje, se creo el evento en tu calendario. Ve al calendario y asigna un recordatorio.
+                  Confirmaste el servicio, en viajes programados puedes checar estatus y detalles.
               </Text>
               <Button
-                icon={
-                    <Icon
-                    name="check-circle"
-                    type='material-community'
-                    size={25}
-                    color="white"
-                    iconStyle={{marginRight:10}}
-                    />
-                }
-                title="Ir a inicio"
+                
+                title="Agregar viajes a mi calendario"
                 buttonStyle={{width: '70%', alignSelf: 'center', backgroundColor: '#009387', marginBottom: 20}}
-                onPress={() => navigation.navigate('Home', {screen: 'Home'} )}
+                onPress={() => agregarViajes(viajes)}
                 />
           </Card>
       </View>
