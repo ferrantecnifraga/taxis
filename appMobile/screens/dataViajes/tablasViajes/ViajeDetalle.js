@@ -36,6 +36,8 @@ const ViajeDetalle = ({ route, navigation }) => {
     vehiculo,
     direccionHospital,
     cliente,
+    horaRecogida,
+    lugarRecogida,
   } = route.params;
 
   const llamar = (number) => {
@@ -226,12 +228,19 @@ const ViajeDetalle = ({ route, navigation }) => {
             <Text style={styles.respuesta}>
               {moment(fechaInicio).format("DD/MM/YYYY HH:mm")}
             </Text>
+
             <Divider style={styles.divider} />
             <Text style={styles.textLabel}>Vehiculo:</Text>
             <Text style={styles.respuesta}>{vehiculo}</Text>
             <Divider style={styles.divider} />
-            <Text style={styles.textLabel}>Direccion del Hospital:</Text>
+            <Text style={styles.textLabel}>Centro de asistencia:</Text>
             <Text style={styles.respuesta}>{direccionHospital}</Text>
+            <Divider style={styles.divider} />
+            <Text style={styles.textLabel}>Lugar de recogida:</Text>
+            <Text style={styles.respuesta}>{lugarRecogida}</Text>
+            <Divider style={styles.divider} />
+            <Text style={styles.textLabel}>Hora de recogida:</Text>
+            <Text style={styles.respuesta}>{horaRecogida}</Text>
             <Divider style={styles.divider} />
             <Text style={styles.textLabel}>Cliente:</Text>
             <Text style={styles.respuesta}>{cliente}</Text>
