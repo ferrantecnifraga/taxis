@@ -125,15 +125,22 @@ const ViajeDetalle = ({ route, navigation }) => {
     console.warn(idVP);
     Alert.alert(
       "Cancelar viaje",
-      "¿Seguro de cancelar el viaje?",
+      "¿Ya habias acordado hora y lugar de recogida con el paciente?",
       [
         {
-          text: "Si, cancelar",
+          text: "Si",
+          onPress: () =>
+            navigation.navigate("DatosCancelacion", {
+              idVP: idVP,
+            }),
+        },
+        {
+          text: "No",
           onPress: () => cancelarViaje(idVP),
         },
         {
-          text: "No, olvidalo",
-          onPress: () => console.warn("OK"),
+          text: "Cancelar",
+          onPress: () => console.warn("Cancelando"),
         },
       ],
       { cancelable: true }
@@ -247,11 +254,7 @@ const ViajeDetalle = ({ route, navigation }) => {
             <Divider style={styles.divider} />
             <TouchableOpacity
               style={styles.btn2}
-              onPress={() => {
-                navigation.navigate("DatosCancelacion", {
-                  idVP: idVP,
-                });
-              }}
+              onPress={() => alertCancelar(idVP)}
               underlayColor="#fff"
             >
               <Text style={styles.botonsito}>{estado}</Text>

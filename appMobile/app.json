@@ -12,6 +12,7 @@
       "package": "com.vigsoft.taxislleida.taxista",
       "versionCode": 1
     },
-    "description": "Aplicación para taxistas"
+    "description": "Aplicación para taxistas",
+    "orientation": "portrait"
   }
 }
