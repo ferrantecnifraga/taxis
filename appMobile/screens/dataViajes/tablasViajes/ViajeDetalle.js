@@ -95,7 +95,8 @@ const ViajeDetalle = ({ route, navigation }) => {
             [
               {
                 text: "Ok",
-                onPress: () => setEstado("Cancelado"),
+                onPress: () =>
+                  navigation.navigate("Viajes", { screen: "Viajes" }),
               },
             ],
             { cancelable: true }
