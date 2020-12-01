@@ -244,10 +244,10 @@ const ViajeDetalle = ({ route, navigation }) => {
             <Text style={styles.textLabel}>Centro de asistencia:</Text>
             <Text style={styles.respuesta}>{direccionHospital}</Text>
             <Divider style={styles.divider} />
-            <Text style={styles.textLabel}>Lugar de recogida:</Text>
+            <Text style={styles.textLabel}>Hora de recogida:</Text>
             <Text style={styles.respuesta}>{lugarRecogida}</Text>
             <Divider style={styles.divider} />
-            <Text style={styles.textLabel}>Hora de recogida:</Text>
+            <Text style={styles.textLabel}>Lugar de recogida:</Text>
             <Text style={styles.respuesta}>{horaRecogida}</Text>
             <Divider style={styles.divider} />
             <Text style={styles.textLabel}>Cliente:</Text>
