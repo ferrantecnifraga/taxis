@@ -143,7 +143,7 @@ const ViajeDetalleHistorial = ({ route, navigation }) => {
             <Text style={styles.textLabel}>Vehiculo:</Text>
             <Text style={styles.respuesta}>{vehiculo}</Text>
             <Divider style={styles.divider} />
-            <Text style={styles.textLabel}>Direccion del Hospital:</Text>
+            <Text style={styles.textLabel}>Centro de asistencia:</Text>
             <Text style={styles.respuesta}>{direccionHospital}</Text>
             <Divider style={styles.divider} />
             <Text style={styles.textLabel}>Cliente:</Text>

@@ -81,6 +81,30 @@ const ViajesHistorialTable = () => {
     fetchMyAPI();
   }, []);
 
+  const descargar = async () => {
+    let email2 = await AsyncStorage.getItem("email");
+    let password2 = await AsyncStorage.getItem("password");
+    let idTaxista2 = await AsyncStorage.getItem("idTaxista");
+    let response = await fetch(
+      "https://taxis-lleida.herokuapp.com/api/taxistas/descargarFacturacion",
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email2,
+          password: password2,
+          idTaxista: idTaxista2,
+        }),
+      }
+    );
+
+    let response2 = await response.json();
+    console.warn(response2);
+  };
+
   //Refresh
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -264,6 +288,9 @@ const ViajesHistorialTable = () => {
             </TableWrapper>
           ))}
         </Table>
+        {/* <Text style={styles.botonsito} onPress={descargar}>
+          Descargar facturación
+        </Text> */}
       </ScrollView>
     </View>
   );
@@ -305,5 +332,13 @@ const styles = StyleSheet.create({
   btnText: {
     textAlign: "center",
     color: "#fff",
+  },
+  botonsito: {
+    fontSize: 20,
+    textAlign: "right",
+    alignSelf: "center",
+    backgroundColor: "#21A0E6",
+    margin: 60,
+    borderStyle: "dashed",
   },
 });
