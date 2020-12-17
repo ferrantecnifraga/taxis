@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "736363678666",
+    "project_id": "taxis-lleida-dev",
+    "storage_bucket": "taxis-lleida-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736363678666:android:d9ca084bfc46ebd1335d33",
+        "android_client_info": {
+          "package_name": "com.vigsoft.taxislleida.taxista"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736363678666-cjvj8d57ot7bk72e2tmucied6f0vekki.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAngSXEm2I1gt97DQgT1onlTDM22AfSyas"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736363678666-cjvj8d57ot7bk72e2tmucied6f0vekki.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

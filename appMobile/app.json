@@ -10,7 +10,9 @@
     },
     "android": {
       "package": "com.vigsoft.taxislleida.taxista",
-      "versionCode": 1
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json",
+      "useNextNotificationsApi": true
     },
     "description": "Aplicación para taxistas",
     "orientation": "portrait"
