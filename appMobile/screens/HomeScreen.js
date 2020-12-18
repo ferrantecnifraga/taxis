@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
 import {
   View,
   Text,
@@ -12,8 +13,21 @@ import {
 import { Card, Icon } from "react-native-elements";
 import { FAB } from "react-native-paper";
 import AsyncStorage from "@react-native-community/async-storage";
-import { BASE_URL } from "../src/utils/index";
+import { BASE_URL, BASE_URL_NOT } from "../src/utils/index";
 import { useQuery, setConsole } from "react-query";
+
+//Expo
+import Constants from "expo-constants";
+import * as Notifications from "expo-notifications";
+import * as Permissions from "expo-permissions";
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+});
+//
 
 setConsole({
   log: console.log,
@@ -45,6 +59,28 @@ const fetchHome = async () => {
 
 const HomeScreen = ({ navigation }) => {
   const { isLoading, error, data, status } = useQuery("home", fetchHome);
+
+  const [expoPushToken, setExpoPushToken] = useState("");
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then((token) => alert("Todo bien"));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        let tipoNotification = notification.data.tipo;
+        if (tipoNotification == "aceptarViaje") {
+          navigation.navigate("atenderViajes");
+        }
+      }
+    );
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+    };
+  }, []);
 
   if (isLoading)
     return (
@@ -208,3 +244,56 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+    );
+    let finalStatus = existingStatus;
+    if (existingStatus !== "granted") {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== "granted") {
+      alert("Failed to get push token for push notification!");
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+    console.log(token);
+  } else {
+    alert("Must use physical device for Push Notifications");
+  }
+
+  if (Platform.OS === "android") {
+    Notifications.setNotificationChannelAsync("default", {
+      name: "default",
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: "#7D7B79",
+    });
+  }
+
+  return token;
+}
+
+const suscribirNotificationes = async () => {
+  let email2 = await AsyncStorage.getItem("email");
+  let password2 = await AsyncStorage.getItem("password");
+  let idTaxista2 = await AsyncStorage.getItem("idTaxista");
+  let response = await fetch(`${BASE_URL_NOT}`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email2,
+      password: password2,
+      idTaxista: idTaxista2,
+    }),
+  });
+
+  return response.json();
+};

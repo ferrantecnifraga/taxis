@@ -4,6 +4,11 @@
     "icon": "./assets/archivo.png",
     "version": "7expo start.0.0",
     "slug": "taxis-lleida-taxista",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
     "ios": {
       "bundleIdentifier": "com.vigsoft.taxislleida.taxista",
       "buildNumber": "1.0.0"
