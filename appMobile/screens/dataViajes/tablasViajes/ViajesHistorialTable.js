@@ -25,68 +25,42 @@ import {
 } from "react-native-table-component";
 import { useNavigation } from "@react-navigation/native";
 import moment, { add } from "moment";
+import { useQuery } from "react-query";
+import { BASE_URL } from "../../../src/utils/index";
+
+const fetchHistorialViajes = async () => {
+  let email2 = await AsyncStorage.getItem("email");
+  let password2 = await AsyncStorage.getItem("password");
+  let idTaxista2 = await AsyncStorage.getItem("idTaxista");
+  let response = await fetch(`${BASE_URL}/historialViajes`, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email: email2,
+      password: password2,
+      idTaxista: idTaxista2,
+    }),
+  });
+
+  return response.json();
+};
 
 const ViajesHistorialTable = () => {
-  const [data, setData] = useState([]);
-  const [current_page2, setCurrent_page2] = useState(1);
-  const [total2, setTotal2] = useState(6);
-  const [paginacion2, setPaginacion2] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [refreshing, setRefreshing] = React.useState(false);
-
-  useEffect(() => {
-    const fetchMyAPI = async () => {
-      let email2 = await AsyncStorage.getItem("email");
-      let password2 = await AsyncStorage.getItem("password");
-      let idTaxista2 = await AsyncStorage.getItem("idTaxista");
-      let response = await fetch(
-        "https://taxis-lleida.herokuapp.com/api/taxistas/historialViajes",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email2,
-            password: password2,
-            idTaxista: idTaxista2,
-          }),
-        }
-      );
-
-      let response2 = await response.json();
-
-      // console.log(idCliente2)
-      console.log(response2.viajes);
-      console.warn(response2.viajes);
-
-      setData(response2.viajes);
-      setLoading(false);
-      if (response2.viajes.length == 0) {
-        Alert.alert(
-          "Historial de viajes",
-          "No hay viajes",
-          [
-            {
-              text: "Ok",
-              onPress: () => console.warn("OK"),
-            },
-          ],
-          { cancelable: true }
-        );
-      }
-    };
-
-    fetchMyAPI();
-  }, []);
+  const { isLoading, error, data, status } = useQuery(
+    "historialViajes",
+    fetchHistorialViajes
+  );
 
   const descargar = async () => {
     let email2 = await AsyncStorage.getItem("email");
     let password2 = await AsyncStorage.getItem("password");
     let idTaxista2 = await AsyncStorage.getItem("idTaxista");
+    let numSocio = await AsyncStorage.getItem("numSocio");
     let response = await fetch(
-      "https://taxis-lleida.herokuapp.com/api/taxistas/descargarFacturacion",
+      "https://taxis-lleida.herokuapp.com/api/taxistas/descargarFacturacionViajes",
       {
         method: "POST",
         headers: {
@@ -97,44 +71,22 @@ const ViajesHistorialTable = () => {
           email: email2,
           password: password2,
           idTaxista: idTaxista2,
+          numSocio: numSocio,
         }),
       }
     );
 
     let response2 = await response.json();
-    console.warn(response2);
-  };
 
-  //Refresh
-  const onRefresh = React.useCallback(async () => {
-    setRefreshing(true);
-    let email2 = await AsyncStorage.getItem("email");
-    let password2 = await AsyncStorage.getItem("password");
-    let idCliente2 = await AsyncStorage.getItem("idCliente");
-    try {
-      let response = await fetch(
-        "https://taxis-lleida.herokuapp.com/api/taxistas/historialViajes",
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            email: email2,
-            password: password2,
-            idTaxista: idTaxista2,
-          }),
-        }
+    if ((response2.message = "Success!")) {
+      Alert.alert(
+        "Facturación",
+        "¡Listo! Enviamos tu facturación, revisa tu email",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
       );
-      let responseJson = await response.json();
-      console.warn(responseJson.viajes);
-      setData(responseJson.viajes.data);
-      setRefreshing(false);
-    } catch (error) {
-      console.error(error);
     }
-  }, [refreshing]);
+  };
 
   // refresh
 
@@ -227,73 +179,97 @@ const ViajesHistorialTable = () => {
     );
   };
 
-  return loading ? (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: 280,
-      }}
-    >
-      <ActivityIndicator size="large" color="#009387" />
-    </View>
-  ) : (
-    <View style={styles.container}>
-      <ScrollView
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }
-      >
-        <Table borderStyle={{ borderColor: "transparent" }}>
-          <Row data={tableHead} style={styles.head} textStyle={styles.celda} />
-          {data.map((e, i) => (
-            <TableWrapper key={i} style={styles.row}>
-              <Cell
-                key={i + 1}
-                data={e.idVP}
-                textStyle={styles.text}
-                style={styles.celda}
-              />
-              <Cell
-                key={i + 7}
-                data={estatusViaje(e.estatus)}
-                textStyle={styles.text}
-                style={styles.celda}
-              />
-              <Cell
-                key={i + 23}
-                data={detallesButton(
-                  e.idVP,
-                  e.nombre,
-                  e.primerApellido,
-                  e.segundoApellido,
-                  e.servicio,
-                  e.estatus,
-                  e.pacientePrimero,
-                  e.telfPrimerPaciente,
-                  e.direccionPrimerPaciente,
-                  e.puebloPrimerPaciente,
-                  e.pacienteSegundo,
-                  e.telfSegundoPaciente,
-                  e.direccionSegundoPaciente,
-                  e.puebloSegundoPaciente,
-                  e.fechaInicio,
-                  e.fechaTermino,
-                  e.vehiculo,
-                  e.direccionHospital,
-                  e.cliente
-                )}
-              />
-            </TableWrapper>
-          ))}
-        </Table>
-        {/* <Text style={styles.botonsito} onPress={descargar}>
-          Descargar facturación
-        </Text> */}
-      </ScrollView>
-    </View>
-  );
+  if (isLoading)
+    return (
+      <View style={styles.topBox}>
+        <Text style={styles.headline}>Cargando historial de viajes..</Text>
+      </View>
+    );
+
+  if (error)
+    return Alert.alert(
+      "Taxis Lleida",
+      "Hubo un error al cargar los datos, intenta cerrando la app y comenzando de nuevo. Error: " +
+        error.message,
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        { text: "OK", onPress: () => console.log("OK Pressed") },
+      ],
+      { cancelable: false }
+    );
+
+  if (status === "success" && data.viajes.length > 0) {
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          <Table borderStyle={{ borderColor: "transparent" }}>
+            <Row
+              data={tableHead}
+              style={styles.head}
+              textStyle={styles.celda}
+            />
+            {data.viajes.map((e, i) => (
+              <TableWrapper key={i} style={styles.row}>
+                <Cell
+                  key={i + 1}
+                  data={e.idVP}
+                  textStyle={styles.text}
+                  style={styles.celda}
+                />
+                <Cell
+                  key={i + 7}
+                  data={estatusViaje(e.estatus)}
+                  textStyle={styles.text}
+                  style={styles.celda}
+                />
+                <Cell
+                  key={i + 23}
+                  data={detallesButton(
+                    e.idVP,
+                    e.nombre,
+                    e.primerApellido,
+                    e.segundoApellido,
+                    e.servicio,
+                    e.estatus,
+                    e.pacientePrimero,
+                    e.telfPrimerPaciente,
+                    e.direccionPrimerPaciente,
+                    e.puebloPrimerPaciente,
+                    e.pacienteSegundo,
+                    e.telfSegundoPaciente,
+                    e.direccionSegundoPaciente,
+                    e.puebloSegundoPaciente,
+                    e.fechaInicio,
+                    e.fechaTermino,
+                    e.vehiculo,
+                    e.direccionHospital,
+                    e.cliente
+                  )}
+                />
+              </TableWrapper>
+            ))}
+          </Table>
+          <TouchableOpacity style={styles.botonsito} onPress={descargar}>
+            <Text>Descargar mi facturación</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.topBox}>
+        <Text style={styles.headline}>¡No hay viajes realizados aún!</Text>
+      </View>
+    );
+  }
 };
 
 export default ViajesHistorialTable;
@@ -334,11 +310,25 @@ const styles = StyleSheet.create({
     color: "#fff",
   },
   botonsito: {
-    fontSize: 20,
+    fontSize: 40,
     textAlign: "right",
     alignSelf: "center",
-    backgroundColor: "#21A0E6",
+    backgroundColor: "#DDDDDD",
     margin: 60,
     borderStyle: "dashed",
+  },
+  headline: {
+    textAlign: "center", // <-- the magic
+    fontWeight: "bold",
+    fontSize: 18,
+    // marginTop: 10,
+    width: 200,
+  },
+  topBox: {
+    flex: 1,
+    flexDirection: "row",
+    backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
