@@ -84,7 +84,9 @@ export function DrawerContent(props) {
                   size={50}
                 />
                 <View style={{ marginLeft: 15, flexDirection: "column" }}>
-                  <Title style={styles.title}>{data.taxista.nombre}</Title>
+                  <Title style={styles.title}>
+                    {data.taxista.nombre} {data.taxista.primerApellido}
+                  </Title>
                   <Caption style={styles.caption}>
                     {data.taxista.numSocio}
                   </Caption>
@@ -107,7 +109,7 @@ export function DrawerContent(props) {
               />
               <DrawerItem
                 icon={({ color, size }) => (
-                  <BadgedIcon name="bell" color={color} size={size} />
+                  <Icon name="bell" color={color} size={size} />
                 )}
                 label="Notificaciones"
                 onPress={() => {

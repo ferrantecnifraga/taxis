@@ -109,7 +109,7 @@ export const HomeStackScreen = ({ navigation }) => (
         ),
         headerRight: () => (
           <View style={styles.iconContainer}>
-            <BadgedIcon
+            <Icon
               style={styles.Icon}
               size={30}
               name={Platform.OS === "ios" ? "ios-mail" : "md-notifications"}

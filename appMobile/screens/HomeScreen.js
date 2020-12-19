@@ -66,15 +66,27 @@ const HomeScreen = ({ navigation }) => {
   const responseListener = useRef();
 
   useEffect(() => {
+    // registerForPushNotificationsAsync().then((token) =>
+    //   alert("Todo bien: " + token)
+    // );
+
     registerForPushNotificationsAsync().then((token) =>
-      alert("Todo bien: " + token)
+      suscribirNotificationes(token).then((response) => {
+        console.warn("El servidor dice:", response);
+        if (String(response.message) == "Success!") {
+          Alert.alert(
+            "App",
+            "¡Estás en línea! Todos los servicios operando",
+            [{ text: "¡Gracias!", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+        }
+      })
     );
 
     notificationListener.current = Notifications.addNotificationReceivedListener(
       (notification) => {
         console.log(notification);
-        const { data } = notification;
-        console.log("Data: " + data);
       }
     );
 
@@ -270,7 +282,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    // console.log(token);
   } else {
     alert("Must use physical device for Push Notifications");
   }
@@ -280,29 +292,37 @@ async function registerForPushNotificationsAsync() {
       name: "default",
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: "#7D7B79",
+      lightColor: "#de8226",
     });
   }
 
   return token;
 }
 
-const suscribirNotificationes = async () => {
-  let email2 = await AsyncStorage.getItem("email");
-  let password2 = await AsyncStorage.getItem("password");
-  let idTaxista2 = await AsyncStorage.getItem("idTaxista");
-  let response = await fetch(`${BASE_URL_NOT}`, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      email: email2,
-      password: password2,
-      idTaxista: idTaxista2,
-    }),
-  });
-
-  return response.json();
+const suscribirNotificationes = async (token) => {
+  try {
+    let email2 = await AsyncStorage.getItem("email");
+    let password2 = await AsyncStorage.getItem("password");
+    let idTaxista2 = await AsyncStorage.getItem("idTaxista");
+    let numSocio = await AsyncStorage.getItem("numSocio");
+    let response = await fetch(`${BASE_URL}/registrarDevice`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email2,
+        password: password2,
+        idTaxista: idTaxista2,
+        expo_token: token,
+        numSocio: numSocio,
+      }),
+    });
+    let response2 = await response.json();
+    console.warn("Servidor en peticion: ", response2);
+    return response2;
+  } catch (error) {
+    alert(error);
+  }
 };
